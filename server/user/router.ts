@@ -9,8 +9,6 @@ const router = express.Router();
 
 /**
  * Get the signed in user
- * TODO: may need better route and documentation
- * (so students don't accidentally delete this when copying over)
  *
  * @name GET /api/users/session
  *
