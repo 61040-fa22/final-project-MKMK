@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <Alerts />
-    <NavBar />
+    <GlobalAlerts />
+    <MainMenu />
     <router-view />
+    <FooterComponent />
   </div>
 </template>
 
 <script>
-import Alerts from '@/components/common/Alerts.vue';
-import NavBar from '@/components/common/NavBar.vue';
+import GlobalAlerts from '@/components/common/GlobalAlerts.vue';
+import FooterComponent from '@/components/common/FooterComponent.vue';
+import MainMenu from '@/components/common/MainMenu.vue';
 
 export default {
   name: 'App',
   components: {
-    Alerts,
-    NavBar
+    GlobalAlerts,
+    FooterComponent,
+    MainMenu
   },
   beforeCreate() {
     // Sync stored username to current session
@@ -62,7 +65,6 @@ body {
 }
 
 #app {
-  display: flex;
   width: 95%; /* Take up most of the width of a screen... */
   max-width: 64rem; /* ...but stop at a certain point if the screen is too wide */
   margin: 0 auto; /* Horizontally center */
@@ -79,7 +81,6 @@ aside {
 main {
   width: 100%;
   padding: 2rem auto;
-  border-right: 1px solid #aaa;
 }
 
 .page_header {
