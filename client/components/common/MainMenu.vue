@@ -3,14 +3,14 @@
     <LogoComponent />
     <!--Nav when signed in-->
     <nav v-if="$store.state.username">
-      <router-link to="/profile">
-        Profile
+      <router-link :to="`/profile/${$store.state.username}`">
+        My Profile
       </router-link>
-      <router-link to="">
-        Groups
+      <router-link to="/not_implemented_yet">
+        My Group
       </router-link>
-      <router-link to="">
-        Items
+      <router-link to="/new">
+        List New Item
       </router-link>
       <router-link to="">
         Log out

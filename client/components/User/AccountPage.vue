@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import ChangeUsernameForm from '@/components/Account/ChangeUsernameForm.vue';
-import ChangePasswordForm from '@/components/Account/ChangePasswordForm.vue';
-import DeleteAccountForm from '@/components/Account/DeleteAccountForm.vue';
-import LogoutForm from '@/components/Account/LogoutForm.vue';
+import ChangeUsernameForm from '@/components/User/ChangeUsernameForm.vue';
+import ChangePasswordForm from '@/components/User/ChangePasswordForm.vue';
+import DeleteAccountForm from '@/components/User/DeleteAccountForm.vue';
+import LogoutForm from '@/components/User/LogoutForm.vue';
 
 export default {
   name: 'AccountPage',

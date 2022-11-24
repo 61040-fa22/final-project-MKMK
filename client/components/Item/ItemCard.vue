@@ -1,9 +1,17 @@
 <template>
   <article>
     <img src="https://via.placeholder.com/150x150">
-    <h3>Item Name</h3>
+    <h3>
+      <router-link to="/item/item_id">
+        Item Name
+      </router-link>
+    </h3>
     <div class="item_card_info">
-      <p>Item Owner</p>
+      <p>
+        <router-link to="/profile/owner_id">
+          Item Owner
+        </router-link>
+      </p>
       <p>42 posts</p>
     </div>
     <p class="item_card_description">

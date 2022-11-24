@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Icon from '@/components/common/Icon.vue';
+import Icon from '@/components/util/Icon.vue';
 
 export default {
   name: 'LogoComponent',

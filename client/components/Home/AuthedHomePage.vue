@@ -24,7 +24,7 @@
 
 <script>
 import CurrentItems from "@/components/Home/CurrentItems.vue";
-import GalleryComponent from "@/components/common/GalleryComponent.vue";
+import GalleryComponent from "@/components/util/GalleryComponent.vue";
 import ItemCard from "@/components/Item/ItemCard.vue";
 
 export default {

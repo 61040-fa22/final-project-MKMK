@@ -1,7 +1,7 @@
 <!-- Form for signing out (block style) -->
 
 <script>
-import BlockForm from '@/components/common/BlockForm.vue';
+import BlockForm from '@/components/util/BlockForm.vue';
 
 export default {
   name: 'LogoutForm',

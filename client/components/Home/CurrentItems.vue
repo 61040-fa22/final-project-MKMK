@@ -25,7 +25,7 @@ Homepage widgets for items you're currently borrowing and lending
 </template>
 
 <script>
-import GalleryComponent from "@/components/common/GalleryComponent.vue";
+import GalleryComponent from "@/components/util/GalleryComponent.vue";
 import ItemCard from "@/components/Item/ItemCard.vue";
 
 export default {

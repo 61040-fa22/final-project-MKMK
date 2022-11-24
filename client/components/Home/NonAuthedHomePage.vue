@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import RegisterForm from '@/components/Login/RegisterForm.vue';
+import RegisterForm from '@/components/User/RegisterForm.vue';
 
 export default {
   name: 'NonAuthedHomePage',
