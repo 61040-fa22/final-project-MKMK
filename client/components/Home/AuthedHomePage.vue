@@ -1,17 +1,39 @@
 <template>
   <div>
-    <section class="page_content">
-      <header class="page_header">
-        <h2>home.</h2>
-      </header>
+    <CurrentItems />
+
+    <section>
+      <h2>browse items</h2>
+      <h3>my group: group_name</h3>
+      <GalleryComponent num-columns="4">
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+      </GalleryComponent>
     </section>
   </div>
 </template>
 
 <script>
+import CurrentItems from "@/components/Home/CurrentItems.vue";
+import GalleryComponent from "@/components/common/GalleryComponent.vue";
+import ItemCard from "@/components/Item/ItemCard.vue";
+
 export default {
   name: 'AuthedHomePage',
-  components: {},
+  components: {
+    CurrentItems,
+    GalleryComponent,
+    ItemCard
+  },
   mounted() {
     // this.$store.commit('refreshFreets');
   }

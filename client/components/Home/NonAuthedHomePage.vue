@@ -1,5 +1,5 @@
 <template>
-  <section class="page_content">
+  <section>
     <header class="page_header">
       <h2>connect with friends and the world around you on not-fritter.</h2>
     </header>

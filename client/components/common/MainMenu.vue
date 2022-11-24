@@ -12,6 +12,9 @@
       <router-link to="">
         Items
       </router-link>
+      <router-link to="">
+        Log out
+      </router-link>
     </nav>
     <!--Nav when not signed in-->
     <nav v-else>
@@ -19,7 +22,7 @@
         About
       </router-link>
       <router-link to="/login">
-        Login
+        Log in
       </router-link>
     </nav>
   </header>
