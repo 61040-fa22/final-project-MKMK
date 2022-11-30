@@ -1,25 +1,22 @@
-<!-- Form for registering an account (block style) -->
+<!-- Form for changing password (block style) -->
 
 <script>
-import BlockForm from '@/components/common/BlockForm.vue';
+import BlockForm from '@/components/util/BlockForm.vue';
 
 export default {
-  name: 'RegisterForm',
+  name: 'ChangePasswordForm',
   mixins: [BlockForm],
   data() {
     return {
       url: '/api/users',
-      method: 'POST',
+      method: 'PATCH',
       hasBody: true,
-      setUsername: true,
       fields: [
-        {id: 'username', label: 'Username', value: ''},
         {id: 'password', label: 'Password', value: ''}
       ],
-      title: 'Create account',
+      title: 'Change password',
       callback: () => {
-        const message = 'Successfully created an account!';
-        this.$router.push({name: 'Home'});
+        const message = 'Successfully changed password!';
         this.$set(this.alerts, message, 'success');
         setTimeout(() => this.$delete(this.alerts, message), 3000);
       }

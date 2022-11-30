@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import RegisterForm from '@/components/Login/RegisterForm.vue';
-import LoginForm from '@/components/Login/LoginForm.vue';
+import RegisterForm from '@/components/User/RegisterForm.vue';
+import LoginForm from '@/components/User/LoginForm.vue';
 
 export default {
   name: 'LoginPage',
