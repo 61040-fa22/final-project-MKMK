@@ -24,6 +24,8 @@ const isHandoffExists = async (req: Request, res: Response, next: NextFunction) 
 const isValidBorrowDates = async (req: Request, res: Response, next: NextFunction) => {
   const {itemId, borrowerId, startDate, endDate} = req.body as {itemId: Types.ObjectId; borrowerId: Types.ObjectId; startDate: Date; endDate: Date};
   const now = new Date();
+  // TODO: isValidTimeRange
+  // TODO: add isDatesAvailable
   if (now > startDate || startDate > endDate) {
     res.status(404).json({
       error: 'Invalid start or end date.'

@@ -5,6 +5,8 @@ import {Schema, model} from 'mongoose';
 export type Rating = {
   _id: Types.ObjectId;
   handoffId: Types.ObjectId;
+  ownerId: Types.ObjectId;
+  borrowerId: Types.ObjectId;
   ownerRating: number;
   borrowerRating: number;
 };
@@ -15,6 +17,16 @@ const RatingSchema = new Schema<Rating>({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Handoff'
+  },
+  ownerId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
+  borrowerId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   // The rating for the owner of the item borrowed
   ownerRating: {
