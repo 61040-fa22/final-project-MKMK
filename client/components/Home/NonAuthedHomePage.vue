@@ -1,5 +1,5 @@
 <template>
-  <section class="page_content">
+  <section>
     <header class="page_header">
       <h2>connect with friends and the world around you on not-fritter.</h2>
     </header>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import RegisterForm from '@/components/Login/RegisterForm.vue';
+import RegisterForm from '@/components/User/RegisterForm.vue';
 
 export default {
   name: 'NonAuthedHomePage',

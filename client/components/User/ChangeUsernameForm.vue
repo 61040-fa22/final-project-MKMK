@@ -1,7 +1,7 @@
 <!-- Form for changing username (block style) -->
 
 <script>
-import BlockForm from '@/components/common/BlockForm.vue';
+import BlockForm from '@/components/util/BlockForm.vue';
 
 export default {
   name: 'ChangeUsernameForm',
