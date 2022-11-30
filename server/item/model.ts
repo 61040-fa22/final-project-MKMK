@@ -28,7 +28,11 @@ const ItemSchema = new Schema<Item>({
     type: String,
     required: true
   },
-  
+  // The current availability of the item
+  isAvailable: {
+    type: Boolean,
+    required: true
+  }
 });
 
 const ItemModel = model<Item>('Item', ItemSchema);
