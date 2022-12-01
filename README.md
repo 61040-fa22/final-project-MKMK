@@ -3,20 +3,20 @@ Congrats, you've completed the Fritter backend! Now it's time to make an interfa
 
 ## Starter Code
 
-This starter code implements freets, feeds, and forms with no styling. The backend starter code for freets and users from the previous assignment (A5) is contained in the `server` folder. The frontend starter code is in the `client` folder and is implemented using the [Vue](https://v2.vuejs.org/) framework.
+This starter code implements entrys, feeds, and forms with no styling. The backend starter code for entrys and users from the previous assignment (A5) is contained in the `server` folder. The frontend starter code is in the `client` folder and is implemented using the [Vue](https://v2.vuejs.org/) framework.
 
 The project is structured as follows:
 
 - `api/index.ts` sets up the backend database connection and Express server. This should actually be in the `server` folder, but it must be here due to a Vercel limitation.
 - `server/` contains the backend starter code from A5 (with some changes)
-  - `freet/` contains files related to the Freet concept
+  - `entry/` contains files related to the Entry concept
   - `user/` contains files related to the User concept
 - `client/` contains the frontend starter code
   - `App.vue` is the root component of your application
   - `main.ts` is the entry point of your application, which initializes Vue
   - `components/` contains the components of the frontend
     - `Account/` contains the account settings page and the related forms
-    - `Freet/` contains the homepage and components related to Freets
+    - `Entry/` contains the homepage and components related to Entries
     - `Login/` contains the login/register page and the related forms
     - `Common/` contains general form components that can be reused across different concepts
   - `public/` contains base HTML files and static assets (like the default Fritter logo)
@@ -28,7 +28,7 @@ The project is structured as follows:
 Make a copy of this repository under your personal GitHub account by clicking the `Use this template` button. Run `npm install` in your terminal to install local dependencies. Copy your `.env` file from A5 into the root directory of your new repo. Make sure you can run the starter code locally before proceeding.
 
 ## Setup
-To incorporate the backend you developed in A5 with our starter frontend, please move your files into the `server` folder. For example, note that whereas the `freet` and `user` folders were in the root directory of your backend, they have been now moved to `server/freet` and `server/user`, respectively.
+To incorporate the backend you developed in A5 with our starter frontend, please move your files into the `server` folder. For example, note that whereas the `entry` and `user` folders were in the root directory of your backend, they have been now moved to `server/entry` and `server/user`, respectively.
 
 We've made some updated to the A5 server starter code that we hope you can incorporate into your backend as well.
 
@@ -38,14 +38,14 @@ A summary of the changes is provided below:
 - `api/index.ts`:
   - Add mongo store to track sessions
   - Remove old frontend from express server (**remember to copy over lines importing your `router.ts` files**)
-- `freet/middleware.ts` and `user/middleware.ts`:
+- `entry/middleware.ts` and `user/middleware.ts`:
   - change all contents of `error:` to strings to be easily printed out by the frontend
   - in `isUsernameNotAlreadyInUse()` of `user/middleware.ts`: bug fix related to changing password
-- `freet/collection.ts`:
-  - update finding freets from an author to return in descending order for consistency with finding all freets
-- `freet/router.ts`
-  - updated incorrect documentation for `GET /api/freets`
-  - changed `PUT` to `PATCH /api/freets/:freetid`, to better follow REST API conventions
+- `entry/collection.ts`:
+  - update finding entrys from an author to return in descending order for consistency with finding all entrys
+- `entry/router.ts`
+  - updated incorrect documentation for `GET /api/entrys`
+  - changed `PUT` to `PATCH /api/entrys/:entryid`, to better follow REST API conventions
 - `user/router.ts`
   - add `GET /api/users/session` so the frontend can fetch info about the logged-in user
   - changed `PUT` to `PATCH /api/users`, to better follow REST API conventions
@@ -61,7 +61,7 @@ Running locally requires a few extra npm scripts from `package.json` in comparis
 2. Open a new terminal (with the original one still open) and run `npm run dev` to start the backend at port `3000`.
 3. To view your website, **connect to [localhost:8080](http://localhost:8080)** (instead of port 3000) since the backend will no longer serve any HTML files.
 
-Vue proxies any URL it can't resolve on the client side (at port 8080) to the server (to port 3030), which is why we can call API routes using relative URLs (such as `fetch('/api/freets')`). See `client/vue.config.js` and associated [Vue CLI docs](https://cli.vuejs.org/config/#vue-config-js) for more details.
+Vue proxies any URL it can't resolve on the client side (at port 8080) to the server (to port 3030), which is why we can call API routes using relative URLs (such as `fetch('/api/entrys')`). See `client/vue.config.js` and associated [Vue CLI docs](https://cli.vuejs.org/config/#vue-config-js) for more details.
 
 ## Deployment to Vercel
 
@@ -79,13 +79,13 @@ Vercel will automatically deploy the latest version of your code whenever a push
 Working in Vue means working with Vue components. The starter code organizes components by the resultant tree structure of how the components are composed together.
 
 ### Template
-Every component takes advantage of an [HTML-based template syntax](https://v2.vuejs.org/v2/guide/syntax.html), which is HTML code that binds the rendered DOM to the component data. Inside the template is where we can display specific form components like `<CreateFreetForm />`. We also take advantage of [conditional rendering](https://v2.vuejs.org/v2/guide/conditional.html) here to display different things to different users (such as signed in vs. signed out). For example, in `client/components/Freet/Freets.vue` in lines 5-23, we have:
+Every component takes advantage of an [HTML-based template syntax](https://v2.vuejs.org/v2/guide/syntax.html), which is HTML code that binds the rendered DOM to the component data. Inside the template is where we can display specific form components like `<CreateEntryForm />`. We also take advantage of [conditional rendering](https://v2.vuejs.org/v2/guide/conditional.html) here to display different things to different users (such as signed in vs. signed out). For example, in `client/components/Entry/Entries.vue` in lines 5-23, we have:
 ```
 <section v-if="$store.state.username">
   <header>
     <h2>Welcome @{{ $store.state.username }}</h2>
   </header>
-  <CreateFreetForm />
+  <CreateEntryForm />
 </section>
 <section v-else>
   <header>
@@ -96,7 +96,7 @@ Every component takes advantage of an [HTML-based template syntax](https://v2.vu
       <router-link to="/login">
         Sign in
       </router-link>
-      to create, edit, and delete freets.
+      to create, edit, and delete entrys.
     </h3>
   </article>
 </section>

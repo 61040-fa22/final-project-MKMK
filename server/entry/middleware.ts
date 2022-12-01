@@ -3,14 +3,14 @@ import {Types} from 'mongoose';
 import EntryCollection from './collection';
 
 /**
- * Checks if a freet with freetId is req.params exists
+ * Checks if a entry with entryId is req.params exists
  */
 const isEntryExists = async (req: Request, res: Response, next: NextFunction) => {
-  const validFormat = Types.ObjectId.isValid(req.params.freetId);
-  const freet = validFormat ? await EntryCollection.findOne(req.params.freetId) : '';
-  if (!freet) {
+  const validFormat = Types.ObjectId.isValid(req.params.entryId);
+  const entry = validFormat ? await EntryCollection.findOne(req.params.entryId) : '';
+  if (!entry) {
     res.status(404).json({
-      error: `Entry with freet ID ${req.params.freetId} does not exist.`
+      error: `Entry with entry ID ${req.params.entryId} does not exist.`
     });
     return;
   }
@@ -19,7 +19,7 @@ const isEntryExists = async (req: Request, res: Response, next: NextFunction) =>
 };
 
 /**
- * Checks if the content of the freet in req.body is valid, i.e not a stream of empty
+ * Checks if the content of the entry in req.body is valid, i.e not a stream of empty
  * spaces and not more than 140 characters
  */
 const isValidEntryContent = (req: Request, res: Response, next: NextFunction) => {
@@ -42,14 +42,14 @@ const isValidEntryContent = (req: Request, res: Response, next: NextFunction) =>
 };
 
 /**
- * Checks if the current user is the author of the freet whose freetId is in req.params
+ * Checks if the current user is the author of the entry whose entryId is in req.params
  */
 const isValidEntryModifier = async (req: Request, res: Response, next: NextFunction) => {
-  const freet = await EntryCollection.findOne(req.params.freetId);
-  const userId = freet.authorId._id;
+  const entry = await EntryCollection.findOne(req.params.entryId);
+  const userId = entry.authorId._id;
   if (req.session.userId !== userId.toString()) {
     res.status(403).json({
-      error: 'Cannot modify other users\' freets.'
+      error: 'Cannot modify other users\' entries.'
     });
     return;
   }

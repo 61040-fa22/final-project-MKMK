@@ -6,13 +6,13 @@ function viewLikes() {
     .catch(showResponse);
 }
 
-function likeFreet(fields) {
+function likeEntry(fields) {
   fetch(`/api/likes/${fields.id}`, {method: 'POST'})
     .then(showResponse)
     .catch(showResponse);
 }
 
-function unlikeFreet(fields) {
+function unlikeEntry(fields) {
   fetch(`/api/likes/${fields.id}`, {method: 'DELETE'})
     .then(showResponse)
     .catch(showResponse);
