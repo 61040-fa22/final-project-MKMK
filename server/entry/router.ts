@@ -13,7 +13,7 @@ const router = express.Router();
  * @name GET /api/entries
  *
  * @return {EntryResponse[]} - A list of all the entry sorted in descending
- *                      order by date modified
+ *                      order by date createdi
  */
 
 /**
@@ -102,34 +102,5 @@ router.delete(
   }
 );
 
-/**
- * Modify a entry
- *
- * @name PATCH /api/entry/:id
- *
- * @param {string} content - the new content for the entry
- * @return {EntryResponse} - the updated entry
- * @throws {403} - if the user is not logged in or not the author of
- *                 of the entry
- * @throws {404} - If the entryId is not valid
- * @throws {400} - If the entry content is empty or a stream of empty spaces
- * @throws {413} - If the entry content is more than 140 characters long
- */
-router.patch(
-  '/:entryId?',
-  [
-    userValidator.isUserLoggedIn,
-    entryValidator.isEntryExists,
-    entryValidator.isValidEntryModifier,
-    entryValidator.isValidEntryContent
-  ],
-  async (req: Request, res: Response) => {
-    const entry = await EntryCollection.updateOne(req.params.entryId, req.body.content);
-    res.status(200).json({
-      message: 'Your entry was updated successfully.',
-      entry: util.constructEntryResponse(entry)
-    });
-  }
-);
 
 export {router as entryRouter};
