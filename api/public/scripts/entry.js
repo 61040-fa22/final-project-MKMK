@@ -5,20 +5,20 @@
  * e.g. for createUser, fields has properties 'username' and 'password'
  */
 
-function viewAllFreets(fields) {
-  fetch('/api/freets')
+function viewAllEntries(fields) {
+  fetch('/api/entries')
     .then(showResponse)
     .catch(showResponse);
 }
 
-function viewFreetsByAuthor(fields) {
-  fetch(`/api/freets?author=${fields.author}`)
+function viewEntriesByAuthor(fields) {
+  fetch(`/api/entries?author=${fields.author}`)
     .then(showResponse)
     .catch(showResponse);
 }
 
-function createFreet(fields) {
-  fetch('/api/freets', {
+function createEntry(fields) {
+  fetch('/api/entries', {
     method: 'POST',
     body: JSON.stringify(fields),
     headers: {'Content-Type': 'application/json'}
@@ -27,8 +27,8 @@ function createFreet(fields) {
     .catch(showResponse);
 }
 
-function deleteFreet(fields) {
-  fetch(`/api/freets/${fields.id}`, {method: 'DELETE'})
+function deleteEntry(fields) {
+  fetch(`/api/entries/${fields.id}`, {method: 'DELETE'})
     .then(showResponse)
     .catch(showResponse);
 }

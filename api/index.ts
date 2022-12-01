@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import * as userValidator from "../server/user/middleware";
 import { userRouter } from "../server/user/router";
-import { freetRouter } from "../server/freet/router";
+import { entryRouter } from "../server/entry/router";
 import MongoStore from "connect-mongo";
 
 // Load environmental variables
@@ -86,7 +86,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // Add routers from routes folder
 app.use("/api/users", userRouter);
-app.use("/api/freets", freetRouter);
+app.use("/api/entries", entryRouter);
 
 // Catch all the other routes and display error message
 app.all("*", (req: Request, res: Response) => {
