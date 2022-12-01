@@ -15,7 +15,7 @@ export default {
         {id: 'description', label: 'Description', value: ''},
       ],
       title: 'List new item',
-      refreshFreets: true,
+      refreshEntries: true,
       callback: () => {
         const message = 'Successfully created an entry!';
         this.$set(this.alerts, message, 'success');
