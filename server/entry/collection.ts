@@ -61,6 +61,20 @@ class EntryCollection {
     return EntryModel.find({authorId: author._id}).sort({dateCreated: -1}).populate('authorId');
   }
 
+
+  /**
+   * TO DO after Item is done: Get all the entries by item. 
+   *
+   * @param {Types.ObjectId} item - itemId 
+   * @return {Promise<HydratedDocument<Entry>[]>} - An array of all of the entries
+   */
+    /*
+     static async findAllByItem(itemId: Types.ObjectId): Promise<Array<HydratedDocument<Entry>>> {
+      const item = await ItemCollection.findOneByItemId(itemId);
+      return EntryModel.find({itemId: item._id}).sort({dateCreated: -1}).populate('itemId');
+    }
+    */
+  
   /**
    * Update a entry with the new content
    *

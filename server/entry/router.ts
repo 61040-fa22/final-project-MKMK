@@ -28,26 +28,60 @@ const router = express.Router();
  */
 router.get(
   '/',
+  [
+    userValidator.isAuthorExists
+  ],
   async (req: Request, res: Response, next: NextFunction) => {
     // Check if author query parameter was supplied
     if (req.query.author !== undefined) {
       next();
       return;
     }
-
     const allEntries = await EntryCollection.findAll();
     const response = allEntries.map(util.constructEntryResponse);
     res.status(200).json(response);
   },
-  [
-    userValidator.isAuthorExists
-  ],
   async (req: Request, res: Response) => {
     const authorEntries = await EntryCollection.findAllByUsername(req.query.author as string);
     const response = authorEntries.map(util.constructEntryResponse);
     res.status(200).json(response);
   }
 );
+
+/**
+ * TO DO: 
+ * Get entry by item.
+ *
+ * @name GET /api/entry?item=itemId
+ *
+ * @return {EntryResponse[]} - An array of entries related to given item 
+ * @throws {400} - If item is not given
+ * @throws {404} - If item does not exist
+ *
+ */
+/*
+ router.get(
+  '/',
+  [
+    itemValidator.isItemExists
+  ],
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Check if author query parameter was supplied
+    if (req.query.itemId !== undefined) {
+      res.status(200);
+      next();
+      return;
+    }
+    const allEntries = await EntryCollection.findAll();
+    const response = allEntries.map(util.constructEntryResponse);
+  },
+  async (req: Request, res: Response) => {
+    const itemEntries = await EntryCollection.findAllByItem(req.query.author as string);
+    const response = itemEntries.map(util.constructEntryResponse);
+    res.status(200).json(response);
+  }
+);
+*/
 
 /**
  * Create a new entry.
