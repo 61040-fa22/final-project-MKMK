@@ -11,6 +11,8 @@ import dotenv from "dotenv";
 import * as userValidator from "../server/user/middleware";
 import { userRouter } from "../server/user/router";
 import { entryRouter } from "../server/entry/router";
+import { itemRouter } from "../server/item/router";
+import { requestRouter } from "../server/request/router";
 import MongoStore from "connect-mongo";
 
 // Load environmental variables
@@ -87,6 +89,8 @@ app.get("/", (req: Request, res: Response) => {
 // Add routers from routes folder
 app.use("/api/users", userRouter);
 app.use("/api/entries", entryRouter);
+app.use("/api/items", itemRouter);
+app.use("/api/requests", requestRouter);
 
 // Catch all the other routes and display error message
 app.all("*", (req: Request, res: Response) => {

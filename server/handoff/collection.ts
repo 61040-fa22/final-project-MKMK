@@ -15,13 +15,11 @@ class RequestCollection {
    * @param {date} endDate - The proposed end date of the borrowing period
    * @return {Promise<HydratedDocument<Request>>} - The newly created Request object
    */
-  static async addOne(itemId: Types.ObjectId | string, startDate: Date, endDate: Date): Promise<HydratedDocument<Request>> {
-    // TODO: create item, item collection. make sure it has an _id and a field called ownerId
-    // Const ownerId = ItemCollection.findOneById({_id: itemId}).ownerId;
-    const borrowerId = 
+  static async addOne(itemId: Types.ObjectId | string, borrowerId: Types.ObjectId | string, startDate: Date, endDate: Date): Promise<HydratedDocument<Request>> {
+    const owner = (await ItemCollection.findOne(itemId)).ownerId;
     const Request = new RequestModel({
       itemId,
-      // OwnerId,
+      owner,
       borrowerId,
       startDate,
       endDate

@@ -12,7 +12,7 @@ export type User = {
   username: string;
   password: string;
   dateJoined: Date;
-  isPaused: boolean;
+  // TO DO:  isPaused: boolean;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -35,10 +35,10 @@ const UserSchema = new Schema({
     required: true
   },
   // The user's activity status
-  isPaused: {
-    type: Boolean,
-    required: true
-  }
+  // isPaused: {
+  //   type: Boolean,
+  //   required: true
+  // }
 });
 
 const UserModel = model<User>('User', UserSchema);

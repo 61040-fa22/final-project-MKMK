@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/scripts/entry.js"></script>
-  <script src="/scripts/likes.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/profiles.js"></script>
   <script src="/scripts/index.js"></script>
@@ -54,14 +53,14 @@
           <input type="submit" value="Delete User">
         </form>
 
-        <form id="change-username">
+        <!-- <form id="change-username">
           <h3>Change Username</h3>
           <div>
             <label for="username">New Username:</label>
             <input id="username" name="username">
           </div>
           <input type="submit" value="Change Username">
-        </form>
+        </form> -->
 
         <form id="change-password">
           <h3>Change Password</h3>
@@ -99,19 +98,19 @@
           <input type="submit" value="Sign out">
         </form>
 
-        <form id="request-item">
+        <!-- <form id="request-item">
           <h3>Request Item</h3>
           <div>
             <label for="id">Item ID (of item to request):</label>
             <input id="id" name="id">
           </div>
           <input type="submit" value="Request Item">
-        </form>
+        </form> -->
     <!-- 
       TO DO: Not sure how we are handling request/handoff so I created a request and a handoff here. 
       Change as you see fit. 
     -->
-        <form id="allow-handoff"> 
+        <!-- <form id="allow-handoff"> 
           <h3>Allow Handoff </h3>
           <div>
             <label for="id">Item ID (of item to allow borrowing):</label>
@@ -134,8 +133,52 @@
             <input id="id" name="id">
             </div>
           <input type="submit" value="Return Item">
+        </form> -->
+        <form id="update-item">
+          <h3>Update Item</h3>
+          <div>
+            <label for="id">Item ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="update-item">
+        </form>
+        <form id="delete-item">
+          <h3>Delete Item</h3>
+          <div>
+            <label for="id">Item ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="delete-item">
+        </form>
+        <form id="get-all-items">
+          <h3>Get All Items</h3>
+          <input type="submit" value="delete-item">
+        </form>
+        <form id="get-item-by-id">
+          <h3>Get Item by ID</h3>
+          <div>
+            <label for="id">Item ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="delete-item">
+        </form>
+        <form id="get-item-by-owner">
+          <h3>Get Item by owner</h3>
+          <div>
+            <label for="id">Owner:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="delete-item">
         </form>
 
+        <form id="view-entries-by-itemId">
+          <h3>View entries for an Item</h3>
+          <div>
+            <label for="itemId">Item ID:</label>
+            <input id="itemId" name="itemId">
+          </div>
+          <input type="submit" value="View All Entries">
+        </form>
         <form id="view-all-entries">
           <h3>View All Entries</h3>
           <input type="submit" value="View All Entries">

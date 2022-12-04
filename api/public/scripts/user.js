@@ -9,14 +9,9 @@ function createUser(fields) {
     .catch(showResponse);
 }
 
-function changeUsername(fields) {
-  fetch('/api/users', {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
-    .then(showResponse)
-    .catch(showResponse);
-}
 
 function changePassword(fields) {
-  fetch('/api/users', {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+  fetch('/api/users', {method: 'PATCH', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
     .then(showResponse)
     .catch(showResponse);
 }
