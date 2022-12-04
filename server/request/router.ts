@@ -55,7 +55,6 @@ router.post(
     // TODO: itemValidator isDatesAvailable
   ],
   async (req: Request, res: Response) => {
-    console.log('testing post request');
     const borrowerId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const {itemId, startDate, endDate} = req.body.contents as {itemId: Types.ObjectId; startDate: Date; endDate: Date};
     const request = await RequestCollection.addOne(itemId, borrowerId, startDate, endDate);
