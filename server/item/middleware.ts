@@ -19,11 +19,24 @@ const isItemExists = async (req: Request, res: Response, next: NextFunction) => 
 };
 
 /**
- * Checks if the name of the item in req.body is valid,
- * i.e not a stream of empty spaces
+ * Checks if the current user is the owner of the item whose itemId is in req.params
  */
-const isValidItemName = (req: Request, res: Response, next: NextFunction) => {
-  const {name} = req.body as {name: string};
+const isValidItemModifier = async (req: Request, res: Response, next: NextFunction) => {
+  const item = await ItemCollection.findOne(req.params.itemId);
+  if (req.session.userId !== item.ownerId.toString()) {
+    res.status(403).json({
+      error: 'Cannot modify other users\' items.'
+    });
+    return;
+  }
+  next();
+};
+
+/**
+ * Checks if the current name and description in req.params are valid (must have a name, length limit on name & description)
+ */
+const isValidItemContent = async (req: Request, res: Response, next: NextFunction) => {
+  const {name, description} = req.body as {name: string; description: string};
   if (!name.trim()) {
     res.status(400).json({
       error: 'Item name must be at least one character long.'
@@ -31,50 +44,16 @@ const isValidItemName = (req: Request, res: Response, next: NextFunction) => {
     return;
   }
 
-  // CHANGE IF WE CHOOSE A MAX LENGTH
-  // if (name.length > X) {
-  //   res.status(413).json({
-  //     error: 'ITEM name must be no more than X characters.'
-  //   });
-  //   return;
-  // }
-
-  next();
-};
-
-/**
- * Checks if the description of the item in req.body is valid,
- * i.e not a stream of empty spaces
- */
- const isValidItemDescription = (req: Request, res: Response, next: NextFunction) => {
-  const {description} = req.body as {description: string};
-  if (!description.trim()) {
-    res.status(400).json({
-      error: 'Item description must be at least one character long.'
+  if (name.length > 50) {
+    res.status(413).json({
+      error: 'Item name must be no more than 50 characters.'
     });
     return;
   }
 
-  // CHANGE IF WE CHOOSE A MAX LENGTH
-  // if (description.length > X) {
-  //   res.status(413).json({
-  //     error: 'ITEM description must be no more than X characters.'
-  //   });
-  //   return;
-  // }
-
-  next();
-};
-
-/**
- * Checks if the current user is the owner of the item whose itemId is in req.params
- */
-const isValidItemModifier = async (req: Request, res: Response, next: NextFunction) => {
-  const item = await ItemCollection.findOne(req.params.itemId);
-  const ownerId = item.ownerId._id;
-  if (req.session.userId !== ownerId.toString()) {
-    res.status(403).json({
-      error: 'Cannot modify other users\' items.'
+  if (description.length > 140) {
+    res.status(413).json({
+      error: 'Item description must be no more than 140 characters.'
     });
     return;
   }
@@ -84,7 +63,6 @@ const isValidItemModifier = async (req: Request, res: Response, next: NextFuncti
 
 export {
   isItemExists,
-  isValidItemName,
-  isValidItemDescription,
-  isValidItemModifier
+  isValidItemModifier,
+  isValidItemContent
 };
