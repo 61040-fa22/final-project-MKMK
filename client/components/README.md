@@ -7,6 +7,20 @@ How this folder is organized:
 - `util`: Reusable UI utilities like forms, an icon wrapper, a modal, a gallery, 3-dots menu component, etc.
 
 
+Item:
+    Model:
+        ownerId: Types.ObjectId;
+        name: string;
+        description: string;
+        isAvailable: boolean;
+    Collection:
+        addOne(ownerId, name, description) create item
+        findOne(itemId) get the item with the given ID
+        findAllByOwnerId(ownerId) get all items owned by the user with ownerId
+        updateOne(itemId, name, description) update item with new values. leave name, description as empty strings to keep old values
+        deleteOne(itemId) delete the item with the given ID
+        deleteMany(ownerId) delete all items owned by the user with ownerId
+
 
 Request:
     Model:
