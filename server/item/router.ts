@@ -44,7 +44,9 @@ router.get(
     const ownerItems = await ItemCollection.findAllByUsername(req.query.owner as string);
     const response = ownerItems.map(util.constructItemResponse);
     res.status(200).json(response);
-   );
+  }
+);
+  
 
 /**
  * Create a new item.
@@ -122,7 +124,13 @@ router.patch(
     itemValidator.isValidItemContent
   ],
   async (req: Request, res: Response) => {
-    const item = await ItemCollection.updateOne(req.params.itemId, req.body.name, req.body.description);
+    let item = await ItemCollection.findOne(req.params.itemId); // Unchanged item
+    if (req.body.name) { // Item with new name
+      item = await ItemCollection.updateOneName(req.params.itemId, req.body.name);
+    }
+    if (req.body.description) { // Item with new description
+      item = await ItemCollection.updateOneDescription(req.params.itemId, req.body.description);
+    }
     res.status(200).json({
       message: 'Your item was updated successfully.',
       item
