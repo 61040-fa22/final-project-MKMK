@@ -1,6 +1,7 @@
 import type {Types} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
+import type {Item} from '../item/model';
 
 // Type definition for Request on the backend
 export type Request = {
@@ -8,6 +9,16 @@ export type Request = {
   itemId: Types.ObjectId;
   ownerId: Types.ObjectId;
   borrowerId: Types.ObjectId;
+  startDate: Date;
+  endDate: Date;
+  accepted: boolean;
+};
+
+export type PopulatedRequest = {
+  _id: Types.ObjectId;
+  itemId: Item;
+  ownerId: User;
+  borrowerId: User;
   startDate: Date;
   endDate: Date;
   accepted: boolean;

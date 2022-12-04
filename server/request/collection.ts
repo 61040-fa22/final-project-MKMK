@@ -14,7 +14,8 @@ class RequestCollection {
    * @return {Promise<HydratedDocument<Request>>} - The newly created Request object
    */
   static async addOne(itemId: Types.ObjectId | string, borrowerId: Types.ObjectId | string, startDate: Date, endDate: Date): Promise<HydratedDocument<Request>> {
-    const ownerId = ItemCollection.findOne({_id: itemId}).ownerId;
+    const item = await ItemCollection.findOne(itemId);
+    const {ownerId} = item;
     const Request = new RequestModel({
       itemId,
       ownerId,
