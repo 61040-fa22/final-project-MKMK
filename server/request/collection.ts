@@ -1,9 +1,7 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {Request} from './model';
 import RequestModel from './model';
-import UserCollection from '../user/collection';
-// Cimport ItemCollection from '../item/collection';
-import {isUserLoggedIn} from 'server/user/middleware';
+import ItemCollection from '../item/collection';
 
 class RequestCollection {
   /**
@@ -15,13 +13,11 @@ class RequestCollection {
    * @param {date} endDate - The proposed end date of the borrowing period
    * @return {Promise<HydratedDocument<Request>>} - The newly created Request object
    */
-  static async addOne(itemId: Types.ObjectId | string, startDate: Date, endDate: Date): Promise<HydratedDocument<Request>> {
-    // TODO: create item, item collection. make sure it has an _id and a field called ownerId
-    // Const ownerId = ItemCollection.findOneById({_id: itemId}).ownerId;
-    const borrowerId = 
+  static async addOne(itemId: Types.ObjectId | string, borrowerId: Types.ObjectId | string, startDate: Date, endDate: Date): Promise<HydratedDocument<Request>> {
+    const ownerId = ItemCollection.findOneById({_id: itemId}).ownerId;
     const Request = new RequestModel({
       itemId,
-      // OwnerId,
+      ownerId,
       borrowerId,
       startDate,
       endDate
@@ -36,7 +32,7 @@ class RequestCollection {
    * @param {string} RequestId - The id of the Request to find
    * @return {Promise<HydratedDocument<Request>> | Promise<null> } - The Request with the given RequestId, if any
    */
-  static async findOne(RequestId: Types.ObjectId | string): Promise<HydratedDocument<Request>> {
+  static async findOneById(RequestId: Types.ObjectId | string): Promise<HydratedDocument<Request>> {
     return RequestModel.findOne({_id: RequestId});
   }
 
@@ -61,51 +57,42 @@ class RequestCollection {
   }
 
   /**
-   * Get all the Requests associated with a user
+   * Get all the Requests to the owner
    *
    * @param {string} userId - The ID of the user whose Requests are sought
+   * @param {boolean} ownerStatus - Whether or not the user is the owner of the items requested; if false, user is considered to be the borrower
    * @return {Promise<HydratedDocument<Request>[]>} - An array of Requests
    */
-  static async findAllByUser(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Request>>> {
-    return RequestModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]});
-  }
+  static async findAllByUser(userId: Types.ObjectId | string, ownerStatus: boolean): Promise<Array<HydratedDocument<Request>>> {
+    if (ownerStatus) {
+      return RequestModel.find({ownerId: userId});
+    }
 
-  /**
-   * Get all the Requests associated with a group
-   *
-   * @param {string} groupId - The ID of the group whose Requests are sought
-   * @return {Promise<HydratedDocument<Request>[]>} - An array of Requests
-   */
-  static async findAllByGroup(groupId: Types.ObjectId | string): Promise<Array<HydratedDocument<Request>>> {
-    // TODO: update this when group collection exists
-    // All users in the group with groupId
-    // Xconst groupUsers = await GroupCollection.findUsersByGroup({groupId});
-    // Find all Requests whose ownerId or borrowerId are in groupUsers
-    return RequestModel.find();// C{$or: [{ownerId:{$in: groupUsers}}, {borrowerId:{ $in: groupUsers}}]});
+    return RequestModel.find({borrowerId: userId});
   }
 
   /**
    * Update a Request's accepted status
    *
-   * @param {string} RequestId - The id of the Request to be updated
+   * @param {string} requestId - The id of the Request to be updated
    * @param {boolean} accepted - Whether or not the Request has been accepted
    * @return {Promise<HydratedDocument<Request>>} - The newly updated Request
    */
-  static async acceptOne(RequestId: Types.ObjectId | string, accepted: boolean): Promise<HydratedDocument<Request>> {
-    const Request = await RequestModel.findOne({_id: RequestId});
+  static async acceptOne(requestId: Types.ObjectId | string, accepted: boolean): Promise<HydratedDocument<Request>> {
+    const Request = await RequestModel.findOne({_id: requestId});
     Request.accepted = accepted;
     await Request.save();
     return Request;
   }
 
   /**
-   * Delete a Request with given RequestId.
+   * Delete a Request with given requestId.
    *
-   * @param {string} RequestId - The Id of Request to delete
+   * @param {string} requestId - The Id of Request to delete
    * @return {Promise<Boolean>} - true if the Request has been deleted, false otherwise
    */
-  static async deleteOne(RequestId: Types.ObjectId | string): Promise<boolean> {
-    const Request = await RequestModel.deleteOne({_id: RequestId});
+  static async deleteOne(requestId: Types.ObjectId | string): Promise<boolean> {
+    const Request = await RequestModel.deleteOne({_id: requestId});
     return Request !== null;
   }
 
@@ -115,7 +102,7 @@ class RequestCollection {
    * @param {string} userId - The id of owner of the Requests
    */
   static async deleteMany(userId: Types.ObjectId | string): Promise<void> {
-    await RequestModel.deleteMany({ownerId: userId});
+    await RequestModel.deleteMany({$or: [{ownerId: userId}, {borrowerId: userId}]});
   }
 }
 

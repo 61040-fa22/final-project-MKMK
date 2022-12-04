@@ -16,7 +16,7 @@ const ItemSchema = new Schema<Item>({
   ownerId: {
     // Use Types.ObjectId outside of the schema
     type: Schema.Types.ObjectId,
-    required: true,
+    required: true
   },
   // The name of the item
   name: {
