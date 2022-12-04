@@ -14,7 +14,6 @@ const isItemExists = async (req: Request, res: Response, next: NextFunction) => 
     });
     return;
   }
-
   next();
 };
 
@@ -23,6 +22,8 @@ const isItemExists = async (req: Request, res: Response, next: NextFunction) => 
  */
 const isValidItemModifier = async (req: Request, res: Response, next: NextFunction) => {
   const item = await ItemCollection.findOne(req.params.itemId);
+  console.log("session id: ", req.session.userId); 
+  console.log("owner: ", item.ownerId.toString()); 
   if (req.session.userId !== item.ownerId.toString()) {
     res.status(403).json({
       error: 'Cannot modify other users\' items.'

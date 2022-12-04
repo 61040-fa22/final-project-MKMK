@@ -92,4 +92,8 @@ class HandoffCollection {
   }
 }
 
+<<<<<<< HEAD
 export default HandoffCollection;
+=======
+export default HandoffCollection;
+>>>>>>> main
