@@ -43,8 +43,8 @@ router.get(
  * @param {date} endDate - The proposed end date of the borrowing period
  * @return {Request} - The created request
  * @throws {403} - If the user is not logged in
- * @throws {400} - If the freet content is empty or a stream of empty spaces
- * @throws {413} - If the freet content is more than 140 characters long
+ * @throws {400} - If the entry content is empty or a stream of empty spaces
+ * @throws {413} - If the entry content is more than 140 characters long
  */
 router.post(
   '/',
@@ -85,7 +85,7 @@ router.delete(
   async (req: Request, res: Response) => {
     await RequestCollection.deleteOne(req.params.requestId);
     res.status(200).json({
-      message: 'Your freet was deleted successfully.'
+      message: 'Your entry was deleted successfully.'
     });
   }
 );
@@ -98,7 +98,7 @@ router.delete(
  * @param {boolean} accept - whether or not the request is accepted
  * @return {Request} - the updated request
  * @throws {403} - if the user is not logged in or not the author of
- *                 of the freet
+ *                 of the entry
  * @throws {404} - If the requestId is not valid
  */
 router.patch(

@@ -6,11 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/scripts/entry.js"></script>
-  <script src="/scripts/likes.js"></script>
   <script src="/scripts/user.js"></script>
-  <script src="/scripts/profiles.js"></script>
+  <script src="/scripts/item.js"></script>
   <script src="/scripts/index.js"></script>
-  <script src="/scripts/items.js"></script>
 
 </head>
 
@@ -53,7 +51,7 @@
           <h3>Delete User</h3>
           <input type="submit" value="Delete User">
         </form>
-
+<!-- 
         <form id="change-username">
           <h3>Change Username</h3>
           <div>
@@ -61,7 +59,7 @@
             <input id="username" name="username">
           </div>
           <input type="submit" value="Change Username">
-        </form>
+        </form> -->
 
         <form id="change-password">
           <h3>Change Password</h3>
@@ -71,70 +69,70 @@
           </div>
           <input type="submit" value="Change Password">
         </form>
-
-        <form id="edit-profile">
-          <h3>Edit Profile</h3>
-          <p>Leave an input blank to leave its corresponding field unchanged. This means that from this GUI you can't clear a field, but programmatically one would be able to do that by passing a blank string.</p>
-          <div>
-            <label for="displayName">Display Name:</label>
-            <input id="displayName" name="displayName">
-          </div>
-          <div>
-            <label for="bio">Bio:</label>
-            <input id="bio" name="bio">
-          </div>
-          <div>
-            <label for="location">Location:</label>
-            <input id="location" name="location">
-          </div>
-          <div>
-            <label for="profileColor">Profile Color:</label>
-            <input id="profileColor" name="profileColor">
-          </div>
-          <input type="submit" value="Edit Profile">
-        </form>
-
         <form id="sign-out">
           <h3>Sign Out</h3>
           <input type="submit" value="Sign out">
         </form>
-
-        <form id="request-item">
-          <h3>Request Item</h3>
+        <form id="create-item">
+          <h3>Create Item</h3>
           <div>
-            <label for="id">Item ID (of item to request):</label>
+            <label for="name">Item name:</label>
+            <input id="name" name="name">
+          </div>
+          <div>
+            <label for="description">Item description:</label>
+            <input id="description" name="description">
+          </div>
+          <input type="submit" value="create-item">
+        </form>
+
+        <form id="update-item">
+          <h3>Update Item</h3>
+          <div>
+            <label for="id">Item ID:</label>
             <input id="id" name="id">
           </div>
-          <input type="submit" value="Request Item">
+          <div>
+            <label for="name">Change name to:</label>
+            <input id="name" name="name">
+          </div>
+          <div>
+            <label for="description">Change description to:</label>
+            <input id="description" name="description">
+          </div>
+          <input type="submit" value="update-item">
         </form>
+
+        <form id="delete-item">
+          <h3>Delete Item</h3>
+          <div>
+            <label for="id">Item ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="delete-item">
+        </form>
+        <form id="get-all-items">
+          <h3>Get All Items</h3>
+          <input type="submit" value="get-all-items">
+        </form>
+    
+        <form id="get-items-by-owner">
+          <h3>Get Items by owner</h3>
+          <div>
+            <label for="id">Owner:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="get-items-by-owner">
+        </form>
+
     <!-- 
       TO DO: Not sure how we are handling request/handoff so I created a request and a handoff here. 
       Change as you see fit. 
     -->
-        <form id="allow-handoff"> 
-          <h3>Allow Handoff </h3>
-          <div>
-            <label for="id">Item ID (of item to allow borrowing):</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Allow Handoff">
-        </form>
-        <form id="reject-handoff"> 
-          <h3>Reject Handoff </h3>
-          <div>
-            <label for="id">Item ID (of item to reject borrowing):</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Reject Handoff">
-        </form>
-        <form id="return-item"> 
-          <h3>Return Item </h3>
-          <div>
-            <label for="id">Item ID (of item to reject borrowing):</label>
-            <input id="id" name="id">
-            </div>
-          <input type="submit" value="Return Item">
-        </form>
+   
+
+
+
 
         <form id="view-all-entries">
           <h3>View All Entries</h3>

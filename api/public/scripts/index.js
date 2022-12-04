@@ -32,22 +32,18 @@ function showResponse(response) {
 const formsAndHandlers = {
   'create-user': createUser,
   'delete-user': deleteUser,
-  'change-username': changeUsername,
   'change-password': changePassword,
   'sign-in': signIn,
   'sign-out': signOut,
-  'request-item': requestItem,
-  'allow-handoff': allowHandoff,
-  'reject-handoff': rejectHandoff,
-  'return-item': returnItem,
-  'view-all-entries': viewAllEntries,
-  'view-entries-by-author': viewEntriesByAuthor,
-  'create-entry': createEntry,
-  'delete-entry': deleteEntry,
-  'view-all-likes': viewLikes,
-  'like-entry': likeEntry,
-  'unlike-entry': unlikeEntry,
-  'edit-profile': editProfile
+  'update-item':updateItem,
+  'create-item':createItem,
+  'delete-item':deleteItem,
+  'get-items-by-owner': getItemsByOwner,
+  'get-all-items': getAllItems,
+  // 'view-all-entries': viewAllEntries,
+  // 'view-entries-by-author': viewEntriesByAuthor,
+  // 'create-entry': createEntry,
+  // 'delete-entry': deleteEntry,
 };
 
 // Attach handlers to forms

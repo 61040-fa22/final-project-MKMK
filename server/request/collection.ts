@@ -1,7 +1,9 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {Request} from './model';
 import RequestModel from './model';
+import UserCollection from '../user/collection';
 import ItemCollection from '../item/collection';
+import {isUserLoggedIn} from 'server/user/middleware';
 
 class RequestCollection {
   /**
