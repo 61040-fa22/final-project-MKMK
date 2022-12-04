@@ -94,6 +94,7 @@ class EntryCollection {
    *
    * @param {string} entryId - The entryId of entry to delete
    * @return {Promise<Boolean>} - true if the entry has been deleted, false otherwise
+   * 
    */
   static async deleteOne(entryId: Types.ObjectId | string): Promise<boolean> {
     const entry = await EntryModel.deleteOne({_id: entryId});
