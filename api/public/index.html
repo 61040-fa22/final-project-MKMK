@@ -1,23 +1,22 @@
 <html>
 
 <head>
-  <title>Fritter</title>
+  <title>BeLender</title>
   <meta name="author" content="6.170 Staff">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <script src="/scripts/freet.js"></script>
+  <script src="/scripts/entry.js"></script>
   <script src="/scripts/likes.js"></script>
   <script src="/scripts/user.js"></script>
-  <script src="/scripts/follow.js"></script>
-  <script src="/scripts/readinglist.js"></script>
-  <script src="/scripts/collaborativemoments.js"></script>
   <script src="/scripts/profiles.js"></script>
   <script src="/scripts/index.js"></script>
+  <script src="/scripts/items.js"></script>
+
 </head>
 
 <body>
   <header>
-    <h1>Fritter</h1>
+    <h1>BeLender</h1>
   </header>
 
   <main class="two-col">
@@ -100,196 +99,115 @@
           <input type="submit" value="Sign out">
         </form>
 
-        <form id="follow-user">
-          <h3>Follow User</h3>
+        <form id="request-item">
+          <h3>Request Item</h3>
           <div>
-            <label for="username">Username (of user to follow):</label>
-            <input id="username" name="username">
+            <label for="id">Item ID (of item to request):</label>
+            <input id="id" name="id">
           </div>
-          <input type="submit" value="Follow User">
+          <input type="submit" value="Request Item">
         </form>
-
-        <form id="unfollow-user">
-          <h3>Unfollow User</h3>
+    <!-- 
+      TO DO: Not sure how we are handling request/handoff so I created a request and a handoff here. 
+      Change as you see fit. 
+    -->
+        <form id="allow-handoff"> 
+          <h3>Allow Handoff </h3>
           <div>
-            <label for="username">Username (of user to unfollow):</label>
-            <input id="username" name="username">
+            <label for="id">Item ID (of item to allow borrowing):</label>
+            <input id="id" name="id">
           </div>
-          <input type="submit" value="Follow User">
+          <input type="submit" value="Allow Handoff">
+        </form>
+        <form id="reject-handoff"> 
+          <h3>Reject Handoff </h3>
+          <div>
+            <label for="id">Item ID (of item to reject borrowing):</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Reject Handoff">
+        </form>
+        <form id="return-item"> 
+          <h3>Return Item </h3>
+          <div>
+            <label for="id">Item ID (of item to reject borrowing):</label>
+            <input id="id" name="id">
+            </div>
+          <input type="submit" value="Return Item">
         </form>
 
-        <form id="view-all-freets">
-          <h3>View All Freets</h3>
-          <input type="submit" value="View All Freets">
+        <form id="view-all-entries">
+          <h3>View All Entries</h3>
+          <input type="submit" value="View All Entries">
         </form>
 
-        <form id="view-freets-by-author">
-          <h3>View Freets By Author</h3>
+        <form id="view-entries-by-itemId">
+          <h3>View entries for an Item</h3>
+          <div>
+            <label for="itemId">Item ID:</label>
+            <input id="itemId" name="itemId">
+          </div>
+          <input type="submit" value="View All Entries">
+        </form>
+
+        <form id="view-entries-by-author">
+          <h3>View Entries By Author</h3>
           <div>
             <label for="author">Author:</label>
             <input id="author" name="author">
           </div>
-          <input type="submit" value="View Freets By Author">
+          <input type="submit" value="View Entries By Author">
         </form>
 
-        <form id="create-freet">
-          <h3>Create Freet</h3>
+        <form id="create-entry">
+          <h3>Create Entry</h3>
           <div>
             <label for="content">Content:</label>
             <textarea id="content" name="content"></textarea>
           </div>
+          <input type="submit" value="Create Entry">
+        </form>
+
+        <form id="delete-entry">
+          <h3>Delete Entry</h3>
           <div>
-            <label for="replyToId">Reply to (tweet ID):</label>
-            <input id="replyToId" name="replyToId">
+            <label for="id">ID:</label>
+            <input id="id" name="id">
           </div>
+          <input type="submit" value="Delete Entry">
+        </form>
+
+
+        <form id="like-entry">
+          <h3>Like Entry</h3>
           <div>
-            <label for="retweetOfId">Retweet (tweet ID):</label>
-            <input id="retweetOfId" name="retweetOfId">
+            <label for="id">Tweet ID:</label>
+            <input id="id" name="id">
           </div>
+          <input type="submit" value="Like Entry">
+        </form>
+
+        <form id="unlike-entry">
+          <h3>Unlike Entry</h3>
           <div>
-            <label for="mentions">Mention (CM ID):</label>
-            <input id="mentions" name="mentions">
+            <label for="id">Tweet ID:</label>
+            <input id="id" name="id">
           </div>
-          <input type="submit" value="Create Freet">
+          <input type="submit" value="Unlike Entry">
         </form>
 
         <form id="view-all-likes">
-          <h3>View All of Your Liked Freets</h3>
-          <input type="submit" value="View All Liked Freets">
+          <h3>View All of Your Liked Entries</h3>
+          <input type="submit" value="View All Liked Entries">
         </form>
 
-        <form id="like-freet">
-          <h3>Like Freet</h3>
-          <div>
-            <label for="id">Tweet ID:</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Like Freet">
-        </form>
 
-        <form id="unlike-freet">
-          <h3>Unlike Freet</h3>
-          <div>
-            <label for="id">Tweet ID:</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Unlike Freet">
-        </form>
 
-        <form id="add-to-reading-list">
-          <h3>Add Freet to Reading List</h3>
-          <div>
-            <label for="id">Tweet ID:</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Add Freet to Reading List">
-        </form>
 
-        <form id="remove-from-reading-list">
-          <h3>Remove Freet from Reading List</h3>
-          <div>
-            <label for="id">Tweet ID:</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Remove Freet from Reading List">
-        </form>
 
-        <form id="clear-reading-list">
-          <h3>Clear Reading List</h3>
-          <p>I.e. remove all items from reading list</p>
-          <input type="submit" value="Clear Reading List">
-        </form>
 
-        <form id="delete-freet">
-          <h3>Delete Freet</h3>
-          <div>
-            <label for="id">ID:</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Delete Freet">
-        </form>
 
-        <form id="create-cm">
-          <h3>Create Collaborative Moment</h3>
-          <div>
-            <label for="title">Title:</label>
-            <input id="title" name="title">
-          </div>
-          <div>
-            <label for="description">Description:</label>
-            <input id="description" name="description">
-          </div>
-          <div>
-            <label for="admins">Admins (comma-separated usernames):</label>
-            <input id="admins" name="admins">
-          </div>
-          <div>
-            <label for="editors">Editors (comma-separated usernames):</label>
-            <input id="editors" name="editors">
-          </div>
-          <input type="submit" value="Create Collaborative Moment">
-        </form>
 
-        <form id="edit-cm">
-          <h3>Edit Collaborative Moment Details</h3>
-          <p>Leave an input blank to leave its corresponding field unchanged. This means that from this GUI you can't clear a field, but programmatically one would be able to do that by passing a blank string.</p>
-          <div>
-            <label for="id">CM ID:</label>
-            <input id="id" name="id">
-          </div>
-          <div>
-            <label for="title">Title:</label>
-            <input id="title" name="title">
-          </div>
-          <div>
-            <label for="description">Description:</label>
-            <input id="description" name="description">
-          </div>
-          <div>
-            <label for="admins">Admins (comma-separated usernames):</label>
-            <input id="admins" name="admins">
-          </div>
-          <div>
-            <label for="editors">Editors (comma-separated usernames):</label>
-            <input id="editors" name="editors">
-          </div>
-          <input type="submit" value="Edit Collaborative Moment">
-        </form>
-
-        <form id="add-freets-to-cm">
-          <h3>Add Freets to Collaborative Moment</h3>
-          <div>
-            <label for="id">CM ID:</label>
-            <input id="id" name="id">
-          </div>
-          <div>
-            <label for="freets">Freet (comma-separated IDs):</label>
-            <input id="freets" name="freets">
-          </div>
-          <input type="submit" value="Add Freets">
-        </form>
-
-        <form id="remove-freets-from-cm">
-          <h3>Remove Freets from Collaborative Moment</h3>
-          <div>
-            <label for="id">CM ID:</label>
-            <input id="id" name="id">
-          </div>
-          <div>
-            <label for="freets">Freet (comma-separated IDs):</label>
-            <input id="freets" name="freets">
-          </div>
-          <input type="submit" value="Remove Freets">
-        </form>
-
-        <form id="delete-cm">
-          <h3>Delete Collaborative Moment</h3>
-          <div>
-            <label for="id">ID:</label>
-            <input id="id" name="id">
-          </div>
-          <input type="submit" value="Delete Collaborative Moment">
-        </form>
       </div>
     </section>
     <section>

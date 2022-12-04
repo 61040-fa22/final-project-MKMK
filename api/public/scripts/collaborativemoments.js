@@ -39,9 +39,9 @@ function editCM(fields) {
     .catch(showResponse);
 }
 
-function addFreetsToCM(fields) {
+function addEntriesToCM(fields) {
   const data = {
-    freetsToAdd: fields.freets ? fields.freets.split(',').map(str => str.trim()) : []
+    entriesToAdd: fields.entries ? fields.entries.split(',').map(str => str.trim()) : []
   };
   fetch(`/api/cm/${fields.id}/entries`, {
     method: 'POST',
@@ -54,9 +54,9 @@ function addFreetsToCM(fields) {
     .catch(showResponse);
 }
 
-function removeFreetsFromCM(fields) {
+function removeEntriesFromCM(fields) {
   const data = {
-    freetsToRemove: fields.freets ? fields.freets.split(',').map(str => str.trim()) : []
+    entriesToRemove: fields.entries ? fields.entries.split(',').map(str => str.trim()) : []
   };
   fetch(`/api/cm/${fields.id}/entries`, {
     method: 'DELETE',

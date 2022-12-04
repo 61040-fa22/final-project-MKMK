@@ -35,7 +35,7 @@ export default {
     ItemCard
   },
   mounted() {
-    // this.$store.commit('refreshFreets');
+    // this.$store.commit('refreshEntries');
   }
 };
 </script>

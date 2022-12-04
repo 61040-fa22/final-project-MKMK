@@ -9,8 +9,8 @@ Vue.use(Vuex);
  */
 const store = new Vuex.Store({
   state: {
-    filter: null, // Username to filter shown freets by (null = show all)
-    freets: [], // All freets created in the app
+    filter: null, // Username to filter shown entries by (null = show all)
+    entries: [], // All entries created in the app
     username: null, // Username of the logged in user
     alerts: {} // global success/error messages encountered during submissions to non-visible forms
   },
@@ -33,25 +33,25 @@ const store = new Vuex.Store({
     },
     updateFilter(state, filter) {
       /**
-       * Update the stored freets filter to the specified one.
-       * @param filter - Username of the user to fitler freets by
+       * Update the stored entries filter to the specified one.
+       * @param filter - Username of the user to fitler entries by
        */
       state.filter = filter;
     },
-    updateFreets(state, freets) {
+    updateEntries(state, entries) {
       /**
-       * Update the stored freets to the provided freets.
-       * @param freets - Freets to store
+       * Update the stored entries to the provided entries.
+       * @param entries - Entries to store
        */
-      state.freets = freets;
+      state.entries = entries;
     },
-    async refreshFreets(state) {
+    async refreshEntries(state) {
       /**
-       * Request the server for the currently available freets.
+       * Request the server for the currently available entries.
        */
-      const url = state.filter ? `/api/users/${state.filter}/freets` : '/api/freets';
+      const url = state.filter ? `/api/users/${state.filter}/entries` : '/api/entries';
       const res = await fetch(url).then(async r => r.json());
-      state.freets = res;
+      state.entries = res;
     }
   },
   // Store data across page refreshes, only discard on browser close

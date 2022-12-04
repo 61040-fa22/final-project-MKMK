@@ -5,7 +5,7 @@
   <main>
     <section>
       <header>
-        <h2>New to Fritter?</h2>
+        <h2>New to BeLender?</h2>
       </header>
       <RegisterForm />
     </section>

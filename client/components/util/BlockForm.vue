@@ -60,7 +60,7 @@ export default {
       method: 'GET', // Form request method
       hasBody: false, // Whether or not form request has a body
       setUsername: false, // Whether or not stored username should be updated after form submission
-      refreshFreets: false, // Whether or not stored freets should be updated after form submission
+      refreshEntries: false, // Whether or not stored entries should be updated after form submission
       alerts: {}, // Displays success/error messages encountered during form submission
       callback: null // Function to run after successful form submission
     };
@@ -99,8 +99,8 @@ export default {
           this.$store.commit('setUsername', res.user ? res.user.username : null);
         }
 
-        if (this.refreshFreets) {
-          this.$store.commit('refreshFreets');
+        if (this.refreshEntries) {
+          this.$store.commit('refreshEntries');
         }
 
         if (this.callback) {

@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       // TODO
-      url: '/api/freets',
+      url: '/api/entries',
       method: 'POST',
       hasBody: true,
       fields: [
@@ -15,9 +15,9 @@ export default {
         {id: 'description', label: 'Description', value: ''},
       ],
       title: 'List new item',
-      refreshFreets: true,
+      refreshEntries: true,
       callback: () => {
-        const message = 'Successfully created a freet!';
+        const message = 'Successfully created an entry!';
         this.$set(this.alerts, message, 'success');
         setTimeout(() => this.$delete(this.alerts, message), 3000);
       }

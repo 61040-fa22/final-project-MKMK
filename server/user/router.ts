@@ -1,6 +1,6 @@
 import type {Request, Response} from 'express';
 import express from 'express';
-import FreetCollection from '../freet/collection';
+import EntryCollection from '../entry/collection';
 import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
@@ -160,7 +160,7 @@ router.delete(
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     await UserCollection.deleteOne(userId);
     // TODO: delete items belonging to user
-    await FreetCollection.deleteMany(userId);
+    await EntryCollection.deleteMany(userId);
     req.session.userId = undefined;
     res.status(200).json({
       message: 'Your account has been deleted successfully.'
