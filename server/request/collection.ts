@@ -14,7 +14,7 @@ class RequestCollection {
    * @return {Promise<HydratedDocument<Request>>} - The newly created Request object
    */
   static async addOne(itemId: Types.ObjectId | string, borrowerId: Types.ObjectId | string, startDate: Date, endDate: Date): Promise<HydratedDocument<Request>> {
-    const ownerId = ItemCollection.findOneById({_id: itemId}).ownerId;
+    const ownerId = ItemCollection.findOne({_id: itemId}).ownerId;
     const Request = new RequestModel({
       itemId,
       ownerId,
@@ -32,7 +32,7 @@ class RequestCollection {
    * @param {string} RequestId - The id of the Request to find
    * @return {Promise<HydratedDocument<Request>> | Promise<null> } - The Request with the given RequestId, if any
    */
-  static async findOneById(RequestId: Types.ObjectId | string): Promise<HydratedDocument<Request>> {
+  static async findOne(RequestId: Types.ObjectId | string): Promise<HydratedDocument<Request>> {
     return RequestModel.findOne({_id: RequestId});
   }
 

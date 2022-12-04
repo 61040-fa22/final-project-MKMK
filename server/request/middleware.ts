@@ -7,7 +7,7 @@ import RequestCollection from './collection';
  */
 const isRequestExists = async (req: Request, res: Response, next: NextFunction) => {
   const validFormat = Types.ObjectId.isValid(req.params.requestId);
-  const request = validFormat ? await RequestCollection.findOneById(req.params.requestId) : '';
+  const request = validFormat ? await RequestCollection.findOne(req.params.requestId) : '';
   if (!request) {
     res.status(404).json({
       error: `request with request ID ${req.params.requestId} does not exist.`
@@ -39,7 +39,7 @@ const isValidTimeRange = async (req: Request, res: Response, next: NextFunction)
  * Checks if the current user is the author (borrower) of the request whose requestId is in req.params
  */
 const isRequestBorrower = async (req: Request, res: Response, next: NextFunction) => {
-  const request = await RequestCollection.findOneById(req.params.requestId);
+  const request = await RequestCollection.findOne(req.params.requestId);
   if (req.session.userId !== request.borrowerId.toString()) {
     res.status(403).json({
       error: 'Cannot delete other users\' requests.'
@@ -54,7 +54,7 @@ const isRequestBorrower = async (req: Request, res: Response, next: NextFunction
  * Checks if the current user is the owner of the item in the request whose requestId is in req.params
  */
 const isRequestOwner = async (req: Request, res: Response, next: NextFunction) => {
-  const request = await RequestCollection.findOneById(req.params.requestId);
+  const request = await RequestCollection.findOne(req.params.requestId);
   if (req.session.userId !== request.ownerId.toString()) {
     res.status(403).json({
       error: 'Cannot accept other users\' requests.'
