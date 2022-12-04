@@ -11,6 +11,7 @@ const store = new Vuex.Store({
   state: {
     filter: null, // Username to filter shown entries by (null = show all)
     entries: [], // All entries created in the app
+    requests: [], // All requests to and from this user
     username: null, // Username of the logged in user
     alerts: {} // global success/error messages encountered during submissions to non-visible forms
   },
@@ -52,6 +53,14 @@ const store = new Vuex.Store({
       const url = state.filter ? `/api/users/${state.filter}/entries` : '/api/entries';
       const res = await fetch(url).then(async r => r.json());
       state.entries = res;
+    },
+    async refreshRequests(state) {
+      /**
+       * Request the server for requests for this user
+       */
+      const url = `/api/requests?user=${state.username}`;
+      const res = await fetch(url).then(async r => r.json());
+      state.requests = res.filter(request => !(request.accepted === null));
     }
   },
   // Store data across page refreshes, only discard on browser close

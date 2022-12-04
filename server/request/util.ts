@@ -32,11 +32,11 @@ const constructRequestResponse = (request: HydratedDocument<Request>): RequestRe
       versionKey: false // Cosmetics; prevents returning of __v property
     })
   };
- 
+
   const ownerName = requestCopy.ownerId.username;
   const borrowerName = requestCopy.borrowerId.username;
   const itemName = requestCopy.itemId.name;
-  
+
   delete requestCopy.ownerId;
   delete requestCopy.borrowerId;
   delete requestCopy.itemId;

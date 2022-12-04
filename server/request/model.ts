@@ -56,7 +56,8 @@ const RequestSchema = new Schema<Request>({
   // Whether or not the borrow request was accepted by the owner
   // null if request has not been responded to
   accepted: {
-    type: Boolean
+    type: Boolean,
+    default: null
   }
 });
 

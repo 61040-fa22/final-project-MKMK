@@ -1,6 +1,7 @@
 import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import RequestCollection from './collection';
+import UserCollection from '../user/collection';
 
 /**
  * Checks if a request with requestId in req.params exists
@@ -28,6 +29,22 @@ const isValidTimeRange = async (req: Request, res: Response, next: NextFunction)
   if (now > startDate || startDate > endDate) {
     res.status(404).json({
       error: 'Invalid start or end date.'
+    });
+    return;
+  }
+
+  next();
+};
+
+/**
+ * Checks if the current user is the one whose requests are being found
+ * user should not be able to see requests that are not to or from them.
+ */
+const isRequestForUser = async (req: Request, res: Response, next: NextFunction) => {
+  const user = await UserCollection.findOneByUsername(req.query.user as string);
+  if (req.session.userId !== user._id) {
+    res.status(403).json({
+      error: 'Cannot view other users\' requests.'
     });
     return;
   }
@@ -74,5 +91,6 @@ export {
   isRequestExists,
   isValidTimeRange,
   isRequestBorrower,
-  isRequestOwner
+  isRequestOwner,
+  isRequestForUser
 };

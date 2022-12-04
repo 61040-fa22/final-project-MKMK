@@ -38,7 +38,7 @@
         }
     },
     methods: {
-        accept(acceptStatus) {
+        async accept(acceptStatus) {
             const options = {
                 method: 'PATCH',
                 body: JSON.stringify({accept: acceptStatus})
@@ -53,6 +53,7 @@
                     message: 'Successfully ' + acceptStatus? 'accepted' : 'rejected' + 'the request.',
                     status: 'success'
                 });
+                this.$store.commit('refreshRequests');
             } catch (e) {
                 this.$set(this.alerts, e, 'error');
                 setTimeout(() => this.$delete(this.alerts, e), 3000);

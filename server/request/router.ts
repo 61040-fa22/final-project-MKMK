@@ -11,9 +11,9 @@ import * as util from './util';
 const router = express.Router();
 
 /**
- * Get all the requests from the given user, who is an owner of isOwner and a borrower otherwise
+ * Get all the requests to and from the given user
  *
- * @name GET /api/requests?owner=username?ownerStatus=ownerStatus
+ * @name GET /api/requests?user=username
  *
  * @return {RequestResponse[]} - A list of all the requests to/from the specified user
  * @throws {400} - If username is not given
@@ -22,14 +22,13 @@ const router = express.Router();
 router.get(
   '/',
   [
-    userValidator.isAuthorExists
-    // TODO: userValidator isUserExists with findOneByUsername
+    userValidator.isUserLoggedIn,
+    requestValidator.isRequestForUser
   ],
   async (req: Request, res: Response) => {
-    const ownerStatus = (req.query.ownerStatus as string === 'true');
-    const username = req.query.owner as string;
+    const username = req.query.user as string;
     const user = await UserCollection.findOneByUsername(username);
-    const requests = await RequestCollection.findAllByUser(user._id, ownerStatus);
+    const requests = await RequestCollection.findAllByUser(user._id);
     const response = requests.map(util.constructRequestResponse);
     res.status(200).json(response);
   }

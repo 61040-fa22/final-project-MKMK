@@ -58,18 +58,13 @@ class RequestCollection {
   }
 
   /**
-   * Get all the Requests to the owner
+   * Get all the Requests to/from the owner
    *
    * @param {string} userId - The ID of the user whose Requests are sought
-   * @param {boolean} ownerStatus - Whether or not the user is the owner of the items requested; if false, user is considered to be the borrower
    * @return {Promise<HydratedDocument<Request>[]>} - An array of Requests
    */
-  static async findAllByUser(userId: Types.ObjectId | string, ownerStatus: boolean): Promise<Array<HydratedDocument<Request>>> {
-    if (ownerStatus) {
-      return RequestModel.find({ownerId: userId});
-    }
-
-    return RequestModel.find({borrowerId: userId});
+  static async findAllByUser(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Request>>> {
+    return RequestModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]});
   }
 
   /**
