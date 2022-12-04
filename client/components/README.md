@@ -14,12 +14,20 @@ Item:
         description: string;
         isAvailable: boolean;
     Collection:
-        addOne(ownerId, name, description) create item
+        addOne(ownerId, name, description, isAvailable) create item
         findOne(itemId) get the item with the given ID
         findAllByOwnerId(ownerId) get all items owned by the user with ownerId
         updateOne(itemId, name, description) update item with new values. leave name, description as empty strings to keep old values
         deleteOne(itemId) delete the item with the given ID
         deleteMany(ownerId) delete all items owned by the user with ownerId
+    Middleware:
+        isItemExists -- does the item with given itemId exist
+        isValidItemModifier -- is the current user the owner of the item being modified
+    Router:
+        GET /api/items get all items
+        GET /api/items?owner=username get all items by owner with username
+        POST /api/items create an item with req.body params name and description
+        PATCH /api/items/:id update the name or description of an item.
 
 
 Request:
@@ -50,5 +58,5 @@ Request:
         GET /api/requests?name=username?owner=ownerStatus get the requests associated with the user as owner if ownerStatus == 'true' or ----borrower otherwise
         POST /api/requests create a request with req.body including itemId, startDate, and endDate
         DELETE /api/requests/:id delete the request with given id if current user made the request
-        PATCH /api/requests/:id accept or reject the request with given id if current user is the owner of the item in the request. the ----body of the request should include a boolean called 'accepted'
+        PATCH /api/requests/accept/:id accept or reject the request with given id if current user is the owner of the item in the request. the ----body of the request should include a boolean called 'accepted'
 

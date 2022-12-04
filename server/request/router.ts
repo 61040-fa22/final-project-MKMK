@@ -2,7 +2,7 @@ import type {NextFunction, Request, Response} from 'express';
 import e from 'express';
 import express from 'express';
 import {Types} from 'mongoose';
-import UserCollection from 'server/user/collection';
+import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
 import RequestCollection from './collection';
 import * as requestValidator from './middleware';
@@ -12,7 +12,7 @@ const router = express.Router();
 /**
  * Get all the requests from the given user, who is an owner of isOwner and a borrower otherwise
  *
- * @name GET /api/requests?name=username?owner=ownerStatus
+ * @name GET /api/requests?owner=username?ownerStatus=ownerStatus
  *
  * @return {Request[]} - A list of all the requests to/from the specified user
  * @throws {400} - If username is not given
@@ -22,11 +22,11 @@ router.get(
   '/',
   [
     userValidator.isAuthorExists
-    // TODO: this will likely need to be fixed bc it counts on the request having a query parameter "author"
+    // TODO: userValidator isUserExists with findOneByUsername
   ],
   async (req: Request, res: Response) => {
-    const ownerStatus = (req.query.owner as string === 'true');
-    const username = req.query.name as string;
+    const ownerStatus = (req.query.ownerStatus as string === 'true');
+    const username = req.query.owner as string;
     const user = await UserCollection.findOneByUsername(username);
     const requests = await RequestCollection.findAllByUser(user._id, ownerStatus);
     res.status(200).json(requests);
@@ -51,9 +51,10 @@ router.post(
   [
     userValidator.isUserLoggedIn,
     requestValidator.isValidTimeRange
-    // TODO: add more validators when they are created.
+    // TODO: itemValidator isDatesAvailable
   ],
   async (req: Request, res: Response) => {
+    console.log('testing post request');
     const borrowerId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const {itemId, startDate, endDate} = req.body.contents as {itemId: Types.ObjectId; startDate: Date; endDate: Date};
     const request = await RequestCollection.addOne(itemId, borrowerId, startDate, endDate);
@@ -92,7 +93,7 @@ router.delete(
 /**
  * Accept or reject a request
  *
- * @name PATCH /api/requests/:id
+ * @name PATCH /api/requests/accept/:id
  *
  * @param {boolean} accept - whether or not the request is accepted
  * @return {Request} - the updated request
@@ -117,4 +118,4 @@ router.patch(
   }
 );
 
-export {router as freetRouter};
+export {router as requestRouter};
