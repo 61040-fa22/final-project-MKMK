@@ -1,68 +1,102 @@
 import type {HydratedDocument, Types} from 'mongoose';
-import ItemModel from './model';
 import type {Item} from './model';
+import ItemModel from './model';
+import UserCollection from '../user/collection';
 
+/**
+ * This files contains a class that has the functionality to explore items
+ * stored in MongoDB.
+ */
 class ItemCollection {
   /**
-   * Add an item to the collection
+   * Add a item to the collection
    *
    * @param {string} ownerId - The id of the owner of the item
-   * @param {string} name - The name of the item
-   * @param {string} description - A description of the item
+   * @param {string} name - The name/title of the item
+   * @param {string} description - The description of the item
    * @return {Promise<HydratedDocument<Item>>} - The newly created item
    */
   static async addOne(ownerId: Types.ObjectId | string, name: string, description: string): Promise<HydratedDocument<Item>> {
-    const isAvailable = false;
     const item = new ItemModel({
       ownerId,
-      name,
-      description,
-      isAvailable
+      name, 
+      description, 
+      isAvailable: true
     });
-    await item.save();
-    return item;
+    await item.save(); // Saves item to MongoDB
+    return item.populate('ownerId');
   }
 
   /**
-   * Find an item by itemId
+   * Find an item by its id
    *
    * @param {string} itemId - The id of the item to find
    * @return {Promise<HydratedDocument<Item>> | Promise<null> } - The item with the given itemId, if any
    */
   static async findOne(itemId: Types.ObjectId | string): Promise<HydratedDocument<Item>> {
-    return ItemModel.findOne({_id: itemId});
+    return ItemModel.findOne({_id: itemId}).populate('ownerId');
   }
 
   /**
-   * Get all the items owned by the user
+   * Get all the items in the database
    *
-   * @param {string} ownerId - The id of the owner of the items to find
    * @return {Promise<HydratedDocument<Item>[]>} - An array of all of the items
    */
-  static async findAllByOwnerId(ownerId: Types.ObjectId | string): Promise<Array<HydratedDocument<Item>>> {
-    return ItemModel.find({ownerId});
+  static async findAll(): Promise<Array<HydratedDocument<Item>>> {
+    // Retrieves items
+    return ItemModel.find({}).populate('ownerId');
   }
 
   /**
-   * Update a item with the new content
+   * Get all the items owned by given user
+   *
+   * @param {string} username - The username of owner of the items
+   * @return {Promise<HydratedDocument<Item>[]>} - An array of all of the items
+   */
+  static async findAllByUsername(username: string): Promise<Array<HydratedDocument<Item>>> {
+    const owner = await UserCollection.findOneByUsername(username);
+    return ItemModel.find({ownerId: owner._id}).populate('ownerId');
+  }
+
+  /**
+   * Update an item with a new name
    *
    * @param {string} itemId - The id of the item to be updated
-   * @param {string} name - The new name of the item, if any
-   * @param {string} description - The new description for the item, if any
+   * @param {string} name - The new name of the item
    * @return {Promise<HydratedDocument<Item>>} - The newly updated item
    */
-  static async updateOne(itemId: Types.ObjectId | string, name: string, description: string): Promise<HydratedDocument<Item>> {
+  static async updateOneName(itemId: Types.ObjectId | string, name: string): Promise<HydratedDocument<Item>> {
     const item = await ItemModel.findOne({_id: itemId});
-    if (name !== '') {
-      item.name = name;
-    }
-
-    if (description !== '') {
-      item.description = description;
-    }
-
+    item.name = name;
     await item.save();
-    return item;
+    return item.populate('ownerId');
+  }
+
+  /**
+   * Update an item with a new description
+   *
+   * @param {string} itemId - The id of the item to be updated
+   * @param {string} description - The new description of the item
+   * @return {Promise<HydratedDocument<Item>>} - The newly updated item
+   */
+   static async updateOneDescription(itemId: Types.ObjectId | string, description: string): Promise<HydratedDocument<Item>> {
+    const item = await ItemModel.findOne({_id: itemId});
+    item.description = description;
+    await item.save();
+    return item.populate('ownerId');
+  }
+
+  /**
+   * Toggle an item's availability
+   *
+   * @param {string} itemId - The id of the item to be updated
+   * @return {Promise<HydratedDocument<Item>>} - The newly updated item
+   */
+   static async updateOneAvailability(itemId: Types.ObjectId | string): Promise<HydratedDocument<Item>> {
+    const item = await ItemModel.findOne({_id: itemId});
+    item.isAvailable = !item.isAvailable;
+    await item.save();
+    return item.populate('ownerId');
   }
 
   /**
@@ -77,9 +111,9 @@ class ItemCollection {
   }
 
   /**
-   * Delete all the items owned by the given owner
+   * Delete all the items by the given owner
    *
-   * @param {string} ownerId - The id of the owner of items
+   * @param {string} ownerId - The id of owner of items
    */
   static async deleteMany(ownerId: Types.ObjectId | string): Promise<void> {
     await ItemModel.deleteMany({ownerId});

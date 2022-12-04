@@ -1,10 +1,19 @@
 import type {Types} from 'mongoose';
 import {Schema, model} from 'mongoose';
+import type { User } from 'server/user/model';
 
 // Type definition for Item on the backend
 export type Item = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   ownerId: Types.ObjectId;
+  name: string;
+  description: string;
+  isAvailable: boolean;
+};
+
+export type PopulatedItem = {
+  _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
+  ownerId: User;
   name: string;
   description: string;
   isAvailable: boolean;
@@ -16,7 +25,8 @@ const ItemSchema = new Schema<Item>({
   ownerId: {
     // Use Types.ObjectId outside of the schema
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: 'User'
   },
   // The name of the item
   name: {

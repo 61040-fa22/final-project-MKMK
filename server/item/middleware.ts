@@ -1,9 +1,9 @@
 import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
-import ItemCollection from './collection';
+import ItemCollection from '../item/collection';
 
 /**
- * Checks if a item with itemId is req.params exists
+ * Checks if a item with itemId in req.params exists
  */
 const isItemExists = async (req: Request, res: Response, next: NextFunction) => {
   const validFormat = Types.ObjectId.isValid(req.params.itemId);
@@ -29,7 +29,6 @@ const isValidItemModifier = async (req: Request, res: Response, next: NextFuncti
     });
     return;
   }
-
   next();
 };
 
