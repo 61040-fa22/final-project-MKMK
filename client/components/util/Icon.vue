@@ -14,8 +14,8 @@ export default {
       default: ''
     },
     size: {
-      type: Number,
-      default: 18
+      type: String,
+      default: '18'
     },
     marginLeft: {
       type: Number,
