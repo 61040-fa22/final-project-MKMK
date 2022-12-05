@@ -42,7 +42,7 @@ const isValidTimeRange = async (req: Request, res: Response, next: NextFunction)
  */
 const isRequestForUser = async (req: Request, res: Response, next: NextFunction) => {
   const user = await UserCollection.findOneByUsername(req.query.user as string);
-  if (req.session.userId !== user._id) {
+  if (req.session.userId !== user._id.toString()) {
     res.status(403).json({
       error: 'Cannot view other users\' requests.'
     });

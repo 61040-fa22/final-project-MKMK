@@ -4,19 +4,12 @@
 
     <section>
       <h2>browse items</h2>
-      <h3>my group: group_name</h3>
       <GalleryComponent num-columns="4">
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
+        <ItemCard 
+          v-for="item in $store.state.items"
+          :key="item._id"
+          :itemId="item._id"
+        />
       </GalleryComponent>
     </section>
   </div>
@@ -35,6 +28,7 @@ export default {
     ItemCard
   },
   mounted() {
+    this.$store.commit('refreshItems');
     // this.$store.commit('refreshEntries');
   }
 };

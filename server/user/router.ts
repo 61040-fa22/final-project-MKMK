@@ -114,6 +114,27 @@ router.post(
 );
 
 /**
+ * Get a user response object by ID
+ * @name GET /api/users/:username
+ *
+ * @param {string} username - The username of the user
+ * @return {UserResponse} - the user
+ * @throws {404} - if the user with that id does not exist
+ */
+router.get(
+  '/:username',
+  [],
+  async (req: Request, res: Response) => {
+    const {username} = req.params;
+    const user = await UserCollection.findOneByUsername(username);
+    if (user) {
+      res.status(200).json({user: util.constructUserResponse(user)});
+    } else {
+      res.status(404).json({error: 'No user with that username found.'});
+    }
+  }
+);
+/**
  * Update a user's profile.
  *
  * @name PATCH /api/users

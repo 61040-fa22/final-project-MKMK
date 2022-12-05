@@ -1,5 +1,7 @@
 import type {Types} from 'mongoose';
 import {Schema, model} from 'mongoose';
+import type {User} from '../user/model';
+import type {Request} from '../request/model';
 
 // Type definition for handoff on the backend
 export type Handoff = {
@@ -7,6 +9,17 @@ export type Handoff = {
   requestId: Types.ObjectId;
   ownerId: Types.ObjectId;
   borrowerId: Types.ObjectId;
+  returnDate: Date;
+  returned: boolean;
+  ownerReturnClaim: Date;
+  borrowerReturnClaim: Date;
+};
+
+export type PopulatedHandoff = {
+  _id: Types.ObjectId;
+  requestId: Request;
+  ownerId: User;
+  borrowerId: User;
   returnDate: Date;
   returned: boolean;
   ownerReturnClaim: Date;
