@@ -10,7 +10,7 @@ import * as util from './util';
 const router = express.Router();
 
 /**
- * Get all currently-open handoffs associated with the user
+ * Get all handoffs associated with the user
  *
  * @name GET /api/handoffs?user=username
  *

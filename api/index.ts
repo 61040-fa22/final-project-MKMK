@@ -13,7 +13,7 @@ import { userRouter } from "../server/user/router";
 import { itemRouter } from "../server/item/router";
 import { entryRouter } from "../server/entry/router";
 import { requestRouter } from "../server/request/router";
-import { handoffRouter } from "server/handoff/router";
+import { handoffRouter } from "../server/handoff/router";
 import MongoStore from "connect-mongo";
 
 // Load environmental variables

@@ -7,7 +7,7 @@
     >
       <h2>Requests to You</h2>
       <RequestCard
-        v-for="request in $store.state.freets.filter(request => request.owner === user.username)"
+        v-for="request in $store.state.requests.filter(request => request.owner === user.username)"
         :key="request.id"
         :request="request"
         :owner="true"
@@ -27,7 +27,7 @@
     >
       <h2>Requests from You</h2>
       <RequestCard
-        v-for="request in $store.state.freets.filter(request => request.borrower === user.username)"
+        v-for="request in $store.state.requests.filter(request => request.borrower === user.username)"
         :key="request.id"
         :request="request"
         :owner="false"

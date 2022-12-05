@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       // TODO
-      url: '/api/entries',
+      url: '/api/items',
       method: 'POST',
       hasBody: true,
       fields: [
@@ -15,9 +15,9 @@ export default {
         {id: 'description', label: 'Description', value: ''},
       ],
       title: 'List new item',
-      refreshEntries: true,
       callback: () => {
-        const message = 'Successfully created an entry!';
+        const message = 'Successfully created an item!';
+        this.$store.commit('refreshItems');
         this.$set(this.alerts, message, 'success');
         setTimeout(() => this.$delete(this.alerts, message), 3000);
       }

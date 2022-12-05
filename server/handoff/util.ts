@@ -5,6 +5,7 @@ import ItemCollection from '../item/collection';
 
 type HandoffResponse = {
   _id: string;
+  itemId: string;
   item: string;
   owner: string;
   borrower: string;
@@ -46,6 +47,7 @@ const constructHandoffResponse = async (handoff: HydratedDocument<Handoff>): Pro
   return {
     ...handoffCopy,
     _id: handoffCopy._id.toString(),
+    itemId: item._id.toString(),
     item: itemName,
     owner: ownerName,
     borrower: borrowerName,
