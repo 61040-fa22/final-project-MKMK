@@ -2,7 +2,7 @@ import type {HydratedDocument, Types} from 'mongoose';
 import type {Entry} from './model';
 import EntryModel from './model';
 import UserCollection from '../user/collection';
-
+import ItemCollection from '../item/collection';
 /**
  * This files contains a class that has the functionality to explore entries
  * stored in MongoDB, including adding, finding, updating, and deleting entries.
@@ -19,9 +19,10 @@ class EntryCollection {
    * @param {string} content - The id of the content of the entry
    * @return {Promise<HydratedDocument<Entry>>} - The newly created entry
    */
-  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Entry>> {
+  static async addOne(authorId: Types.ObjectId | string, itemId: Types.ObjectId | string,  content: string): Promise<HydratedDocument<Entry>> {
     const date = new Date();
     const entry = new EntryModel({
+      itemId: itemId, 
       authorId,
       dateCreated: date,
       content
@@ -61,6 +62,17 @@ class EntryCollection {
     return EntryModel.find({authorId: author._id}).sort({dateCreated: -1}).populate('authorId');
   }
 
+  /**
+   * Get all the entries in by item 
+   *
+   * @param {Types.ObjectId} itemId - The item Id
+   * @return {Promise<HydratedDocument<Entry>[]>} - An array of all of the entries
+   */
+     static async findAllByItem(itemId: Types.ObjectId | string): Promise<Array<HydratedDocument<Entry>>> {
+      return EntryModel.find({itemId: itemId}).sort({dateCreated: -1}).populate('itemId');
+    }
+  
+  
 
   /**
    * TO DO after Item is done: Get all the entries by item. 

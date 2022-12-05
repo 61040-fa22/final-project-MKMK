@@ -3,6 +3,8 @@ import express from 'express';
 import EntryCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as entryValidator from './middleware';
+import * as itemValidator from '../item/middleware';
+
 import * as util from './util';
 
 const router = express.Router();
@@ -19,9 +21,9 @@ const router = express.Router();
 /**
  * Get entry by author.
  *
- * @name GET /api/entry?author=username
+ * @name GET /api/entries/entry?author=username
  *
- * @return {EntryResponse[]} - An array of entry created by user with username, author
+ * @return {EntryResponse[]} - An array of entries created by user with username, author
  * @throws {400} - If author is not given
  * @throws {404} - If no user has given author
  *
@@ -29,7 +31,6 @@ const router = express.Router();
 router.get(
   '/',
   [
-    userValidator.isAuthorExists
   ],
   async (req: Request, res: Response, next: NextFunction) => {
     // Check if author query parameter was supplied
@@ -49,39 +50,36 @@ router.get(
 );
 
 /**
- * TO DO: 
  * Get entry by item.
  *
- * @name GET /api/entry?item=itemId
+ * @name GET /api/entries/item/:itemId
  *
  * @return {EntryResponse[]} - An array of entries related to given item 
  * @throws {400} - If item is not given
  * @throws {404} - If item does not exist
  *
  */
-/*
  router.get(
-  '/',
-  [
-    itemValidator.isItemExists
-  ],
-  async (req: Request, res: Response, next: NextFunction) => {
-    // Check if author query parameter was supplied
-    if (req.query.itemId !== undefined) {
-      res.status(200);
-      next();
-      return;
-    }
-    const allEntries = await EntryCollection.findAll();
-    const response = allEntries.map(util.constructEntryResponse);
-  },
+  '/item',
+
+  // async (req: Request, res: Response, next: NextFunction) => {
+  //   // Check if itemId query parameter was supplied
+  //   // if (req.query.itemId !== undefined) {
+  //   //   res.status(200);
+  //   //   next();
+  //   //   return;
+  //   // }
+  //   // const allEntries = await EntryCollection.findAll();
+  //   // const response = allEntries.map(util.constructEntryResponse);
+  // },
   async (req: Request, res: Response) => {
-    const itemEntries = await EntryCollection.findAllByItem(req.query.author as string);
+    const itemEntries = await EntryCollection.findAllByItem(req.query.itemId as string);
     const response = itemEntries.map(util.constructEntryResponse);
     res.status(200).json(response);
+
   }
 );
-*/
+
 
 /**
  * Create a new entry.
@@ -92,7 +90,6 @@ router.get(
  * @return {EntryResponse} - The created entry
  * @throws {403} - If the user is not logged in
  * @throws {400} - If the entry content is empty or a stream of empty spaces
- * @throws {413} - If the entry content is more than 140 characters long
  */
 router.post(
   '/',
@@ -102,7 +99,7 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const entry = await EntryCollection.addOne(userId, req.body.content);
+    const entry = await EntryCollection.addOne(userId, req.body.itemId, req.body.content);
 
     res.status(201).json({
       message: 'Your entry was created successfully.',

@@ -40,10 +40,11 @@ const formsAndHandlers = {
   'delete-item':deleteItem,
   'get-items-by-owner': getItemsByOwner,
   'get-all-items': getAllItems,
-  // 'view-all-entries': viewAllEntries,
-  // 'view-entries-by-author': viewEntriesByAuthor,
-  // 'create-entry': createEntry,
-  // 'delete-entry': deleteEntry,
+  'view-all-entries': viewAllEntries,
+  'view-entries-by-itemId': viewEntriesByItem,
+  'view-entries-by-author': viewEntriesByAuthor,
+  'create-entry': createEntry,
+  'delete-entry': deleteEntry,
 };
 
 // Attach handlers to forms
