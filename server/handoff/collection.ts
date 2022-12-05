@@ -1,7 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {Handoff} from './model';
 import HandoffModel from './model';
-import ItemCollection from '../item/collection';
 import RequestCollection from '../request/collection';
 
 class HandoffCollection {
@@ -38,15 +37,10 @@ class HandoffCollection {
    * Get all the handoffs to the owner
    *
    * @param {string} userId - The ID of the user whose handoffs are sought
-   * @param {boolean} ownerStatus - Whether or not the user is the owner of the items handoffed; if false, user is considered to be the borrower
    * @return {Promise<HydratedDocument<Handoff>[]>} - An array of handoffs
    */
-  static async findAllByUser(userId: Types.ObjectId | string, ownerStatus: boolean): Promise<Array<HydratedDocument<Handoff>>> {
-    if (ownerStatus) {
-      return HandoffModel.find({ownerId: userId});
-    }
-
-    return HandoffModel.find({borrowerId: userId});
+  static async findAllByUser(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Handoff>>> {
+    return HandoffModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]});
   }
 
   /**

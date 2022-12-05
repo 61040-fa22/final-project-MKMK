@@ -12,6 +12,8 @@ import * as userValidator from "../server/user/middleware";
 import { userRouter } from "../server/user/router";
 import { itemRouter } from "../server/item/router";
 import { entryRouter } from "../server/entry/router";
+import { requestRouter } from "../server/request/router";
+import { handoffRouter } from "server/handoff/router";
 import MongoStore from "connect-mongo";
 
 // Load environmental variables
@@ -89,6 +91,9 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/users", userRouter);
 app.use("/api/entries", entryRouter);
 app.use("/api/items", itemRouter);
+app.use("/api/requests", requestRouter);
+app.use('/api/handoff', handoffRouter);
+
 
 // Catch all the other routes and display error message
 app.all("*", (req: Request, res: Response) => {
