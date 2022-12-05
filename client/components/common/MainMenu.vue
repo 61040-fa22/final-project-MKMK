@@ -12,9 +12,13 @@
       <router-link to="/new">
         List New Item
       </router-link>
-      <router-link to="">
-        Log out
-      </router-link>
+      <ApiButton
+        title="Log out"
+        url="/api/users/session"
+        method="DELETE"
+        set-username="true"
+        :callback="logoutCallback"
+      />
     </nav>
     <!--Nav when not signed in-->
     <nav v-else>
@@ -29,12 +33,23 @@
 </template>
 
 <script>
+import ApiButton from '@/components/util/ApiButton.vue';
 import LogoComponent from '@/components/common/LogoComponent.vue';
 
 export default {
   name: 'MainMenu',
   components: {
+    ApiButton,
     LogoComponent
+  },
+  methods: {
+    logoutCallback() {
+      this.$store.commit('alert', {
+        message: 'You are now signed out!',
+        status: 'success'
+      });
+      this.$router.push({name: 'Home'});
+    }
   }
 };
 </script>
