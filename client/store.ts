@@ -13,7 +13,7 @@ const store = new Vuex.Store({
     entries: [], // All entries created in the app
     items: [], // All items in the app
     requests: [], // All requests to and from this user
-    activeBorrows: [], // All incomplete borrowing instances involving this user
+    handoffs: [], // All incomplete borrowing instances involving this user
     username: null, // Username of the logged in user
     alerts: {} // global success/error messages encountered during submissions to non-visible forms
   },
@@ -62,15 +62,15 @@ const store = new Vuex.Store({
        */
       const url = `/api/requests?user=${state.username}`;
       const res = await fetch(url).then(async r => r.json());
-      state.requests = res.filter(request => !(request.accepted === null));
+      state.requests = res.filter(request => request.accepted === null);
     },
-    async refreshActiveBorrows(state) {
+    async refreshHandoffs(state) {
       /**
        * Request the server for active borrows for this user
        */
       const url = `/api/handoffs?user=${state.username}`;
       const res = await fetch(url).then(async r => r.json());
-      state.activeBorrows = res.filter(borrow => !borrow.returned);
+      state.handoffs = res.filter(borrow => !borrow.returned);
     },
     async refreshItems(state) {
       /**

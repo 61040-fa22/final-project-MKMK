@@ -19,10 +19,22 @@
         :user="user"
         :owner="true"
       />
+      <br><br>
       <UserRequests 
         :user="user"
         :owner="false"
       />
+      <br><br>
+      <UserHandoffs
+        :user="user"
+        :owner="true"
+      />
+      <br><br>
+      <UserHandoffs
+        :user="user"
+        :owner="false"
+      />
+
     </div>
   </main>
 </template>
@@ -31,9 +43,11 @@
 import UserRequests from "@/components/Request/UserRequests.vue";
 import ItemCard from "@/components/Item/ItemCard.vue";
 import GalleryComponent from "@/components/util/GalleryComponent.vue";
+import UserHandoffs from "@/components/Handoff/UserHandoffs.vue";
+
 export default {
   name: "ProfilePage",
-  components: {UserRequests, ItemCard, GalleryComponent},
+  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs},
   data (){
     return{
       user: Object,

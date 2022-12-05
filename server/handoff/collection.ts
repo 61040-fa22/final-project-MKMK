@@ -40,7 +40,7 @@ class HandoffCollection {
    * @return {Promise<HydratedDocument<Handoff>[]>} - An array of handoffs
    */
   static async findAllByUser(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Handoff>>> {
-    return HandoffModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]});
+    return HandoffModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]}).populate(['ownerId', 'borrowerId', 'requestId']);
   }
 
   /**

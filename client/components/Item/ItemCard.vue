@@ -16,7 +16,7 @@
           Owned by {{ item.owner }}
         </router-link>
       </p>
-      <p>42 posts</p>
+      <p> {{ $store.state.entries.filter(entry => entry.itemId === item._id).length}} posts</p>
     </div>
     <p class="item_card_description">
       {{ item.description }}
