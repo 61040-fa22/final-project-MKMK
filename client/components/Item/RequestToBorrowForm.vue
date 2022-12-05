@@ -6,14 +6,13 @@ export default {
   mixins: [BlockForm],
   data() {
     return {
-      // TODO
-      url: '/api/entries',
+      url: '/api/requests',
       method: 'POST',
       hasBody: true,
       fields: [
-        {id: 'startDate', label: 'Start Date', value: ''},
-        {id: 'endDate', label: 'End Date', value: ''},
-        {id: 'message', label: 'Message', value: ''}
+        {id: 'startDate', type: 'date', label: 'Start Date'},
+        {id: 'endDate', type: 'date', label: 'End Date', value: ''},
+        {id: 'message', type: 'textarea', label: 'Message', value: '', placeholder: 'Write a message to request to borrow this item'}
       ],
       title: 'Borrow this item',
       refreshEntries: true,

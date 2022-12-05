@@ -4,25 +4,36 @@
 <template>
   <form @submit.prevent="submit">
     <h3>{{ title }}</h3>
-    <article
-      v-if="fields.length"
-    >
+    <article v-if="fields.length">
       <div
         v-for="field in fields"
         :key="field.id"
       >
         <label :for="field.id">{{ field.label }}:</label>
         <textarea
-          v-if="field.id === 'content'"
+          v-if="field.type === 'textarea'"
           :name="field.id"
           :value="field.value"
           @input="field.value = $event.target.value"
         />
         <input
-          v-else
-          :type="field.id === 'password' ? 'password' : 'text'"
+          v-else-if="field.type === 'date'"
+          type="date"
           :name="field.id"
-          :value="field.value"
+          value="field.value"
+          @input="field.value = $event.target.value"
+        >
+        <input
+          v-else-if="field.type === 'password'"
+          type="password"
+          :name="field.id"
+          @input="field.value = $event.target.value"
+        >
+        <input
+          v-else
+          type="text"
+          :name="field.id"
+          :placeholder="field.placeholder"
           @input="field.value = $event.target.value"
         >
       </div>
