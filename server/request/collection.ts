@@ -66,7 +66,7 @@ class RequestCollection {
    * @return {Promise<HydratedDocument<Request>[]>} - An array of Requests
    */
   static async findAllByUser(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Request>>> {
-    return RequestModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]});
+    return RequestModel.find({$or: [{ownerId: userId}, {borrowerId: userId}]}).populate(['itemId', 'ownerId', 'borrowerId']);
   }
 
   /**
