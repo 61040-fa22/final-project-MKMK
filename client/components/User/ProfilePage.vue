@@ -2,7 +2,15 @@
   <main>
     <h2>page for profile {{ $route.params.id }}</h2>
     <img src="https://via.placeholder.com/150x150">
-
+    <div>
+      <h2>Items</h2>
+      <GalleryComponent num-columns=4>
+        <ItemCard
+          v-for="item in $store.state.items.filter(item => item.owner === user.username)"
+          :itemId="item._id"
+        />
+      </GalleryComponent>
+    </div>
     <div
       v-if="(user.username === $store.state.username)"
     >
@@ -21,9 +29,11 @@
 
 <script>
 import UserRequests from "@/components/Request/UserRequests.vue";
+import ItemCard from "@/components/Item/ItemCard.vue";
+import GalleryComponent from "@/components/util/GalleryComponent.vue";
 export default {
   name: "ProfilePage",
-  components: {UserRequests},
+  components: {UserRequests, ItemCard, GalleryComponent},
   data (){
     return{
       user: Object,

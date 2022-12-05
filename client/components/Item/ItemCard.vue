@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 img {
-  width: 100%;
+  width: 150px;
 }
 
 p {
