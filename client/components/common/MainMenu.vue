@@ -6,9 +6,6 @@
       <router-link :to="`/profile/${$store.state.username}`">
         My Profile
       </router-link>
-      <router-link to="/not_implemented_yet">
-        My Group
-      </router-link>
       <router-link to="/new">
         List New Item
       </router-link>
