@@ -1,22 +1,27 @@
 <template>
   <article>
     <div class="info">
-      <p>@author</p>
-      <p>timestamp</p>
+      <p>{{ entry.author }}</p>
+
+      <p>{{ entry.dateCreated }}</p>
     </div>
     <div class="content">
       <p>
-        Diary entry dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        {{ entry.content }}
       </p>
     </div>
-    <p>like</p>
-    <p>delete</p>
   </article>
 </template>
 
 <script>
 export default {
-
+  name: 'DiaryPost',
+  props: {
+    entry: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

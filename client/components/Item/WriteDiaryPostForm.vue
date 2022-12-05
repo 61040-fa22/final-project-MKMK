@@ -11,7 +11,8 @@ export default {
       method: 'POST',
       hasBody: true,
       fields: [
-        {id: 'content', label: 'Content', value: ''}
+        {id: 'content', label: 'Content', value: ''},
+        {id: 'itemId', label: 'ID'}
       ],
       title: 'Write diary post',
       refreshEntries: true,

@@ -5,6 +5,7 @@ import type {Entry, PopulatedEntry} from './model';
 // Update this if you add a property to the Entry type!
 type EntryResponse = {
   _id: string;
+  itemId: string;
   author: string;
   dateCreated: string;
   content: string;
@@ -36,6 +37,7 @@ const constructEntryResponse = (entry: HydratedDocument<Entry>): EntryResponse =
   return {
     ...entryCopy,
     _id: entryCopy._id.toString(),
+    itemId: entryCopy.itemId.toString(),
     author: username,
     dateCreated: formatDate(entry.dateCreated)
   };

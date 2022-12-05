@@ -2,14 +2,11 @@
   <section>
     <h3>Item Diary</h3>
 
-    <DiaryPost />
-    <DiaryPost />
-    <DiaryPost />
-    <DiaryPost />
-    <DiaryPost />
-    <DiaryPost />
-    <DiaryPost />
-    <DiaryPost />
+    <DiaryPost 
+      v-for="entry in $store.state.entries.filter(entry => entry.itemId === item._id)"
+      :entry="entry"
+    />
+
   </section>
 </template>
 
@@ -20,6 +17,15 @@ export default {
   name: "DiaryFeed",
   components: {
     DiaryPost
+  },
+  props: {
+    item: {
+      type: Object, 
+      required: true
+    }
+  },
+  mounted(){
+    this.$store.commit('refreshEntries')
   }
 }
 </script>

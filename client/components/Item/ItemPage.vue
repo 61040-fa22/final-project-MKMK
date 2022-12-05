@@ -15,7 +15,9 @@
     />
 
     <WriteDiaryPostForm />
-    <DiaryFeed />
+    <DiaryFeed 
+      :item="item"
+    />
   </main>
 </template>
 
