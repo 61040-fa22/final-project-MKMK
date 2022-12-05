@@ -12,8 +12,8 @@ export default {
   name: 'GalleryComponent',
   props: {
     numColumns: {
-      type: Number,
-      default: 4
+      type: String,
+      default: '4'
     }
   },
   computed: {
