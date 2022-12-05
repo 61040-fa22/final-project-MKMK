@@ -4,6 +4,11 @@
       v-if="owner"
     >
       <h3>Requests to You</h3>
+      <p
+        v-if="($store.state.requests.filter(request => request.owner === user.username).length === 0)"
+      >
+        No requests for you to approve (yet)!
+      </p>
       <RequestComponent
         v-for="request in $store.state.requests.filter(request => request.owner === user.username)"
         :request="request"
@@ -14,15 +19,16 @@
       v-else
     >
       <h3>Requests from You</h3>
-      <div
-        v-for="request in $store.state.requests.filter(request => request.borrower === user.username)"
+      <p
+        v-if="($store.state.requests.filter(request => request.borrower === user.username).length === 0)"
       >
-        <RequestComponent
-          :request="request"
-          :owner="owner"
-        />
-        <br>
-      </div>
+        You have no pending requests (yet)!
+      </p>
+      <RequestComponent
+        v-for="request in $store.state.requests.filter(request => request.borrower === user.username)"
+        :request="request"
+        :owner="owner"
+      />
     </div>
   </section>
 </template>
