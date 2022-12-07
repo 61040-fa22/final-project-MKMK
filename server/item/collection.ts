@@ -34,7 +34,6 @@ class ItemCollection {
    * @return {Promise<HydratedDocument<Item>> | Promise<null> } - The item with the given itemId, if any
    */
   static async findOne(itemId: Types.ObjectId | string): Promise<HydratedDocument<Item>> {
-    console.log("looking for item");
     return ItemModel.findOne({_id: itemId}).populate('ownerId');
   }
 

@@ -101,7 +101,7 @@ router.delete(
  * @throws {404} - If the requestId is not valid
  */
 router.patch(
-  '/:requestId?',
+  '/accept/:requestId?',
   [
     userValidator.isUserLoggedIn,
     requestValidator.isRequestExists,
