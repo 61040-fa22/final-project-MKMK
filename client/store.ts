@@ -70,7 +70,7 @@ const store = new Vuex.Store({
        */
       const url = `/api/handoffs?user=${state.username}`;
       const res = await fetch(url).then(async r => r.json());
-      state.handoffs = res.filter(borrow => !borrow.returned);
+      state.handoffs = res;
     },
     async refreshItems(state) {
       /**
