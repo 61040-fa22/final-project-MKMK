@@ -2,7 +2,6 @@ import type {HydratedDocument} from 'mongoose';
 import moment from 'moment';
 import type {Handoff, PopulatedHandoff} from './model';
 import ItemCollection from '../item/collection';
-import HandoffCollection from './collection';
 
 type HandoffResponse = {
   _id: string;
@@ -10,7 +9,6 @@ type HandoffResponse = {
   item: string;
   owner: string;
   borrower: string;
-  startDate: string;
   returnDate: string;
   returned: boolean;
 };
@@ -31,9 +29,8 @@ const formatDate = (date: Date): string => moment(date).format('MMMM Do YYYY, h:
  * @returns {handoffResponse} - The handoff object formatted for the frontend
  */
 const constructHandoffResponse = async (handoff: HydratedDocument<Handoff>): Promise<HandoffResponse> => {
-  const handoffPopulated = await HandoffCollection.findOne(handoff._id);
   const handoffCopy: PopulatedHandoff = {
-    ...handoffPopulated.toObject({
+    ...handoff.toObject({
       versionKey: false // Cosmetics; prevents returning of __v property
     })
   };
@@ -42,6 +39,7 @@ const constructHandoffResponse = async (handoff: HydratedDocument<Handoff>): Pro
   const borrowerName = handoffCopy.borrowerId.username;
   const item = await ItemCollection.findOne(handoffCopy.requestId.itemId);
   const itemName = item.name;
+
   delete handoffCopy.ownerId;
   delete handoffCopy.borrowerId;
   delete handoffCopy.requestId;
@@ -53,7 +51,6 @@ const constructHandoffResponse = async (handoff: HydratedDocument<Handoff>): Pro
     item: itemName,
     owner: ownerName,
     borrower: borrowerName,
-    startDate: formatDate(handoff.startDate),
     returnDate: formatDate(handoff.returnDate)
   };
 };

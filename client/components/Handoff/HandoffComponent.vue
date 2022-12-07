@@ -1,19 +1,20 @@
 <template>
     <section
     >
+    one handoff
       <div
         v-if="owner"
       >
       <h3>{{ handoff.borrower }} has your {{ handoff.item }} until {{ handoff.returnDate }} </h3>
       <button
-       @click="returnItem"
+       @click="accept(true)"
        >
        Mark as Returned
       </button>
       <button
-       @click="problem"
+       @click="accept(false)"
        >
-       Report a Problem 
+       Reject  
       </button>
       </div>
   
@@ -44,30 +45,42 @@
           }
       },
       methods: {
-        async returnItem() {
+        async deleteRequest() {
           try{
-              console.log('returning');
-              const r = await fetch(`api/handoffs/${this.handoff._id}`, {method: 'PATCH', headers: {'Accept': 'application/json','Content-Type': 'application/json'}});
+              const r = await fetch(`api/requests/${this.request._id}`, {method: 'DELETE'});
               if (!r.ok) {
-                  console.log('uh oh');
                   const res = await r.json();
                   throw new Error(res.error);
               }
               this.$store.commit('alert', {
-                  message: 'Successfully marked the item as returned.',
+                  message: 'Successfully deleted the request.',
                   status: 'success'
               });
-              this.$store.commit('refreshHandoffs');
+              this.$store.commit('refreshRequests');
+              console.log(this.$store.requests);
             } catch (e) {
               this.$set(this.alerts, e, 'error');
               setTimeout(() => this.$delete(this.alerts, e), 3000);
             }
         },
-        problem() {
-          this.$store.commit('alert', {
-                  message: 'Problem has been filed with beLender and we will get back to you shortly.',
+        async accept(accepted) {
+          try{
+              const r = await fetch(`api/requests/${this.request._id}`, {method: 'DELETE'});
+              if (!r.ok) {
+                  const res = await r.json();
+                  throw new Error(res.error);
+              }
+              this.$store.commit('alert', {
+                  message: 'Successfully deleted the request.',
                   status: 'success'
               });
+              this.$store.commit('refreshRequests');
+              console.log(this.$store.requests);
+            } catch (e) {
+              this.$set(this.alerts, e, 'error');
+              setTimeout(() => this.$delete(this.alerts, e), 3000);
+            }
+  
         }
   
       }
@@ -79,11 +92,8 @@
       border-width: 2px;
       border-color: black;
       border-radius: 5px;
-      margin: 7px;
     }
     button {
       padding: 5px;
-      border-style: solid;
-      border-width: 2px;
     }
   </style>

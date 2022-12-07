@@ -28,7 +28,7 @@ router.get(
     const username = req.query.user as string;
     const user = await UserCollection.findOneByUsername(username);
     const handoffs = await HandoffCollection.findAllByUser(user._id);
-    const response = await Promise.all(handoffs.map( util.constructHandoffResponse));
+    const response = handoffs.map(util.constructHandoffResponse);
     res.status(200).json(response);
   }
 );
@@ -50,7 +50,7 @@ router.post(
     userValidator.isUserLoggedIn
   ],
   async (req: Request, res: Response) => {
-    const requestId = req.body.requestId;
+    const {requestId} = req.body.contents as {requestId: Types.ObjectId};
     const handoff = await HandoffCollection.addOne(requestId);
     res.status(201).json({
       message: 'Your handoff was created successfully.',
@@ -75,9 +75,7 @@ router.patch(
     userValidator.isUserLoggedIn
   ],
   async (req: Request, res: Response) => {
-    console.log('router heard return!');
     const returned = await HandoffCollection.returnOne(req.params.handoffId, req.session.userId);
-    console.log('finished returnone');
     const message = 'You successfully marked the item as returned.';
     const addition = 'Awaiting other party to mark item as returned.';
     res.status(200).json({

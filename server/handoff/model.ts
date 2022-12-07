@@ -9,7 +9,6 @@ export type Handoff = {
   requestId: Types.ObjectId;
   ownerId: Types.ObjectId;
   borrowerId: Types.ObjectId;
-  startDate: Date;
   returnDate: Date;
   returned: boolean;
   ownerReturnClaim: Date;
@@ -21,7 +20,6 @@ export type PopulatedHandoff = {
   requestId: Request;
   ownerId: User;
   borrowerId: User;
-  startDate: Date;
   returnDate: Date;
   returned: boolean;
   ownerReturnClaim: Date;
@@ -46,11 +44,6 @@ const HandoffSchema = new Schema<Handoff>({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
-  },
-  // The start date of the borrowing period
-  startDate: {
-    type: Date,
-    required: true
   },
   // The end date of the borrowing period
   returnDate: {

@@ -11,7 +11,7 @@
       Currently Borrowing
     </h3>
     <HandoffComponent
-      v-for="handoff in $store.state.handoffs.filter(handoff => handoff.startDate < new Date() && !handoff.returned)"
+      v-for="handoff in $store.state.handoffs"
       :owner="owner"
       :handoff="handoff"
     />

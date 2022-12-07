@@ -29,8 +29,7 @@ export default {
   },
   mounted() {
     this.$store.commit('refreshItems');
-    this.$store.commit('refreshHandoffs');
-    this.$store.commit('refreshEntries');
+    // this.$store.commit('refreshEntries');
   }
 };
 </script>

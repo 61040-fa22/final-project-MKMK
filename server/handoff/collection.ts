@@ -10,16 +10,14 @@ class HandoffCollection {
    * @param {string} requestId - The id of the request referenced by the handoff
    * @return {Promise<HydratedDocument<Handoff>>} - The newly created handoff object
    */
-  static async addOne(requestId: Types.ObjectId): Promise<HydratedDocument<Handoff>> {
+  static async addOne(requestId: Types.ObjectId | string): Promise<HydratedDocument<Handoff>> {
     const request = await RequestCollection.findOne(requestId);
-    const {ownerId, borrowerId, startDate, endDate} = request;
-    const returnDate = endDate;
+    const {ownerId, borrowerId, endDate} = request;
     const handoff = new HandoffModel({
       requestId,
       ownerId,
       borrowerId,
-      startDate,
-      returnDate
+      endDate
     });
     await handoff.save(); // Saves handoff to MongoDB
     return handoff;
@@ -32,7 +30,7 @@ class HandoffCollection {
    * @return {Promise<HydratedDocument<Handoff>> | Promise<null> } - The handoff with the given handoffId, if any
    */
   static async findOne(handoffId: Types.ObjectId | string): Promise<HydratedDocument<Handoff>> {
-    return HandoffModel.findOne({_id: handoffId}).populate(['ownerId', 'borrowerId', 'requestId']);
+    return HandoffModel.findOne({_id: handoffId});
   }
 
   /**
@@ -54,14 +52,14 @@ class HandoffCollection {
    */
   static async returnOne(handoffId: Types.ObjectId | string, userId: Types.ObjectId | string): Promise<boolean> {
     const handoff = await HandoffModel.findOne({_id: handoffId});
-    if (handoff.ownerId.toString() === userId.toString() && handoff.ownerReturnClaim === null) {
+    if (handoff.ownerId.toString() === userId.toString()) {
       handoff.ownerReturnClaim = new Date();
-    } else if (handoff.borrowerId.toString() === userId.toString() && handoff.borrowerReturnClaim === null) {
+    } else if (handoff.borrowerId.toString() === userId.toString()) {
       handoff.borrowerReturnClaim = new Date();
     } else {
       throw new Error('The user with ID ' + userId.toString() + ' is not associated with this handoff');
     }
- 
+
     handoff.returned = (handoff.ownerReturnClaim !== null && handoff.borrowerReturnClaim !== null);
     await handoff.save();
     return handoff.returned;
