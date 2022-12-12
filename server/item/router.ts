@@ -46,7 +46,6 @@ router.get(
     res.status(200).json(response);
   }
 );
-  
 
 /**
  * Create a new item.
@@ -128,16 +127,16 @@ router.patch(
     if (req.body.name) { // Item with new name
       item = await ItemCollection.updateOneName(req.params.itemId, req.body.name);
     }
+
     if (req.body.description) { // Item with new description
       item = await ItemCollection.updateOneDescription(req.params.itemId, req.body.description);
     }
+
     res.status(200).json({
       message: 'Your item was updated successfully.',
       item
     });
   }
 );
-
-
 
 export {router as itemRouter};

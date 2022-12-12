@@ -11,14 +11,29 @@
       >
         <label :for="field.id">{{ field.label }}:</label>
         <textarea
-          v-if="field.id === 'content'"
+          v-if="field.type === 'textarea'"
           :name="field.id"
           :value="field.value"
           @input="field.value = $event.target.value"
         />
         <input
+          v-else-if="field.type === 'password'"
+          :type="password"
+          :name="field.id"
+          :value="field.value"
+          @input="field.value = $event.target.value"
+        >
+        <input
+          v-else-if="field.type === 'date'"
+          type="date"
+          :name="field.id"
+          :value="field.value"
+          @input="field.value = $event.target.value"
+        >
+        <!--Default to text input-->
+        <input
           v-else
-          :type="field.id === 'password' ? 'password' : 'text'"
+          :type="text"
           :name="field.id"
           :value="field.value"
           @input="field.value = $event.target.value"
@@ -49,7 +64,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'BlockForm',
   data() {
@@ -92,20 +106,18 @@ export default {
 
       try {
         const r = await fetch(this.url, options);
+        const res = await r.json();
         if (!r.ok) {
-          const res = await r.json();
           throw new Error(res.error);
         }
         if (this.setUsername) {
-          const text = await r.text();
-          const res = text ? JSON.parse(text) : {user: null};
-          this.$store.commit('setUsername', res.user ? res.user.username : null);
+          this.$store.commit('setUsername', res?.user?.username);
         }
         if (this.refreshEntries) {
           this.$store.commit('refreshEntries');
         }
         if (this.callback) {
-          this.callback();
+          this.callback(res);
         }
       } catch (e) {
         this.$set(this.alerts, e, 'error');

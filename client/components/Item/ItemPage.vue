@@ -10,9 +10,7 @@
     </p>
     <br><br>
 
-    <RequestToBorrowForm
-      :itemId="$route.params.id" 
-    />
+    <RequestToBorrowForm :item-id="$route.params.id" />
 
     <WriteDiaryPostForm />
     <DiaryFeed 
@@ -33,9 +31,11 @@ export default {
     RequestToBorrowForm,
     WriteDiaryPostForm
   },
-  data () {
-    return {
-      item: this.$store.state.items.filter(item => item._id === this.$route.params.id)[0]
+  computed: {
+    item() {
+      return this.$store.state.items.filter(
+        item => item._id === this.$route.params.id
+      )[0];
     }
   }
 };

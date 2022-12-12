@@ -6,20 +6,20 @@ export default {
   mixins: [BlockForm],
   data() {
     return {
-      // TODO
       url: '/api/items',
       method: 'POST',
       hasBody: true,
       fields: [
         {id: 'name', label: 'Name', value: ''},
-        {id: 'description', label: 'Description', value: ''},
+        {id: 'description', label: 'Description', type: 'textarea', value: ''},
       ],
       title: 'List new item',
-      callback: () => {
-        const message = 'Successfully created an item!';
+      callback: (res) => {
         this.$store.commit('refreshItems');
-        this.$set(this.alerts, message, 'success');
-        setTimeout(() => this.$delete(this.alerts, message), 3000);
+        this.$store.commit('alert', {
+          message: 'Successfully created an item!', status: 'success'
+        });
+        this.$router.push({name: 'Item', params: {id: res.item._id}});
       }
     };
   }
