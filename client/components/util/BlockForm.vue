@@ -1,6 +1,3 @@
-<!-- Reusable component representing a form in a block style -->
-<!-- This is just an example; feel free to define any reusable components you want! -->
-
 <template>
   <form @submit.prevent="submit">
     <h3>{{ title }}</h3>
@@ -9,7 +6,7 @@
         v-for="field in fields"
         :key="field.id"
       >
-        <label :for="field.id">{{ field.label }}:</label>
+        <label :for="field.id">{{ field.label ? field.label + ":" : '' }}</label>
         <textarea
           v-if="field.type === 'textarea'"
           :name="field.id"

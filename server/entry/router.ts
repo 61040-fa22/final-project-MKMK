@@ -103,7 +103,7 @@ router.post(
     const entry = await EntryCollection.addOne(userId, req.body.itemId, req.body.content);
 
     res.status(201).json({
-      message: 'Your entry was created successfully.',
+      message: 'Successfully wrote in item diary',
       entry: util.constructEntryResponse(entry)
     });
   }

@@ -22,7 +22,7 @@
       <RequestToBorrowForm :item-id="$route.params.id" />
     </section>
     <section>
-      <WriteDiaryPostForm />
+      <WriteDiaryPostForm :item-id="$route.params.id" />
     </section>
     <section>
       <DiaryFeed :item="item" />
