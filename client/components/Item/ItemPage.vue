@@ -18,7 +18,7 @@
         {{ item.description }}
       </p>
     </section>
-    <section>
+    <section v-if="!ownerIsMe">
       <RequestToBorrowForm :item-id="$route.params.id" />
     </section>
     <section>
@@ -49,6 +49,9 @@ export default {
       return this.$store.state.items.filter(
         item => item._id === this.$route.params.id
       )[0];
+    },
+    ownerIsMe() {
+      return this.item.owner === this.$store.state.username;
     }
   }
 };
