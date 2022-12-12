@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="page_container">
     <h2>Profile: @{{ $route.params.id }}</h2>
     <p v-if="isMe">
       <router-link :to="{name: 'Settings'}">
