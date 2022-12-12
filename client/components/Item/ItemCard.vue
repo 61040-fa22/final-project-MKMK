@@ -29,16 +29,15 @@ export default {
   name: 'ItemCard',
   props: {
     itemId: {
-      type: Object,
+      type: String,
       required: true
     }
   },
   data () {
-      return {
-        item: this.$store.state.items.filter(item => item._id === this.itemId)[0]
-      }
-  } 
-
+    return {
+      item: this.$store.state.items.filter(item => item._id === this.itemId)[0]
+    }
+  }
 }
 </script>
 

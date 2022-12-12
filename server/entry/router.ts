@@ -84,8 +84,9 @@ router.get(
 /**
  * Create a new entry.
  *
- * @name POST /api/entry
+ * @name POST /api/entries
  *
+ * @param {string} itemId
  * @param {string} content - The content of the entry
  * @return {EntryResponse} - The created entry
  * @throws {403} - If the user is not logged in

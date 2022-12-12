@@ -18,7 +18,7 @@
         />
         <input
           v-else-if="field.type === 'password'"
-          :type="password"
+          type="password"
           :name="field.id"
           :value="field.value"
           @input="field.value = $event.target.value"
@@ -33,7 +33,7 @@
         <!--Default to text input-->
         <input
           v-else
-          :type="text"
+          type="text"
           :name="field.id"
           :value="field.value"
           @input="field.value = $event.target.value"

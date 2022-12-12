@@ -8,7 +8,7 @@
         <ItemCard 
           v-for="item in $store.state.items"
           :key="item._id"
-          :itemId="item._id"
+          :item-id="item._id"
         />
       </GalleryComponent>
     </section>
@@ -29,7 +29,6 @@ export default {
   },
   mounted() {
     this.$store.commit('refreshItems');
-    // this.$store.commit('refreshEntries');
   }
 };
 </script>

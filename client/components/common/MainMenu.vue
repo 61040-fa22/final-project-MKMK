@@ -13,7 +13,7 @@
         title="Log out"
         url="/api/users/session"
         method="DELETE"
-        set-username="true"
+        set-username
         :callback="logoutCallback"
       />
     </nav>

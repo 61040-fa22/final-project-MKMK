@@ -6,7 +6,7 @@ export default {
   mixins: [BlockForm],
   props: {
     itemId: {
-      type: Object,
+      type: String,
       required: true
     }
   },
