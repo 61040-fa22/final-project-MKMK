@@ -4,7 +4,7 @@ import HomePage from "./components/Home/HomePage.vue";
 import ItemPage from "./components/Item/ItemPage.vue";
 import ProfilePage from "./components/User/ProfilePage.vue";
 import ListNewItemPage from "./components/Item/ListNewItemPage.vue";
-import AccountPage from "./components/User/AccountPage.vue";
+import SettingsPage from "./components/User/SettingsPage.vue";
 import LoginPage from "./components/User/LoginPage.vue";
 import NotFound from "./NotFound.vue";
 
@@ -15,7 +15,7 @@ const routes = [
   { path: "/item/:id", name: "Item", component: ItemPage },
   { path: "/profile/:id", name: "Profile", component: ProfilePage },
   { path: "/new", name: "List new item", component: ListNewItemPage },
-  { path: "/account", name: "Account", component: AccountPage },
+  { path: "/settings", name: "Settings", component: SettingsPage },
   { path: "/login", name: "Login", component: LoginPage },
   { path: "*", name: "Not Found", component: NotFound },
 ];

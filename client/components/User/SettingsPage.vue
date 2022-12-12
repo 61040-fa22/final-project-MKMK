@@ -1,6 +1,3 @@
-<!-- Page for account settings and management -->
-<!-- User should be authenticated in order to see this page -->
-
 <template>
   <main>
     <section>
@@ -25,7 +22,7 @@ import ChangePasswordForm from '@/components/User/ChangePasswordForm.vue';
 import DeleteAccountForm from '@/components/User/DeleteAccountForm.vue';
 
 export default {
-  name: 'AccountPage',
+  name: 'SettingsPage',
   components: {
     ChangeUsernameForm,
     ChangePasswordForm,

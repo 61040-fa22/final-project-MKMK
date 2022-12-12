@@ -1,19 +1,23 @@
 <template>
   <main>
-    <h2>page for profile {{ $route.params.id }}</h2>
+    <h2>Profile: @{{ $route.params.id }}</h2>
+    <p v-if="isMe">
+      <router-link :to="{name: 'Settings'}">
+        Settings
+      </router-link>
+    </p>
     <img src="https://via.placeholder.com/150x150">
     <div>
       <h2>Items</h2>
       <GalleryComponent num-columns=4>
         <ItemCard
-          v-for="item in $store.state.items.filter(item => item.owner === user.username)"
-          :itemId="item._id"
+          v-for="item in items"
+          :key="item._id"
+          :item-id="item._id"
         />
       </GalleryComponent>
     </div>
-    <div
-      v-if="(user.username === $store.state.username)"
-    >
+    <div v-if="isMe">
       <h2>My Info</h2>
       <UserRequests 
         :user="user"
@@ -34,7 +38,6 @@
         :user="user"
         :owner="false"
       />
-
     </div>
   </main>
 </template>
@@ -49,8 +52,16 @@ export default {
   name: "ProfilePage",
   components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs},
   data (){
-    return{
+    return {
       user: Object,
+    }
+  },
+  computed: {
+    items() {
+      return this.$store.state.items.filter(item => item.owner === this.user.username);
+    },
+    isMe() {
+      return this.$store.state.username === this.$route.params.id;
     }
   },
   async mounted () {
