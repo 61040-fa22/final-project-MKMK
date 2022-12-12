@@ -4,9 +4,7 @@
 <template>
   <form @submit.prevent="submit">
     <h3>{{ title }}</h3>
-    <article
-      v-if="fields.length"
-    >
+    <article v-if="fields.length">
       <div
         v-for="field in fields"
         :key="field.id"
@@ -62,50 +60,50 @@ export default {
       url: '', // Url to submit form to
       method: 'GET', // Form request method
       hasBody: false, // Whether or not form request has a body
-      setUsername: false, // Whether or not stored username should be updated after form submission
-      refreshEntries: false, // Whether or not stored entries should be updated after form submission
+      body: {},
       alerts: {}, // Displays success/error messages encountered during form submission
-      callback: null // Function to run after successful form submission
+      callback: null, // Function to run after successful form submission
+
+      setUsername: false, // Whether or not stored username should be updated after form submission
+      refreshEntries: false // Whether or not stored entries should be updated after form submission
     };
   },
   methods: {
     async submit() {
       /**
-        * Submits a form with the specified options from data().
-        */
+       * Submits a form with the specified options from data().
+       */
       const options = {
         method: this.method,
         headers: {'Content-Type': 'application/json'},
-        credentials: 'same-origin' // Sends express-session credentials with request
+        credentials: 'same-origin'
       };
       if (this.hasBody) {
-        options.body = JSON.stringify(Object.fromEntries(
+        const formData = Object.fromEntries(
           this.fields.map(field => {
             const {id, value} = field;
             field.value = '';
             return [id, value];
           })
-        ));
+        );
+        // Add onto existing body
+        options.body = JSON.stringify({...formData, ...this.requestBody});
       }
 
       try {
         const r = await fetch(this.url, options);
         if (!r.ok) {
-          // If response is not okay, we throw an error and enter the catch block
           const res = await r.json();
           throw new Error(res.error);
         }
-
         if (this.setUsername) {
           const text = await r.text();
           const res = text ? JSON.parse(text) : {user: null};
           this.$store.commit('setUsername', res.user ? res.user.username : null);
         }
-
         if (this.refreshEntries) {
           this.$store.commit('refreshEntries');
         }
-
         if (this.callback) {
           this.callback();
         }

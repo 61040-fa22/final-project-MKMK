@@ -1,7 +1,7 @@
-import type {NextFunction, Request, Response} from 'express';
-import e from 'express';
 import express from 'express';
-import type {Types} from 'mongoose';
+import type {Request, Response} from 'express';
+import mongoose from 'mongoose';
+
 import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
 import RequestCollection from './collection';
@@ -55,7 +55,9 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const borrowerId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const {itemId, startDate, endDate} = req.body as {itemId: Types.ObjectId; startDate: Date; endDate: Date};
+    const {itemId: itemIdString} = req.body as {itemId: string};
+    const itemId = new mongoose.Types.ObjectId(itemIdString);
+    const {startDate, endDate} = req.body as {startDate: Date; endDate: Date};
     const request = await RequestCollection.addOne(itemId, borrowerId, startDate, endDate);
     res.status(201).json({
       message: 'Your request was created successfully.',

@@ -15,10 +15,12 @@ export default {
       url: '/api/requests',
       method: 'POST',
       hasBody: true,
+      requestBody: {
+        itemId: this.itemId
+      },
       fields: [
         {id: 'startDate', label: 'Start Date', value: ''},
-        {id: 'endDate', label: 'End Date', value: ''},
-        {id: 'itemId', label: 'Item [do not edit this]', value: this.itemId}
+        {id: 'endDate', label: 'End Date', value: ''}
       ],
       title: 'Borrow this item',
       refreshEntries: true,
