@@ -19,8 +19,8 @@ export default {
         itemId: this.itemId
       },
       fields: [
-        {id: 'startDate', label: 'Start Date', value: ''},
-        {id: 'endDate', label: 'End Date', value: ''}
+        {id: 'startDate', label: 'Start Date', type: 'date'},
+        {id: 'endDate', label: 'End Date', type: 'date'}
       ],
       title: 'Borrow this item',
       refreshEntries: true,
