@@ -83,6 +83,14 @@ main {
   padding: 2rem auto;
 }
 
+/* Wrapper to make page no wider than a specific width on large screens,
+but still take up the whole width on small screens */
+.page_container {
+  width: 95%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .page_header {
   margin-top: 2rem;
   display: flex;
@@ -192,10 +200,12 @@ hr {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="date"],
+textarea {
   font-size: 1.1rem;
   color: #343434;
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 1rem;
   outline: none;
   border-radius: 0.25rem;
   border: 1px solid #aaa;
@@ -205,6 +215,17 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
+  box-shadow: 0 0 4px #ccc;
+}
+
+textarea {
+  max-width: 100%;
+  height: 8rem;
+  resize: none;
+  padding: 1rem;
+}
+
+textarea:focus {
   box-shadow: 0 0 4px #ccc;
 }
 

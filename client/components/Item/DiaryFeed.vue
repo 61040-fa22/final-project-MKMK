@@ -1,12 +1,16 @@
 <template>
   <section>
     <h3>Item Diary</h3>
-
-    <DiaryPost 
-      v-for="entry in $store.state.entries.filter(entry => entry.itemId === item._id)"
-      :entry="entry"
-    />
-
+    <div v-if="entries.length">
+      <DiaryPost
+        v-for="entry in entries"
+        :key="entry._id"
+        :entry="entry"
+      />
+    </div>
+    <div v-else>
+      No diary entries yet!
+    </div>
   </section>
 </template>
 
@@ -24,9 +28,14 @@ export default {
       required: true
     }
   },
-  mounted(){
-    this.$store.commit('refreshEntries')
-  }
+  computed: {
+    entries() {
+      return this.$store.state.entries.filter(entry => entry.itemId === this.item._id);
+    }
+  },
+  mounted() {
+    this.$store.commit('refreshEntries');
+  },
 }
 </script>
 

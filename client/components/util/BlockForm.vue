@@ -48,7 +48,7 @@
         type="submit"
         class="button submit_button"
       >
-        {{ title || buttonLabel }}
+        {{ buttonLabel || title }}
       </button>
     </div>
     <section class="alerts">
@@ -130,7 +130,6 @@ export default {
 
 <style scoped>
 form {
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

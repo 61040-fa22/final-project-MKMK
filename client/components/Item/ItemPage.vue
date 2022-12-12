@@ -1,21 +1,28 @@
 <template>
-  <main>
-    <h2>
-      {{ item.name }}
-    </h2>
-    <img src="https://via.placeholder.com/150x150">
-    <br><br>
-    <p>
-      {{ item.description }}
-    </p>
-    <br><br>
-
-    <RequestToBorrowForm :item-id="$route.params.id" />
-
-    <WriteDiaryPostForm />
-    <DiaryFeed 
-      :item="item"
-    />
+  <main class="page_container">
+    <section>
+      <h2>
+        {{ item.name }}
+      </h2>
+      <p>
+        Owned by <router-link :to="{ name: 'Profile', params: {id: item.owner}}">
+          @{{ item.owner }}
+        </router-link>
+      </p>
+      <img src="https://via.placeholder.com/150x150">
+      <p>
+        {{ item.description }}
+      </p>
+    </section>
+    <section>
+      <RequestToBorrowForm :item-id="$route.params.id" />
+    </section>
+    <section>
+      <WriteDiaryPostForm />
+    </section>
+    <section>
+      <DiaryFeed :item="item" />
+    </section>
   </main>
 </template>
 
@@ -42,4 +49,7 @@ export default {
 </script>
 
 <style scoped>
+section {
+  margin-bottom: 3rem;
+}
 </style>

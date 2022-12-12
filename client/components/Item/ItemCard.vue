@@ -10,10 +10,11 @@
     </h3>
     <div class="item_card_info">
       <p>
+        Owned by 
         <router-link 
           :to="('/profile/' + item.owner)"
         >
-          Owned by {{ item.owner }}
+          @{{ item.owner }}
         </router-link>
       </p>
       <p> {{ $store.state.entries.filter(entry => entry.itemId === item._id).length}} posts</p>

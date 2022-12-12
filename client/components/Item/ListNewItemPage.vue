@@ -1,27 +1,16 @@
+<template>
+  <main class="page_container">
+    <ListNewItemForm />
+  </main>
+</template>
+
 <script>
-import BlockForm from '@/components/util/BlockForm.vue';
+import ListNewItemForm from '@/components/Item/ListNewItemForm.vue';
 
 export default {
   name: 'ListNewItemPage',
-  mixins: [BlockForm],
-  data() {
-    return {
-      url: '/api/items',
-      method: 'POST',
-      hasBody: true,
-      fields: [
-        {id: 'name', label: 'Name', value: ''},
-        {id: 'description', label: 'Description', type: 'textarea', value: ''},
-      ],
-      title: 'List new item',
-      callback: (res) => {
-        this.$store.commit('refreshItems');
-        this.$store.commit('alert', {
-          message: 'Successfully created an item!', status: 'success'
-        });
-        this.$router.push({name: 'Item', params: {id: res.item._id}});
-      }
-    };
+  components: {
+    ListNewItemForm
   }
 };
 </script>

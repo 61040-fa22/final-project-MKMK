@@ -23,6 +23,7 @@ export default {
         {id: 'endDate', label: 'End Date', type: 'date'}
       ],
       title: 'Borrow this item',
+      buttonLabel: 'Send request',
       refreshEntries: true,
       callback: () => {
         const message = 'Successfully requested an Item!';
