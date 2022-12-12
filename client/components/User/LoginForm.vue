@@ -16,11 +16,12 @@ export default {
         {id: 'username', label: 'Username', value: ''},
         {id: 'password', label: 'Password', value: ''}
       ],
-      title: 'Sign in',
+      title: '',
+      buttonLabel: 'Log in',
       callback: () => {
         this.$router.push({name: 'Home'});
         this.$store.commit('alert', {
-          message: 'You are now signed in!', status: 'success'
+          message: 'You are now logged in', status: 'success'
         });
       }
     };

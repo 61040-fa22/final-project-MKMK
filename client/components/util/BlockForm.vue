@@ -30,11 +30,14 @@
     <article v-else>
       <p>{{ content }}</p>
     </article>
-    <button
-      type="submit"
-    >
-      {{ title }}
-    </button>
+    <div>
+      <button
+        type="submit"
+        class="button submit_button"
+      >
+        {{ title || buttonLabel }}
+      </button>
+    </div>
     <section class="alerts">
       <article
         v-for="(status, alert, index) in alerts"

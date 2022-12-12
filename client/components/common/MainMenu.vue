@@ -42,7 +42,7 @@ export default {
   methods: {
     logoutCallback() {
       this.$store.commit('alert', {
-        message: 'You are now signed out!',
+        message: 'You are now logged out',
         status: 'success'
       });
       this.$router.push({name: 'Home'});

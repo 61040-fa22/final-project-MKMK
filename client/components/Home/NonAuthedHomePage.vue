@@ -4,26 +4,24 @@
       <h2>connect with friends and the world around you on not-fritter.</h2>
     </header>
 
-    <h1>sign up</h1>
-    <RegisterForm />
+    <h1>Create an account</h1>
+    <SignupForm />
 
-    <footer>
-      <p>
-        already have an account? <router-link to="/login">
-          sign in
-        </router-link>
-      </p>
-    </footer>
+    <p>
+      Already have an account? <router-link to="/login">
+        Log in
+      </router-link>
+    </p>
   </section>
 </template>
 
 <script>
-import RegisterForm from '@/components/User/RegisterForm.vue';
+import SignupForm from '@/components/User/SignupForm.vue';
 
 export default {
   name: 'NonAuthedHomePage',
   components: {
-    RegisterForm
+    SignupForm
   }
 };
 </script>
