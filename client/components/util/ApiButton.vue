@@ -45,24 +45,18 @@ export default {
 
       try {
         const r = await fetch(this.url, options);
-
+        const res = await r.json();
         if (!r.ok) {
-          const res = await r.json();
           throw new Error(res.error);
         }
-
         if (this.setUsername) {
-          const text = await r.text();
-          const res = text ? JSON.parse(text) : {user: null};
-          this.$store.commit('setUsername', res.user ? res.user.username : null);
+          this.$store.commit('setUsername', res?.user?.username);
         }
-
         if (this.refreshEntries) {
           this.$store.commit('refreshEntries');
         }
-
         if (this.callback) {
-          this.callback();
+          this.callback(res);
         }
       } catch (e) {
         this.$store.commit('alert', {

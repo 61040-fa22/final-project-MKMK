@@ -37,11 +37,11 @@ router.get(
     const response = allItems.map(util.constructItemResponse);
     res.status(200).json(response);
   },
-  [
-    userValidator.isAuthorExists
-  ],
+  [userValidator.isAuthorExists],
   async (req: Request, res: Response) => {
-    const ownerItems = await ItemCollection.findAllByUsername(req.query.owner as string);
+    const ownerItems = await ItemCollection.findAllByUsername(
+      req.query.owner as string
+    );
     const response = ownerItems.map(util.constructItemResponse);
     res.status(200).json(response);
   }
@@ -59,12 +59,12 @@ router.get(
  */
 router.post(
   '/',
-  [
-    userValidator.isUserLoggedIn,
-    itemValidator.isValidItemContent
-  ],
+  [userValidator.isUserLoggedIn, itemValidator.isValidItemContent],
   async (req: Request, res: Response) => {
-    const {name, description} = req.body as {name: string; description: string};
+    const {name, description} = req.body as {
+      name: string;
+      description: string;
+    };
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const item = await ItemCollection.addOne(userId, name, description);
 
@@ -95,7 +95,7 @@ router.delete(
   async (req: Request, res: Response) => {
     await ItemCollection.deleteOne(req.params.itemId);
     res.status(200).json({
-      message: 'Your item was deleted successfully.'
+      message: 'Item successfully deleted'
     });
   }
 );
@@ -124,12 +124,20 @@ router.patch(
   ],
   async (req: Request, res: Response) => {
     let item = await ItemCollection.findOne(req.params.itemId); // Unchanged item
-    if (req.body.name) { // Item with new name
-      item = await ItemCollection.updateOneName(req.params.itemId, req.body.name);
+    if (req.body.name) {
+      // Item with new name
+      item = await ItemCollection.updateOneName(
+        req.params.itemId,
+        req.body.name
+      );
     }
 
-    if (req.body.description) { // Item with new description
-      item = await ItemCollection.updateOneDescription(req.params.itemId, req.body.description);
+    if (req.body.description) {
+      // Item with new description
+      item = await ItemCollection.updateOneDescription(
+        req.params.itemId,
+        req.body.description
+      );
     }
 
     res.status(200).json({

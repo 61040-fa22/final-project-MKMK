@@ -4,6 +4,10 @@
       <h2>
         {{ item.name }}
       </h2>
+      <DeleteItemButton
+        v-if="$store.state.username === item.owner"
+        :item="item"
+      />
       <p>
         Owned by <router-link :to="{ name: 'Profile', params: {id: item.owner}}">
           @{{ item.owner }}
@@ -27,6 +31,7 @@
 </template>
 
 <script>
+import DeleteItemButton from "@/components/Item/DeleteItemButton.vue";
 import DiaryFeed from "@/components/Item/DiaryFeed.vue";
 import RequestToBorrowForm from "@/components/Item/RequestToBorrowForm.vue";
 import WriteDiaryPostForm from "@/components/Item/WriteDiaryPostForm.vue";
@@ -34,6 +39,7 @@ import WriteDiaryPostForm from "@/components/Item/WriteDiaryPostForm.vue";
 export default {
   name: "ItemPage",
   components: {
+    DeleteItemButton,
     DiaryFeed,
     RequestToBorrowForm,
     WriteDiaryPostForm
