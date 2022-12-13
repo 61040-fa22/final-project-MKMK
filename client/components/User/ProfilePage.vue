@@ -104,13 +104,13 @@ export default {
   .profile_header {
   display: grid;
   grid-template-columns: 3fr 6fr 1fr;
-}
-.logo_container {
-  display: flex;
-  align-items: center;
-  gap: 0.75em;
-}
-.indent {
-  margin-left: 25px;
-}
+  }
+  .logo_container {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+  }
+  .indent {
+    margin-left: 25px;
+  }
 </style>

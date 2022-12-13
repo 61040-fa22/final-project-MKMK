@@ -1,23 +1,36 @@
 <template>
   <main class="page_container">
-    <section>
-      <h2>
-        {{ item.name }}
-      </h2>
-      <DeleteItemButton
-        v-if="$store.state.username === item.owner"
-        :item="item"
-      />
-      <p>
-        Owned by <router-link :to="{ name: 'Profile', params: {id: item.owner}}">
-          @{{ item.owner }}
-        </router-link>
-      </p>
-      <img src="https://via.placeholder.com/150x150">
-      <p>
-        {{ item.description }}
-      </p>
-    </section>
+    <div class="item_header">
+      <section>
+        <img src="https://via.placeholder.com/150x150">
+      </section>
+      <section>
+        <h2 class="title">{{ item.name }}</h2>
+        <p class="owner">
+          owned by <router-link :to="{ name: 'Profile', params: {id: item.owner}}">
+            @{{ item.owner }}
+          </router-link>
+        </p>
+        <br>
+        <p class="description">{{ item.description }}</p>
+      </section>
+    </div>
+
+    <div class="interaction">
+      <svg>
+        <rect width="100%" height="50" style="fill:none;stroke:blue"/>
+      </svg>  
+      <!--
+        REPLACE ABOVE SVG WITH:
+        if user is the owner or a current borrower,
+          <BorrowButton>
+        else
+          <WriteDiaryEntryButton>
+
+        this way, the immediate next thing on the page is diary entries.
+      -->
+    </div>
+
     <section v-if="!ownerIsMe">
       <RequestToBorrowForm :item-id="$route.params.id" />
     </section>
@@ -60,5 +73,22 @@ export default {
 <style scoped>
 section {
   margin-bottom: 3rem;
+}
+.item_header {
+  display: grid;
+  grid-template-columns: 3fr 6fr 1fr;
+  margin-top: 25px;
+}
+.description {
+  font-style: oblique;
+  font-size: x-large;
+}
+.owner {
+  font-variant:small-caps;
+}
+.interaction {
+  display:flex;
+  justify-content: center;
+  text-align: center;
 }
 </style>
