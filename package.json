@@ -10,6 +10,7 @@
         "dev": "nodemon api/index.ts -e js,ts,json"
     },
     "dependencies": {
+        "@vue/cli": "^5.0.8",
         "bootstrap": "^5.2.3",
         "bootstrap-vue": "^2.23.1",
         "connect-history-api-fallback": "^1.6.0",

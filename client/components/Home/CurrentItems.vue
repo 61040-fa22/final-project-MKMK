@@ -7,7 +7,7 @@ Homepage widgets for items you're currently borrowing and lending
     <section>
       <h2>currently borrowing ({{ $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username).length }})</h2>
       <p>post an update about the item(s) you're borrowing!</p>
-      <GalleryComponent num-columns="4">
+      <GalleryComponent num-columns="3">
         <ItemCard 
           v-for="handoff in $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username)"
           :key="handoff._id"
@@ -19,7 +19,7 @@ Homepage widgets for items you're currently borrowing and lending
     <!--Currently lending (only appears if you're currently lending something)-->
     <section>
       <h2>currently lending ({{ $store.state.activeBorrows.filter(handoff => handoff.owner === $store.state.username).length }})</h2>
-      <GalleryComponent num-columns="4">
+      <GalleryComponent >
         <ItemCard 
           v-for="handoff in $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username)"
           :key="handoff._id"

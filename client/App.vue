@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" style="display:flex-col">
     <GlobalAlerts />
     <MainMenu />
     <router-view />
-    <FooterComponent />
+      <FooterComponent />
+
   </div>
 </template>
 
@@ -11,13 +12,15 @@
 import GlobalAlerts from '@/components/common/GlobalAlerts.vue';
 import FooterComponent from '@/components/common/FooterComponent.vue';
 import MainMenu from '@/components/common/MainMenu.vue';
+import LeftNav from '@/components/common/LeftNav.vue';
 
 export default {
   name: 'App',
   components: {
     GlobalAlerts,
     FooterComponent,
-    MainMenu
+    MainMenu, 
+    LeftNav
   },
   beforeCreate() {
     // Sync stored username to current session
@@ -129,10 +132,17 @@ p.success {
 button, .button {
   border: none;
   outline: none;
-  transition: 0.1s;
+  width:120px;
+  max-width: 150px;
+  height :auto;
+
+  /* transition: 0.1s; */
   cursor: pointer;
-  border-radius: 2rem;
+  border-radius: 5px;
+  /* flex: auto; */
   font-weight: bold;
+  padding: 10px 10px;
+  /* width: 150px; */
 }
 
 .submit_button {

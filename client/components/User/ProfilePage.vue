@@ -28,7 +28,7 @@
 
     <div>
       <h2>Items</h2>
-      <GalleryComponent num-columns=4>
+      <GalleryComponent>
         <ItemCard
           v-for="item in items"
           :key="item._id"
