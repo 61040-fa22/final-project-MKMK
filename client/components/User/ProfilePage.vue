@@ -1,12 +1,31 @@
 <template>
   <main class="page_container">
-    <h2>Profile: @{{ $route.params.id }}</h2>
-    <p v-if="isMe">
-      <router-link :to="{name: 'Settings'}">
-        Settings
-      </router-link>
-    </p>
-    <img src="https://via.placeholder.com/150x150">
+
+    <div class="profile_header">
+      <section>
+        <img src="https://via.placeholder.com/150x150">
+      </section>
+      <section>
+        <h2>@{{ $route.params.id }}</h2>
+        <p class="indent">Joined in {{ date() }}</p>
+        <br><br>
+        <p> *INSERT RATING HERE* </p>
+      </section>
+      <section v-if="isMe">
+        <router-link
+          to="/settings"
+          class="logo_container"
+        >
+          <Icon
+            src="/icons/gear.png"
+            size="30"
+          />
+        </router-link>
+      </section>
+    </div>
+    <br>
+    <hr>
+
     <div>
       <h2>Items</h2>
       <GalleryComponent num-columns=4>
@@ -47,10 +66,11 @@ import UserRequests from "@/components/Request/UserRequests.vue";
 import ItemCard from "@/components/Item/ItemCard.vue";
 import GalleryComponent from "@/components/util/GalleryComponent.vue";
 import UserHandoffs from "@/components/Handoff/UserHandoffs.vue";
+import Icon from '@/components/util/Icon.vue';
 
 export default {
   name: "ProfilePage",
-  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs},
+  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs, Icon},
   data (){
     return {
       user: Object,
@@ -71,9 +91,26 @@ export default {
       const res = await r.json();
       this.user = res.user;
     }
+  },
+  methods: {
+    date() {
+      return this.user.dateJoined.split(' ')[2].split(',')[0];
+    }
   }
 };
 </script>
 
 <style scoped>
+  .profile_header {
+  display: grid;
+  grid-template-columns: 3fr 6fr 1fr;
+  }
+  .logo_container {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+  }
+  .indent {
+    margin-left: 25px;
+  }
 </style>
