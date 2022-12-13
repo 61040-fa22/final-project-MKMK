@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "./components/Home/HomePage.vue";
+import AboutPage from "./components/About/AboutPage.vue";
 import ItemPage from "./components/Item/ItemPage.vue";
 import ProfilePage from "./components/User/ProfilePage.vue";
 import ListNewItemPage from "./components/Item/ListNewItemPage.vue";
@@ -12,6 +13,7 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: "/", name: "Home", component: HomePage },
+  { path: "/about", name: "About", component: AboutPage },
   { path: "/item/:id", name: "Item", component: ItemPage },
   { path: "/profile/:id", name: "Profile", component: ProfilePage },
   { path: "/new", name: "List new item", component: ListNewItemPage },

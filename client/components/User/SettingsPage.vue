@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="page_container">
     <section>
       <header>
         <h2>Account settings for @{{ $store.state.username }}</h2>

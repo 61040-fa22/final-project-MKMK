@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.state.items.filter(item => item.owner === this.user.username);
+      return this.$store.state.items.filter(item => item.owner === this.$route.params.id);
     },
     isMe() {
       return this.$store.state.username === this.$route.params.id;
