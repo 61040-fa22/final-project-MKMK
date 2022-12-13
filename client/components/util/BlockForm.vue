@@ -135,6 +135,7 @@ export default {
     });
     await getDownloadURL(storageRef).then(url => {
       console.log('Download URL', url)
+      this.imgRef = url;
     });
   },
     async submit() {
@@ -146,6 +147,7 @@ export default {
         headers: {'Content-Type': 'application/json'},
         credentials: 'same-origin'
       };
+      console.log('imgref is ' + this.imgRef);
       if (this.hasBody) {
         const formData = Object.fromEntries(
           this.fields.map(field => {
@@ -154,14 +156,15 @@ export default {
             return [id, value];
           })
         );
-        
+
         const toStringify = {...formData, ...this.requestBody};
+
         if (this.hasImage) {
           toStringify["imageRef"] = this.imgRef;
-         }
-        // Add onto existing body
-        options.body = JSON.stringify({...formData, ...this.requestBody});
+        }
 
+        // Add onto existing body
+        options.body = JSON.stringify(toStringify);
       }
 
 

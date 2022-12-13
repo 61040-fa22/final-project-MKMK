@@ -48,7 +48,7 @@ const ItemSchema = new Schema<Item>({
   // A reference to the item's photo in firebase
   imageRef: {
     type: String,
-    default: null
+    default: "https://via.placeholder.com/150x150"
   }
 });
 

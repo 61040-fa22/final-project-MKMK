@@ -8,11 +8,10 @@ Homepage widgets for items you're currently borrowing and lending
       <h2>currently borrowing ({{ $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username).length }})</h2>
       <p>post an update about the item(s) you're borrowing!</p>
       <GalleryComponent num-columns="4">
-        <ItemCard 
+        <HandoffComponent
           v-for="handoff in $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username)"
           :key="handoff._id"
         />
-        <ItemCard />
       </GalleryComponent>
     </section>
 
@@ -20,11 +19,10 @@ Homepage widgets for items you're currently borrowing and lending
     <section>
       <h2>currently lending ({{ $store.state.activeBorrows.filter(handoff => handoff.owner === $store.state.username).length }})</h2>
       <GalleryComponent num-columns="4">
-        <ItemCard 
+        <HandoffComponent
           v-for="handoff in $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username)"
           :key="handoff._id"
         />
-        <ItemCard />
       </GalleryComponent>
     </section>
   </section>
@@ -32,13 +30,13 @@ Homepage widgets for items you're currently borrowing and lending
 
 <script>
 import GalleryComponent from "@/components/util/GalleryComponent.vue";
-import ItemCard from "@/components/Item/ItemCard.vue";
+import HandoffComponent from "@/components/Handoff/HandoffComponent.vue";
 
 export default {
   name: "CurrentItems",
   components: {
     GalleryComponent,
-    ItemCard
+    HandoffComponent
   },
 }
 </script>
