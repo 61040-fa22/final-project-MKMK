@@ -14,14 +14,20 @@ class ItemCollection {
    * @param {string} ownerId - The id of the owner of the item
    * @param {string} name - The name/title of the item
    * @param {string} description - The description of the item
+   * @param {string} imageRef - A url referencing the image in firebase
    * @return {Promise<HydratedDocument<Item>>} - The newly created item
    */
-  static async addOne(ownerId: Types.ObjectId | string, name: string, description: string): Promise<HydratedDocument<Item>> {
+  static async addOne(ownerId: Types.ObjectId | string, name: string, description: string, imageRef =''): Promise<HydratedDocument<Item>> {
+    if (imageRef.length === 0) {
+      imageRef = null;
+    }
+    
     const item = new ItemModel({
       ownerId,
       name, 
       description, 
-      isAvailable: true
+      isAvailable: true,
+      imageRef
     });
     await item.save(); // Saves item to MongoDB
     return item.populate('ownerId');
@@ -86,6 +92,21 @@ class ItemCollection {
     await item.save();
     return item.populate('ownerId');
   }
+
+  /**
+   * Update an item with a new image ref
+   *
+   * @param {string} itemId - The id of the item to be updated
+   * @param {string} imageRef - the url referencing the image in firebase
+   * @param {Promise<HydratedDocument<Item>>} - The newly updated item
+   */
+   static async updateOneImage(itemId: Types.ObjectId | string, imageRef: string): Promise<HydratedDocument<Item>> {
+    const item = await ItemModel.findOne({_id: itemId});
+    item.imageRef = imageRef;
+    await item.save();
+    return item.populate('ownerId');
+  }
+
 
   /**
    * Toggle an item's availability

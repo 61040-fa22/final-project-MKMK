@@ -1,6 +1,5 @@
 <script>
 import BlockForm from '@/components/util/BlockForm.vue';
-
 export default {
   name: 'ListNewItemForm',
   mixins: [BlockForm],
@@ -15,6 +14,8 @@ export default {
       ],
       title: 'List new item',
       buttonLabel: 'Submit',
+      hasImage: true,
+      image: 'test',
       callback: (res) => {
         this.$store.commit('refreshItems');
         this.$store.commit('alert', {

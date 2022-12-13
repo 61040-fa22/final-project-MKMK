@@ -9,6 +9,7 @@ export type Item = {
   name: string;
   description: string;
   isAvailable: boolean;
+  imageRef: string;
 };
 
 export type PopulatedItem = {
@@ -17,6 +18,7 @@ export type PopulatedItem = {
   name: string;
   description: string;
   isAvailable: boolean;
+  imageRef: string;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -42,6 +44,11 @@ const ItemSchema = new Schema<Item>({
   isAvailable: {
     type: Boolean,
     required: true
+  },
+  // A reference to the item's photo in firebase
+  imageRef: {
+    type: String,
+    default: null
   }
 });
 

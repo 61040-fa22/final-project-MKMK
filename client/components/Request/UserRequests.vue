@@ -11,6 +11,7 @@
       </p>
       <RequestComponent
         v-for="request in $store.state.requests.filter(request => request.owner === user.username)"
+        :key="request._id"
         :request="request"
         :owner="owner"
       />
@@ -26,6 +27,7 @@
       </p>
       <RequestComponent
         v-for="request in $store.state.requests.filter(request => request.borrower === user.username)"
+        :key="request._id"
         :request="request"
         :owner="owner"
       />

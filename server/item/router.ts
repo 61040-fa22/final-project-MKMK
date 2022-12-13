@@ -54,6 +54,7 @@ router.get(
  *
  * @param {string} name - The name of the item
  * @param {string} description - The description of the item
+ * @param {string} imageRef - the url of the image in firebase
  * @return {Item} - The created item
  * @throws {403} - If the user is not logged in
  */
@@ -61,12 +62,13 @@ router.post(
   '/',
   [userValidator.isUserLoggedIn, itemValidator.isValidItemContent],
   async (req: Request, res: Response) => {
-    const {name, description} = req.body as {
+    const {name, description, imageRef} = req.body as {
       name: string;
       description: string;
+      imageRef: string;
     };
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const item = await ItemCollection.addOne(userId, name, description);
+    const item = await ItemCollection.addOne(userId, name, description, imageRef);
 
     res.status(201).json({
       message: 'Your item was created successfully.',
@@ -107,6 +109,7 @@ router.delete(
  *
  * @param {string} name - the new name for the item
  * @param {string} description - the new description for the item
+ * @param {string} imageRef - the new image url for the item
  * @return {Item} - the updated item
  * @throws {403} - if the user is not logged in or not the owner of
  *                 of the item
@@ -137,6 +140,13 @@ router.patch(
       item = await ItemCollection.updateOneDescription(
         req.params.itemId,
         req.body.description
+      );
+    }
+
+    if (req.body.imageRef) { 
+      item = await ItemCollection.updateOneImage(
+        req.params.itemId,
+        req.params.imageRef
       );
     }
 

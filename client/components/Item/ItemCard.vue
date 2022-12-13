@@ -1,6 +1,6 @@
 <template>
   <article>
-    <img src="https://via.placeholder.com/150x150">
+    <img id='itemImage' src="https://via.placeholder.com/150x150">
     <h3>
       <router-link 
         :to="('/item/' + itemId)"
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 export default {
   name: 'ItemCard',
   props: {
@@ -38,8 +39,14 @@ export default {
     return {
       item: this.$store.state.items.filter(item => item._id === this.itemId)[0]
     }
+  },
+  mounted () {
+    const img = document.getElementById('itemImage');
+    img.setAttribute('src', this.item.imageRef);
   }
+
 }
+
 </script>
 
 <style scoped>

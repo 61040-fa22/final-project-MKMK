@@ -7,6 +7,7 @@ type ItemResponse = {
   name: string;
   description: string;
   isAvailable: boolean;
+  imageRef: string;
 };
 
 /**
@@ -30,7 +31,7 @@ const constructItemResponse = (item: HydratedDocument<Item>): ItemResponse => {
     owner: owner,
     name: itemCopy.name,
     description: itemCopy.description,
-    isAvailable: itemCopy.isAvailable
+    isAvailable: itemCopy.isAvailable,
   };
 };
 

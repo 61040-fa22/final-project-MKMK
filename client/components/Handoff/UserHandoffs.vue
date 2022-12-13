@@ -12,6 +12,7 @@
     </h3>
     <HandoffComponent
       v-for="handoff in $store.state.handoffs"
+      :key="handoff._id"
       :owner="owner"
       :handoff="handoff"
     />
