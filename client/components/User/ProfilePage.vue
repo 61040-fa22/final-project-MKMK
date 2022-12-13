@@ -23,8 +23,7 @@
         </router-link>
       </section>
     </div>
-    <br>
-    <hr>
+    <br><hr><br>
 
     <div>
       <h2>Items</h2>
@@ -67,10 +66,12 @@ import ItemCard from "@/components/Item/ItemCard.vue";
 import GalleryComponent from "@/components/util/GalleryComponent.vue";
 import UserHandoffs from "@/components/Handoff/UserHandoffs.vue";
 import Icon from '@/components/util/Icon.vue';
+import Tab from '../common/Tab.vue'
+import Tabs from '../common/Tabs.vue'
 
 export default {
   name: "ProfilePage",
-  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs, Icon},
+  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs, Icon, Tab, Tabs},
   data (){
     return {
       user: Object,
