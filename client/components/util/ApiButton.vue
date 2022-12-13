@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submit">
-    <button type="submit">
+    <button type="submit" style="width:100%">
       {{ title }}
     </button>
   </form>

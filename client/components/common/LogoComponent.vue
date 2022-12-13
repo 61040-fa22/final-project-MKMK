@@ -7,7 +7,7 @@
       src="/icons/heart.svg"
       size="36"
     />
-    <h1>BeLender</h1>
+    <h1 style="color: #81B29A">BeLender</h1>
   </router-link>
 </template>
 
@@ -31,6 +31,6 @@ export default {
 
 a {
   text-decoration: none;
-  color: #222;
+  color:  #3D405B;
 }
 </style>

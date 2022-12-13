@@ -13,5 +13,6 @@ export default {
 <style scoped>
 footer {
   margin: 4rem 0 2rem;
+  /* padding-left: 200px; */
 }
 </style>
