@@ -1,5 +1,5 @@
 <template>
-  <main class="page_container">
+  <main class="page_container" style="padding-left:25px">
 
     <div class="profile_header">
       <section>
@@ -23,40 +23,54 @@
         </router-link>
       </section>
     </div>
-    <br>
-    <hr>
+    <br><hr><br>
 
-    <div>
+    <div class='wrapper' v-if="isMe">
+      <tabs>
+        <tab title="Incoming Requests">
+          <UserRequests 
+            :user="user"
+            :owner="true"
+          /></tab>
+        <tab title="Outgoing Requests">
+          <UserRequests 
+            :user="user"
+            :owner="false"
+          />
+        </tab>
+        <tab title="Current Lends">
+          <UserHandoffs
+            :user="user"
+            :owner="true"
+          />
+        </tab>
+        <tab title="Current Borrows">
+          <UserHandoffs
+            :user="user"
+            :owner="false"
+          />
+        </tab>
+        <tab title="My Items">
+          <GalleryComponent num-columns=4>
+            <ItemCard
+              v-for="item in items"
+              :key="item._id"
+              :item-id="item._id"
+            />
+          </GalleryComponent>
+        </tab>
+      </tabs>
+    </div>
+
+    <div v-if="!isMe">
       <h2>Items</h2>
-      <GalleryComponent num-columns=4>
+      <GalleryComponent>
         <ItemCard
           v-for="item in items"
           :key="item._id"
           :item-id="item._id"
         />
       </GalleryComponent>
-    </div>
-    <div v-if="isMe">
-      <h2>My Info</h2>
-      <UserRequests 
-        :user="user"
-        :owner="true"
-      />
-      <br><br>
-      <UserRequests 
-        :user="user"
-        :owner="false"
-      />
-      <br><br>
-      <UserHandoffs
-        :user="user"
-        :owner="true"
-      />
-      <br><br>
-      <UserHandoffs
-        :user="user"
-        :owner="false"
-      />
     </div>
   </main>
 </template>
@@ -67,10 +81,12 @@ import ItemCard from "@/components/Item/ItemCard.vue";
 import GalleryComponent from "@/components/util/GalleryComponent.vue";
 import UserHandoffs from "@/components/Handoff/UserHandoffs.vue";
 import Icon from '@/components/util/Icon.vue';
+import Tab from '../common/Tab.vue'
+import Tabs from '../common/Tabs.vue'
 
 export default {
   name: "ProfilePage",
-  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs, Icon},
+  components: {UserRequests, ItemCard, GalleryComponent, UserHandoffs, Icon, Tab, Tabs},
   data (){
     return {
       user: Object,
@@ -104,6 +120,7 @@ export default {
   .profile_header {
   display: grid;
   grid-template-columns: 3fr 6fr 1fr;
+  padding-top:45px;
   }
   .logo_container {
     display: flex;
@@ -111,6 +128,13 @@ export default {
     gap: 0.75em;
   }
   .indent {
-    margin-left: 25px;
+    /* margin-left: 20px; */
   }
+  .wrapper {
+      width: 100%;
+      min-height: 100vh;
+      background-color: #f8f8f800;
+      margin: 0;
+      padding: 20px;
+    }
 </style>

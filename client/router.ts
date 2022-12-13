@@ -8,6 +8,8 @@ import ListNewItemPage from "./components/Item/ListNewItemPage.vue";
 import SettingsPage from "./components/User/SettingsPage.vue";
 import LoginPage from "./components/User/LoginPage.vue";
 import NotFound from "./NotFound.vue";
+import FeedPage from "./components/Home/FeedPage.vue";
+import EntryComponent from "./components/Item/EntryComponent.vue";
 
 Vue.use(VueRouter);
 
@@ -19,7 +21,10 @@ const routes = [
   { path: "/new", name: "List new item", component: ListNewItemPage },
   { path: "/settings", name: "Settings", component: SettingsPage },
   { path: "/login", name: "Login", component: LoginPage },
+  { path: "/feed", name: "Feed", component: FeedPage },
   { path: "*", name: "Not Found", component: NotFound },
+
+
 ];
 
 const router = new VueRouter({ routes });

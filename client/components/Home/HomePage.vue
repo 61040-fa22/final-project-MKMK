@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <AuthedHomePage v-if="$store.state.username" />
+  <main style="display:flex-col">
+    <AuthedHomePage v-if="$store.state.username" style=""/>
     <NonAuthedHomePage v-else />
   </main>
 </template>
@@ -13,7 +13,7 @@ export default {
   name: 'HomePage',
   components: {
     NonAuthedHomePage,
-    AuthedHomePage
+    AuthedHomePage, 
   }
 };
 </script>
