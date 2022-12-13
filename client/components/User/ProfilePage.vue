@@ -25,7 +25,44 @@
     </div>
     <br><hr><br>
 
-    <div>
+    <div class='wrapper' v-if="isMe">
+      <tabs>
+        <tab title="Incoming Requests">
+          <UserRequests 
+            :user="user"
+            :owner="true"
+          /></tab>
+        <tab title="Outgoing Requests">
+          <UserRequests 
+            :user="user"
+            :owner="false"
+          />
+        </tab>
+        <tab title="Current Lends">
+          <UserHandoffs
+            :user="user"
+            :owner="true"
+          />
+        </tab>
+        <tab title="Current Borrows">
+          <UserHandoffs
+            :user="user"
+            :owner="false"
+          />
+        </tab>
+        <tab title="My Items">
+          <GalleryComponent num-columns=4>
+            <ItemCard
+              v-for="item in items"
+              :key="item._id"
+              :item-id="item._id"
+            />
+          </GalleryComponent>
+        </tab>
+      </tabs>
+    </div>
+
+    <div v-if="!isMe">
       <h2>Items</h2>
       <GalleryComponent>
         <ItemCard
@@ -34,28 +71,6 @@
           :item-id="item._id"
         />
       </GalleryComponent>
-    </div>
-    <div v-if="isMe">
-      <h2>My Info</h2>
-      <UserRequests 
-        :user="user"
-        :owner="true"
-      />
-      <br><br>
-      <UserRequests 
-        :user="user"
-        :owner="false"
-      />
-      <br><br>
-      <UserHandoffs
-        :user="user"
-        :owner="true"
-      />
-      <br><br>
-      <UserHandoffs
-        :user="user"
-        :owner="false"
-      />
     </div>
   </main>
 </template>
@@ -115,4 +130,11 @@ export default {
   .indent {
     /* margin-left: 20px; */
   }
+  .wrapper {
+      width: 100%;
+      min-height: 100vh;
+      background-color: #f8f8f800;
+      margin: 0;
+      padding: 20px;
+    }
 </style>
