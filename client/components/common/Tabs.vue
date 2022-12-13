@@ -43,7 +43,7 @@
     ul.tabs__header {
       display: block;
       list-style: none;
-      margin: 0 0 0 20px;
+      margin: 0 0 0 10px;
       padding: 0;
     }
     ul.tabs__header > li {
@@ -53,6 +53,8 @@
       display: inline-block;
       margin-right: 5px;
       cursor: pointer;
+      max-width: 18%;
+      text-align: center;
     }
     ul.tabs__header > li.tab__selected {
       font-weight: bold;
