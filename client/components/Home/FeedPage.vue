@@ -1,41 +1,36 @@
 <template>
-  <section>
-    <h3>Item Diary</h3>
-    <div v-if="entries.length">
-      <DiaryPost
-        v-for="entry in entries"
-        :key="entry._id"
-        :entry="entry"
-      />
-    </div>
-    <div v-else>
-    </div>
-  </section>
+  <main class="feed">
+      <!-- <EntryComponent :content="entry.content" :author="entry.author"/> -->
+    <EntryComponent
+          v-for="entry in entries"
+          :content="entry.content"
+          :author="entry.author"
+          :date="entry.dateCreated"
+          :itemId="entry.itemId"
+        />
+  </main>
 </template>
 
 <script>
-import DiaryPost from "@/components/Item/DiaryPost.vue";
+import EntryComponent from "@/components/Item/EntryComponent.vue";
 
 export default {
-  name: "DiaryFeed",
+  name: "FeedPage",
   components: {
-    DiaryPost
-  },
-  props: {
-    item: {
-      type: Object, 
-      required: true
-    }
+    EntryComponent
   },
   computed: {
     entries() {
-      return this.$store.state.entries.filter(entry => entry.itemId === this.item._id);
-    }
-  },
-  mounted() {
-    this.$store.commit('refreshEntries');
-  },
-}
+      return this.$store.state.entries;
+    },
+}}
 </script>
 
-<style scoped></style>
+<style scoped>
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;;
+  margin: 10px 0px 0px 10px;
+}
+</style>

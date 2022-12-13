@@ -1,14 +1,13 @@
 <template>
   <div class="" >
     <CurrentItems />
-    <LeftNav /> 
 
     <div class="right-content">
       <div>
-      <h2 style="">browse items</h2>
+      <h2 s>browse items</h2>
       </div>
       <div>
-      <GalleryComponent style="display:flex-row">
+      <GalleryComponent >
         <ItemCard 
           v-for="item in $store.state.items"
           :key="item._id"
@@ -43,15 +42,15 @@ export default {
 <style>
 /* .items {
   width: auto;
-  padding-left:250px;
 } */
 .right-content{
   display: flex-col; 
+  padding-top: 25px;
+  padding-left: 45px;
   /* flex-direction:col; */
-  width:80%; 
+  /* width:100%;  */
   /* border: 1px solid green; */
   /* float:right; */
-  /* padding-left:200px; */
 
   }
 

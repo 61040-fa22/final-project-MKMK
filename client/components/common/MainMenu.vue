@@ -3,9 +3,8 @@
 <template>
   <header>
   <div style="display:flex">
-      <LogoComponent style="padding:10px"/>
       <!--Nav when signed in-->
-      <nav class="nav-buttons" v-if="$store.state.username" style="padding: 15px">
+      <nav class="nav-buttons" v-if="$store.state.username" style="">
 
         <router-link to="/">
         <!-- TO DO: Fix route here -->
@@ -23,9 +22,10 @@
           method="DELETE"
           set-username
           :callback="logoutCallback"
-          style="width:100%"
+          style="width:max-content; float: right;"
           class="user-button"
         />
+
       </nav>
       <!--Nav when not signed in-->
       <nav v-else>
@@ -67,18 +67,21 @@ export default {
 header {
   /* display: flex; */
   justify-content: space-between;
-  align-items: right;
+  /* align-items: right; */
+
 }
 
 nav {
   display: flex;
   gap: 1rem;
-  float: right;
+  width: 100vh;
+  padding-left:45px;
+  padding-bottom:15px;
+  border-bottom: 1px solid rgba(179, 179, 179, 0.541);
 
-  /* border-bottom: 1px solid grey; */
 }
 .nav-buttons {
   /* padding:15px;  */
-  text-align: right;
+  /* text-align: right; */
 }
 </style>

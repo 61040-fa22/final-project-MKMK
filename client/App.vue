@@ -1,9 +1,13 @@
 <template>
-  <div id="app" style="display:flex-col">
-    <GlobalAlerts />
-    <MainMenu />
-    <router-view />
-      <FooterComponent />
+  <div id="app" style="display:flex">
+    <div style="">
+      <GlobalAlerts />
+      <LeftNav/>
+    </div>
+    <div style="display:col; padding-left:0px; padding-top:50px">
+        <MainMenu />
+        <router-view />
+    </div>
 
   </div>
 </template>
@@ -21,6 +25,7 @@ export default {
     FooterComponent,
     MainMenu, 
     LeftNav
+    
   },
   beforeCreate() {
     // Sync stored username to current session
@@ -48,7 +53,7 @@ typically have their own default styles) */
   /* Resets */
   margin: 0;
   padding: 0;
-  font-family: Helvetica, sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 
 /* Prevent overscrolling :) https://stackoverflow.com/questions/12046315/prevent-overscrolling-of-web-page */
@@ -59,11 +64,8 @@ html {
 body {
   height: 100%;
   overflow: auto;
-}
-
-body {
-  background: #fcfcfd;
-  color: #232323;
+  background: #e1e3f1e1;
+  color: #3D405B;
   font-size: 1.1rem;
 }
 
@@ -90,8 +92,8 @@ main {
 but still take up the whole width on small screens */
 .page_container {
   width: 95%;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 100vh;
+  margin: 5px auto;
 }
 
 .page_header {
@@ -135,6 +137,8 @@ button, .button {
   width:120px;
   max-width: 150px;
   height :auto;
+  color: #3D405B;
+  background: #3d405b75;
 
   /* transition: 0.1s; */
   cursor: pointer;
@@ -149,6 +153,7 @@ button, .button {
   padding: 0.7rem 1.4rem;
   font-size: 1.1rem;
   background: #f93;
+  color: #E07A5F;
   border-radius: 2rem;
   color: #fff;
 }
@@ -271,4 +276,9 @@ form label {
 .alerts .success {
   background-color: rgb(45, 135, 87);
 }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
 </style>
+
+
+

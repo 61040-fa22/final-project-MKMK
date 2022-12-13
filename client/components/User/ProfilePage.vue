@@ -1,5 +1,5 @@
 <template>
-  <main class="page_container">
+  <main class="page_container" style="padding-left:25px">
 
     <div class="profile_header">
       <section>
@@ -104,6 +104,7 @@ export default {
   .profile_header {
   display: grid;
   grid-template-columns: 3fr 6fr 1fr;
+  padding-top:45px;
   }
   .logo_container {
     display: flex;
@@ -111,6 +112,6 @@ export default {
     gap: 0.75em;
   }
   .indent {
-    margin-left: 25px;
+    /* margin-left: 20px; */
   }
 </style>

@@ -1,18 +1,22 @@
 
 
 <template>
-      <div v-if="$store.state.username" class="left">
+    <div v-if="$store.state.username" class="outer">
+      <div class="left">
+        <LogoComponent style="padding:10px"/>
         <router-link :to="`/profile/${$store.state.username}`">
-            <button>My Profile</button >
+            <div >
+            <img src="https://via.placeholder.com/150x150" style="width: 120px; max-width: 150px;">
+            <h2> {{this.$store.state.username}} </h2>
+            <button style="">My Profile</button >
+            </div>
         </router-link>
         <router-link to="/new">
           <button> New Item </button >
         </router-link>
-        <router-link to="/new">
-          <button> All Items </button >
-        </router-link>
-      </div>
 
+      </div>
+  </div>
 </template>
 
 <script>
@@ -25,7 +29,7 @@ export default {
   components: {
     ApiButton,
     LogoComponent, 
-    IconVue
+    IconVue, 
   },
   methods: {
     logoutCallback() {
@@ -41,21 +45,24 @@ export default {
 
 <style>
 
+.outer {
+  border-right: 1px solid rgba(179, 179, 179, 0.541);
+  width: 240px;
+  height: 100vh;
+  float:left;
+}
 
 .left {
   display: flex;
   flex-direction: column;
-  padding-top: 25px;
-  padding-right: 25px;
+  padding-top: 15px;
+  padding-right: 15px;
+  height: 250px;
   /* padding-left: 0px; */
   gap: 2rem;
-  max-width: 228px;
-  border-right: 1.5px solid rgb(179, 179, 179);
-  border-top: 1.5px solid rgba(107, 107, 107, 0.479);
-  border-radius: 0px 5px 0px 0px ;
   text-align: center;
-  width:max-content;
-  height: 100vh;
-  float: left;
+  /* float: left; */
+  justify-content: space-between;
+  /* margin-left: 15px; */
 }
 </style>

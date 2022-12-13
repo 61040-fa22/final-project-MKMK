@@ -41,6 +41,7 @@
         "eslint-config-xo": "^0.42.0",
         "eslint-config-xo-typescript": "^0.53.0",
         "eslint-plugin-vue": "^9.6.0",
+        "google-fonts-webpack-plugin": "^0.4.4",
         "nodemon": "^2.0.20",
         "ts-node": "^10.6.0",
         "typescript": "^4.6.4",
