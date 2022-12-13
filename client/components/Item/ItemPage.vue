@@ -2,7 +2,7 @@
   <main class="page_container">
     <div class="item_header">
       <section>
-        <img src="https://via.placeholder.com/150x150">
+        <img ref="itemImage" src="https://via.placeholder.com/150x150">
       </section>
       <section>
         <h2 class="title">{{ item.name }}</h2>
@@ -66,6 +66,11 @@ export default {
     ownerIsMe() {
       return this.item.owner === this.$store.state.username;
     }
+  },
+  mounted () {
+    if (this.item.imageRef) {
+      this.$refs["itemImage"].src = this.item.imageRef;
+    }
   }
 };
 </script>
@@ -73,6 +78,9 @@ export default {
 <style scoped>
 section {
   margin-bottom: 3rem;
+}
+img {
+  width: 150px;
 }
 .item_header {
   display: grid;
