@@ -6,10 +6,10 @@
       <!--Nav when signed in-->
       <nav class="nav-buttons" v-if="$store.state.username">
 
-        <router-link to="/feed">
+        <router-link to="/">
           <div class="nav-item"> Feed</div >
         </router-link>
-        <router-link to="/">
+        <router-link to="/items">
         <!-- TO DO: Fix route here -->
         <span class="nav-item"> All Items </span >
         </router-link>

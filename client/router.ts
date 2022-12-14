@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "./components/Home/HomePage.vue";
+import AuthedHomePage from "./components/Home/AuthedHomePage.vue";
 import AboutPage from "./components/About/AboutPage.vue";
 import ItemPage from "./components/Item/ItemPage.vue";
 import ProfilePage from "./components/User/ProfilePage.vue";
@@ -21,10 +22,8 @@ const routes = [
   { path: "/new", name: "List new item", component: ListNewItemPage },
   { path: "/settings", name: "Settings", component: SettingsPage },
   { path: "/login", name: "Login", component: LoginPage },
-  { path: "/feed", name: "Feed", component: FeedPage },
+  { path: "/items", name: "Feed", component: AuthedHomePage },
   { path: "*", name: "Not Found", component: NotFound },
-
-
 ];
 
 const router = new VueRouter({ routes });
