@@ -4,27 +4,15 @@
   <header>
   <div style="display:flex">
       <!--Nav when signed in-->
-      <nav class="nav-buttons" v-if="$store.state.username" style="">
+      <nav class="nav-buttons" v-if="$store.state.username">
 
         <router-link to="/">
         <!-- TO DO: Fix route here -->
-          <button> All Items </button >
+        <span class="nav-item"> All Items </span >
         </router-link>
         <router-link to="/feed">
-          <button > Feed</button >
+          <div class="nav-item"> Feed</div >
         </router-link>
-        <router-link :to="`/profile/${$store.state.username}`">
-            <button>My Profile</button >
-        </router-link>
-        <ApiButton
-          title="Log out"
-          url="/api/users/session"
-          method="DELETE"
-          set-username
-          :callback="logoutCallback"
-          style="width:max-content; float: right;"
-          class="user-button"
-        />
 
       </nav>
       <!--Nav when not signed in-->
@@ -44,12 +32,14 @@
 <script>
 import ApiButton from '@/components/util/ApiButton.vue';
 import LogoComponent from '@/components/common/LogoComponent.vue';
+import IconVue from '../util/Icon.vue';
 
 export default {
   name: 'MainMenu',
   components: {
     ApiButton,
-    LogoComponent
+    LogoComponent, 
+    IconVue
   },
   methods: {
     logoutCallback() {
@@ -74,14 +64,15 @@ header {
 nav {
   display: flex;
   gap: 1rem;
+  justify-content: space-evenly;
+  text-align: center;
   width: 100vh;
   padding-left:45px;
   padding-bottom:15px;
   border-bottom: 1px solid rgba(179, 179, 179, 0.541);
 
 }
-.nav-buttons {
-  /* padding:15px;  */
-  /* text-align: right; */
+.nav-item {
+/* NEEDS STYLING like the tabs  */
 }
 </style>

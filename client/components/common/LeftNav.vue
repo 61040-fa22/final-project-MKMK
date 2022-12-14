@@ -6,13 +6,15 @@
         <LogoComponent style="padding:10px"/>
         <router-link :to="`/profile/${$store.state.username}`">
             <div >
-            <img src="https://via.placeholder.com/150x150" style="width: 120px; max-width: 150px;">
+            <img src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px">
             <h2> {{this.$store.state.username}} </h2>
-            <button style="">My Profile</button >
             </div>
         </router-link>
         <router-link to="/new">
-          <button> New Item </button >
+          <button> Add New Item </button >
+        </router-link>
+                <router-link :to="`/profile/${$store.state.username}`">
+            <button>My Profile</button >
         </router-link>
 
       </div>
