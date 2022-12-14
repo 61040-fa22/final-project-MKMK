@@ -1,6 +1,7 @@
 import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import ItemCollection from '../item/collection';
+import type {User} from "../user/model";
 
 /**
  * Checks if a item with itemId in req.params exists
@@ -22,9 +23,8 @@ const isItemExists = async (req: Request, res: Response, next: NextFunction) => 
  */
 const isValidItemModifier = async (req: Request, res: Response, next: NextFunction) => {
   const item = await ItemCollection.findOne(req.params.itemId);
-  console.log("session id: ", req.session.userId); 
-  console.log("owner: ", item.ownerId.toString()); 
-  if (req.session.userId !== item.ownerId.toString()) {
+  const owner = item.ownerId as any as User;
+  if (req.session.userId !== owner._id.toString()) {
     res.status(403).json({
       error: 'Cannot modify other users\' items.'
     });
