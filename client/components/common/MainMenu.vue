@@ -15,6 +15,8 @@
             <router-link to="/feed">
               <div class="nav-item"> Feed</div >
             </router-link>
+            <div @click="logoutCallback">Log Out</div>
+
 
       </nav>
       <!--Nav when not signed in-->
@@ -44,14 +46,22 @@ export default {
     IconVue, 
   },
   methods: {
-    logoutCallback() {
-      this.$store.commit('alert', {
+    async logoutCallback() {
+      const r = await fetch(`/api/users/session`, {method: 'DELETE'});
+      const res = await r.json().then( ()=>{
+        this.$store.state.username = null;
+        this.$store.state.requests = [];
+        this.$store.state.handoffs = [];
+        this.$store.state.items = [];
+        this.$store.state.entries = [];
+        this.$store.commit('alert', {
         message: 'You are now logged out',
         status: 'success'
-      });
-      this.$router.push({name: 'Home'});
-    }}
-
+        })
+        this.$router.push({name: 'Home'});
+    });
+    }
+  }
 };
 </script>
 

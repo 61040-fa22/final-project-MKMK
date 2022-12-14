@@ -4,6 +4,7 @@ import EntryCollection from '../entry/collection';
 import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
+import ItemCollection from '../item/collection';
 
 const router = express.Router();
 
@@ -106,6 +107,7 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const img = req.body.imageRef ? req.body.imageRef : "https://via.placeholder.com/150x150";
+    console.log(req.body.name, img);
     const user = await UserCollection.addOne(req.body.username, req.body.password, img);
     req.session.userId = user._id.toString();
     res.status(201).json({
@@ -185,6 +187,8 @@ router.delete(
     await UserCollection.deleteOne(userId);
     // TODO: delete items belonging to user
     await EntryCollection.deleteMany(userId);
+    await ItemCollection.deleteMany(userId);
+
     req.session.userId = undefined;
     res.status(200).json({
       message: 'Your account has been deleted successfully.'
