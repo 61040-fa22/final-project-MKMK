@@ -16,6 +16,8 @@
                 <router-link :to="`/profile/${$store.state.username}`">
             <div class="left-item">My Profile</div >
         </router-link>
+        <div class="nav-item" @click="logoutCallback">Log Out</div>
+
 
       </div>
   </div>
@@ -37,20 +39,35 @@ export default {
     const r = await fetch(`/api/users/session`);
     if (r.ok) {
       const res = await r.json();
-      console.log(res.user);
       this.user = res.user;
-      setTimeout(() => {
-        this.$refs["imageData"].src = this.user.imageRef;
-      }, 0)
-    };
+    }
+    setTimeout(() => {
+      this.$refs["imageData"].src = this.user.imageRef;
+    }, 0)
+
   },
   methods: {
-    logoutCallback() {
-      this.$store.commit('alert', {
+    // logoutCallback() {
+    //   this.$store.commit('alert', {
+    //     message: 'You are now logged out',
+    //     status: 'success'
+    //   });
+    //   this.$router.push({name: 'LeftNav'});
+    // }, 
+      async logoutCallback() {
+      const r = await fetch(`/api/users/session`, {method: 'DELETE'});
+      const res = await r.json().then( ()=>{
+        this.$store.state.username = null;
+        this.$store.state.requests = [];
+        this.$store.state.handoffs = [];
+        this.$store.state.items = [];
+        this.$store.state.entries = [];
+        this.$store.commit('alert', {
         message: 'You are now logged out',
         status: 'success'
-      });
-      this.$router.push({name: 'LeftNav'});
+        })
+        this.$router.push({name: 'Home'});
+    });
     }
   }
 };
@@ -89,6 +106,7 @@ export default {
   z-index: 1;
   cursor: pointer;
   transition:0.13s ease-in;
+  color: 
 }
 .left-item:hover{
     background:rgba(107, 106, 168, 0.247);
