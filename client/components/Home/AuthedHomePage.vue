@@ -2,7 +2,7 @@
   <div class="" >
     <div class="right-content">
       <div>
-      <h2 s>browse items</h2>
+      <h2>Browse items</h2>
       </div>
       <div>
       <GalleryComponent >

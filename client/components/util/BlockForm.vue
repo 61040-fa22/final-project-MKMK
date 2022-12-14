@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submit">
-    <h3>{{ title }}</h3>
+    <h2>{{ title }}</h2>
     <article v-if="fields.length">
       <div
         v-for="field in fields"

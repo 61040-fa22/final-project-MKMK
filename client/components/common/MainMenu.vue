@@ -1,34 +1,25 @@
-
-
 <template>
   <header>
-  <div style="display:flex">
-      <!--Nav when signed in-->
-      <nav class="nav-buttons" v-if="$store.state.username">
-        <!-- <router-link to="/">
-          <span class="nav-item"> All Items </span >
-        </router-link> -->
-      
-            <router-link to="/">
-              <div class="nav-item" @click="handleClick()"> Feed </div >
-            </router-link>
-            <router-link to="/items">
-              <div class="nav-item"> All Items</div >
-            </router-link>
+    <!--Nav when signed in-->
+    <nav class="nav-buttons" v-if="$store.state.username">
+      <router-link to="/">
+        <div class="nav-item" @click="handleClick()"> Feed </div >
+      </router-link>
+      <router-link to="/items">
+        <div class="nav-item"> All Items</div >
+      </router-link>
+    </nav>
 
-      </nav>
-      <!--Nav when not signed in-->
-      <nav v-else>
-        <router-link to="/about">
-          About
-        </router-link>
-        <router-link to="/login">
-          Log in
-        </router-link>
-      </nav>
-  </div>
+    <!--Nav when not signed in-->
+    <nav v-else>
+      <router-link to="/about">
+        About
+      </router-link>
+      <router-link to="/login">
+        Log in
+      </router-link>
+    </nav>
   </header>
-
 </template>
 
 <script>
@@ -42,19 +33,16 @@ export default {
     ApiButton,
     LogoComponent, 
     IconVue, 
-  },
-  methods: {
-
   }
 };
 </script>
 
 <style>
 header {
-  /* display: flex; */
-  justify-content: space-between;
-  /* align-items: right; */
-
+  padding: 1.5rem 0 1.25rem;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(179, 179, 179, 0.541);
 }
 
 nav {
@@ -62,11 +50,7 @@ nav {
   gap: 1rem;
   justify-content: space-evenly;
   text-align: center;
-  width: 100vh;
-  padding-left:45px;
-  padding-bottom:15px;
-  border-bottom: 1px solid rgba(179, 179, 179, 0.541);
-
+  width: 100%;
 }
 .nav-item {
   color: rgba(119, 118, 118, 0.767);
