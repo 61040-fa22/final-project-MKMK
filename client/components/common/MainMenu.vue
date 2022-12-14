@@ -5,15 +5,17 @@
   <div style="display:flex">
       <!--Nav when signed in-->
       <nav class="nav-buttons" v-if="$store.state.username">
-
-        <router-link to="/">
-        <!-- TO DO: Fix route here -->
-        <span class="nav-item"> All Items </span >
-        </router-link>
-        <router-link to="/feed">
-          <div class="nav-item"> Feed</div >
-        </router-link>
-        <div @click="logoutCallback">Log Out</div>
+        <!-- <router-link to="/">
+          <span class="nav-item"> All Items </span >
+        </router-link> -->
+      
+            <router-link to="/">
+              <div class="nav-item" @click="handleClick()"> All Items </div >
+            </router-link>
+            <router-link to="/feed">
+              <div class="nav-item"> Feed</div >
+            </router-link>
+            <div @click="logoutCallback">Log Out</div>
 
 
       </nav>
@@ -41,7 +43,7 @@ export default {
   components: {
     ApiButton,
     LogoComponent, 
-    IconVue
+    IconVue, 
   },
   methods: {
     async logoutCallback() {
@@ -83,6 +85,29 @@ nav {
 
 }
 .nav-item {
-/* NEEDS STYLING like the tabs  */
+  color: rgba(119, 118, 118, 0.767);
+  font-size: 18px;
+  text-decoration: none; 
+  border: solid 1px rgba(119, 118, 118, 0.767);
+  border-radius: 25px;
+  padding: 10px;
+  min-width:120px;
+  z-index: 1;
+  cursor: pointer;
+  /* transition:         0.08s ease-in;
+  -o-transition:      0.08s ease-in;
+  -ms-transition:     0.08s ease-in;
+  -moz-transition:    0.08s ease-in;
+  -webkit-transition: 0.08s ease-in; */
+
+ }
+ a {
+  text-decoration: none;
+  color:  #3D405B;
 }
+
+.nav-item::selection{
+    background:olive;
+}
+
 </style>
