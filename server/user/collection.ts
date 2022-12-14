@@ -18,10 +18,10 @@ class UserCollection {
    * @param {string} password - The password of the user
    * @return {Promise<HydratedDocument<User>>} - The newly created user
    */
-  static async addOne(username: string, password: string): Promise<HydratedDocument<User>> {
+  static async addOne(username: string, password: string, imageRef:string): Promise<HydratedDocument<User>> {
     const dateJoined = new Date();
-
-    const user = new UserModel({username, password, dateJoined});
+    
+    const user = new UserModel({username, password, dateJoined, imageRef});
     await user.save(); // Saves user to MongoDB
     return user;
   }
@@ -65,9 +65,10 @@ class UserCollection {
    *
    * @param {string} userId - The userId of the user to update
    * @param {Object} userDetails - An object with the user's updated credentials
+   * @param {string} imageRef - a url to the image in firebase
    * @return {Promise<HydratedDocument<User>>} - The updated user
    */
-  static async updateOne(userId: Types.ObjectId | string, userDetails: {password?: string; username?: string}): Promise<HydratedDocument<User>> {
+  static async updateOne(userId: Types.ObjectId | string, userDetails: {password?: string; username?: string; imageRef?: string}): Promise<HydratedDocument<User>> {
     const user = await UserModel.findOne({_id: userId});
     if (userDetails.password) {
       user.password = userDetails.password;
@@ -75,6 +76,10 @@ class UserCollection {
 
     if (userDetails.username) {
       user.username = userDetails.username;
+    }
+
+    if (userDetails.imageRef) {
+      user.imageRef = userDetails.imageRef;
     }
 
     await user.save();

@@ -3,11 +3,11 @@
 
     <div class="profile_header">
       <section>
-        <img src="https://via.placeholder.com/150x150">
+        <img class="profPic" ref="imageData" src="https://via.placeholder.com/150x150">
       </section>
       <section>
         <h2>@{{ $route.params.id }}</h2>
-        <p>Joined in {{ date() }}</p>
+        <p class="indent">Joined in {{ date() }}</p>
         <br><br>
         <p> *INSERT RATING HERE* </p>
       </section>
@@ -58,7 +58,6 @@
               :item-id="item._id"
             />
           </GalleryComponent>
-          <p v-if="items.length===0">You haven't posted any items yet.</p>
         </tab>
       </tabs>
     </div>
@@ -72,7 +71,6 @@
           :item-id="item._id"
         />
       </GalleryComponent>
-      <p v-if="items.length===0">This user hasn't posted any items.</p>
     </div>
   </main>
 </template>
@@ -109,6 +107,9 @@ export default {
       const res = await r.json();
       this.user = res.user;
     }
+    setTimeout(() => {
+      this.$refs["imageData"].src = this.user.imageRef;
+    }, 0)
   },
   methods: {
     date() {
@@ -129,6 +130,9 @@ export default {
     align-items: center;
     gap: 0.75em;
   }
+  .indent {
+    /* margin-left: 20px; */
+  }
   .wrapper {
       width: 100%;
       min-height: 100vh;
@@ -136,4 +140,8 @@ export default {
       margin: 0;
       padding: 20px;
     }
+
+  .profPic {
+      width: 150px;
+  }
 </style>

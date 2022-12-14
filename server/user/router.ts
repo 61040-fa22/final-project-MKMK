@@ -89,6 +89,7 @@ router.delete(
  *
  * @param {string} username - username of user
  * @param {string} password - user's password
+ * @param {string} imageRef - the url to the image in firebase
  * @return {UserResponse} - The created user
  * @throws {403} - If there is a user already logged in
  * @throws {409} - If username is already taken
@@ -104,7 +105,8 @@ router.post(
     userValidator.isValidPassword
   ],
   async (req: Request, res: Response) => {
-    const user = await UserCollection.addOne(req.body.username, req.body.password);
+    const img = req.body.imageRef ? req.body.imageRef : "https://via.placeholder.com/150x150";
+    const user = await UserCollection.addOne(req.body.username, req.body.password, img);
     req.session.userId = user._id.toString();
     res.status(201).json({
       message: `Your account was created successfully. You have been logged in as ${user.username}`,
@@ -141,6 +143,7 @@ router.get(
  *
  * @param {string} username - The user's new username
  * @param {string} password - The user's new password
+ * @param {string} imageRef - the user's new profile pic url from firebase
  * @return {UserResponse} - The updated user
  * @throws {403} - If user is not logged in
  * @throws {409} - If username already taken

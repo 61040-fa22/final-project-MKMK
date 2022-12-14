@@ -1,7 +1,6 @@
 <template>
     <section
     >
-    one handoff
       <div
         v-if="owner"
       >
@@ -14,7 +13,7 @@
       <button
        @click="accept(false)"
        >
-       Reject  
+       Report a Problem 
       </button>
       </div>
   

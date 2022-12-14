@@ -6,7 +6,7 @@
         <LogoComponent style="padding:10px"/>
         <router-link :to="`/profile/${$store.state.username}`">
             <div >
-            <img src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px">
+            <img ref="imageData" src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px">
             <h2> {{this.$store.state.username}} </h2>
             </div>
         </router-link>
@@ -32,6 +32,17 @@ export default {
     ApiButton,
     LogoComponent, 
     IconVue, 
+  },
+  async mounted (){
+    const r = await fetch(`/api/users/session`);
+    if (r.ok) {
+      const res = await r.json();
+      this.user = res.user;
+    }
+    setTimeout(() => {
+      this.$refs["imageData"].src = this.user.imageRef;
+    }, 0)
+
   },
   methods: {
     logoutCallback() {

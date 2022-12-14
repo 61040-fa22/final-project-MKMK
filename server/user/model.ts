@@ -12,6 +12,7 @@ export type User = {
   username: string;
   password: string;
   dateJoined: Date;
+  imageRef: string;
   // isPaused: boolean;
 };
 
@@ -33,7 +34,12 @@ const UserSchema = new Schema({
   dateJoined: {
     type: Date,
     required: true
+  },
+  imageRef: {
+    type: String,
+    default: "https://via.placeholder.com/150x150"
   }
+
   // The user's activity status
   // isPaused: {
   //   type: Boolean,

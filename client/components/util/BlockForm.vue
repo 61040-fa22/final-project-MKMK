@@ -147,7 +147,6 @@ export default {
         headers: {'Content-Type': 'application/json'},
         credentials: 'same-origin'
       };
-      console.log('imgref is ' + this.imgRef);
       if (this.hasBody) {
         const formData = Object.fromEntries(
           this.fields.map(field => {
