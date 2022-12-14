@@ -17,8 +17,6 @@
             <div class="left-item">My Profile</div >
         </router-link>
         <div class="left-item" style="border:0px"@click="logoutCallback">Log Out</div>
-
-
       </div>
   </div>
 </template>
@@ -106,7 +104,7 @@ export default {
   z-index: 1;
   cursor: pointer;
   transition:0.13s ease-in;
-  color: 
+  /* color:  */
 }
 .left-item:hover{
     background:rgba(107, 106, 168, 0.247);

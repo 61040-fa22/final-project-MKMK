@@ -10,12 +10,11 @@
         </router-link> -->
       
             <router-link to="/">
-              <div class="nav-item" @click="handleClick()"> All Items </div >
+              <div class="nav-item" @click="handleClick()"> Feed </div >
             </router-link>
-            <router-link to="/feed">
-              <div class="nav-item"> Feed</div >
+            <router-link to="/items">
+              <div class="nav-item"> All Items</div >
             </router-link>
-
 
       </nav>
       <!--Nav when not signed in-->
@@ -76,11 +75,13 @@ nav {
   border: solid 1px rgba(119, 118, 118, 0.767);
   border-radius: 25px;
   padding: 10px;
-  min-width:120px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width:140px;
   z-index: 1;
   cursor: pointer;
   transition:0.13s ease-in;
- 
+  
 
  }
  a {
@@ -89,10 +90,10 @@ nav {
 }
 
 .nav-item:hover{
-    background:rgba(57, 55, 214, 0.247);
+    background:rgba(107, 106, 168, 0.247);
 }
 .nav-item:active{
-    background:rgba(57, 55, 214, 0.247);
+    background:rgba(107, 106, 168, 0.247);
 }
 
 </style>
