@@ -17,26 +17,20 @@
     </div>
 
     <div class="interaction">
-      <!-- <svg>
-        <rect width="100%" height="50" style="fill:none;stroke:blue"/>
-      </svg>   -->
-      <!--
-        REPLACE ABOVE SVG WITH:
-        if user is the owner or a current borrower,
-          <BorrowButton>
-        else
-          <WriteDiaryEntryButton>
-
-        this way, the immediate next thing on the page is diary entries.
-      -->
+      <button v-if="canPost" @click="entry()" class="item_button">
+        WRITE DIARY ENTRY
+      </button><br>
+      <div v-if="showEntry">
+        <WriteDiaryPostForm :item-id="$route.params.id" />
+      </div>
+      <button v-if="!canPost" @click="borrow()" class="item_button">
+        REQUEST TO BORROW
+      </button><br>
+      <div v-if="showBorrow">
+        <RequestToBorrowForm :item-id="$route.params.id" />
+      </div>
     </div>
 
-    <section v-if="!ownerIsMe">
-      <RequestToBorrowForm :item-id="$route.params.id" />
-    </section>
-    <section>
-      <WriteDiaryPostForm :item-id="$route.params.id" />
-    </section>
     <section>
       <DiaryFeed :item="item" />
     </section>
@@ -57,6 +51,12 @@ export default {
     RequestToBorrowForm,
     WriteDiaryPostForm
   },
+  data() {
+    return {
+      showBorrow: false,
+      showEntry: false
+    }
+  },
   computed: {
     item() {
       return this.$store.state.items.filter(
@@ -65,11 +65,24 @@ export default {
     },
     ownerIsMe() {
       return this.item.owner === this.$store.state.username;
+    },
+    canPost() {
+      const handoffs = this.$store.state.handoffs
+      const isBorrowing = handoffs.filter(handoff => handoff.itemId === this.item._id).length;
+      return (this.item.owner === this.$store.state.username) || isBorrowing;
     }
   },
   mounted () {
     if (this.item.imageRef) {
       this.$refs["itemImage"].src = this.item.imageRef;
+    }
+  },
+  methods: {
+    borrow() {
+      this.showBorrow = !this.showBorrow
+    },
+    entry() {
+      this.showEntry = !this.showEntry
     }
   }
 };
@@ -95,8 +108,11 @@ img {
   font-variant:small-caps;
 }
 .interaction {
-  display:flex;
+  display:block;
+}
+.item_button {
+  min-width: 30%;
+  display: flex;
   justify-content: center;
-  text-align: center;
 }
 </style>

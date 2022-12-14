@@ -72,7 +72,7 @@ export default {
   padding-right: 15px;
   height: 250px;
   /* padding-left: 0px; */
-  gap: 2rem;
+  gap: 1rem;
   text-align: center;
   /* float: left; */
   justify-content: space-between;

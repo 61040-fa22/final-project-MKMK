@@ -53,7 +53,7 @@
       display: inline-block;
       margin-right: 5px;
       cursor: pointer;
-      max-width: 18%;
+      max-width: 20%;
       text-align: center;
     }
     ul.tabs__header > li.tab__selected {
@@ -65,19 +65,20 @@
       display: inline-block;
       color: black;
       padding: 20px;
-      min-width: 800px;
+      min-width: 100%;
       border-radius: 10px;
       min-height: 400px;
+      overflow: auto;
     }
     .tabs .tab{
     background-color: #fff;
-  }
-  .tabs li {
-    background-color: #ddd;
-    color: #aaa;
-  }
-  .tabs li.tab__selected {
-    background-color: #fff;
-    color: #83FFB3;
-  }
+    }
+    .tabs li {
+      background-color: #ddd;
+      color: #aaa;
+    }
+    .tabs li.tab__selected {
+      background-color: #fff;
+      color: #83FFB3;
+    }
   </style>

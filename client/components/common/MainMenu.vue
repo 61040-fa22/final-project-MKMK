@@ -16,7 +16,6 @@
               <div class="nav-item"> Feed</div >
             </router-link>
 
-
       </nav>
       <!--Nav when not signed in-->
       <nav v-else>
