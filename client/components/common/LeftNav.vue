@@ -37,12 +37,12 @@ export default {
     const r = await fetch(`/api/users/session`);
     if (r.ok) {
       const res = await r.json();
+      console.log(res.user);
       this.user = res.user;
-    }
-    setTimeout(() => {
-      this.$refs["imageData"].src = this.user.imageRef;
-    }, 0)
-
+      setTimeout(() => {
+        this.$refs["imageData"].src = this.user.imageRef;
+      }, 0)
+    };
   },
   methods: {
     logoutCallback() {

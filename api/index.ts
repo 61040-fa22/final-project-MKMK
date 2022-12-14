@@ -94,7 +94,7 @@ app.use("/api/users", userRouter);
 app.use("/api/entries", entryRouter);
 app.use("/api/items", itemRouter);
 app.use("/api/requests", requestRouter);
-app.use('/api/handoff', handoffRouter);
+app.use('/api/handoffs', handoffRouter);
 app.use('/api/likes', likeRouter);
 
 
