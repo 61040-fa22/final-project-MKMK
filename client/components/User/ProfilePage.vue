@@ -7,7 +7,7 @@
       </section>
       <section>
         <h2>@{{ $route.params.id }}</h2>
-        <p class="indent">Joined in {{ date() }}</p>
+        <p>Joined in {{ date() }}</p>
         <br><br>
         <p> *INSERT RATING HERE* </p>
       </section>
@@ -58,6 +58,7 @@
               :item-id="item._id"
             />
           </GalleryComponent>
+          <p v-if="items.length===0">You haven't posted any items yet.</p>
         </tab>
       </tabs>
     </div>
@@ -71,6 +72,7 @@
           :item-id="item._id"
         />
       </GalleryComponent>
+      <p v-if="items.length===0">This user hasn't posted any items.</p>
     </div>
   </main>
 </template>
@@ -126,9 +128,6 @@ export default {
     display: flex;
     align-items: center;
     gap: 0.75em;
-  }
-  .indent {
-    /* margin-left: 20px; */
   }
   .wrapper {
       width: 100%;
