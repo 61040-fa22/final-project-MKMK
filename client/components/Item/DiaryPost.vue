@@ -13,6 +13,8 @@
           </router-link>
           <span class="date">{{ entry.dateCreated }}</span>
         </p>
+
+
         <DotsMenu v-if="authorIsMe">
           <DeleteDiaryPostButton :entry="entry" />
         </DotsMenu>
@@ -85,22 +87,21 @@ article:last-of-type {
   justify-content: space-between;
   margin-bottom: 1rem;
 }
-.content {
+.info_and_content {
   background: white;
   border: rgb(165, 164, 164);
-  width: 71rem;
+  width: 70rem;
   min-height: 100px;
   border-radius:10px;
   position: relative;
   padding: 15px;
-  left: 130px;
-  bottom: 120px;
+
 }
 .profilePic{
       cursor: pointer;
 }
 
-.date {
+/* .date {
   margin-left: 0.5rem;
-}
+} */
 </style>
