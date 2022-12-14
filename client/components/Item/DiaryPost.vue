@@ -13,7 +13,7 @@
           </router-link>
           <span class="date">{{ entry.dateCreated }}</span>
         </p>
-        <DotsMenu>
+        <DotsMenu v-if="authorIsMe">
           <DeleteDiaryPostButton :entry="entry" />
         </DotsMenu>
       </div>
@@ -40,6 +40,11 @@ export default {
     entry: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    authorIsMe() {
+      return this.entry.author === this.$store.state.username;
     }
   },
   async mounted () {
