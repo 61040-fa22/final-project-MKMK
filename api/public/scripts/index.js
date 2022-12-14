@@ -45,6 +45,11 @@ const formsAndHandlers = {
   'view-entries-by-author': viewEntriesByAuthor,
   'create-entry': createEntry,
   'delete-entry': deleteEntry,
+  'view-all-likes': getAllLikes,
+  'create-like': createLike,
+  'delete-like': deleteLike,
+  'get-likes-by-entry': getLikesByEntry,
+  'get-likes-by-user': getLikesByUser
 };
 
 // Attach handlers to forms

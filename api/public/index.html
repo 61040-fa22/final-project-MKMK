@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/scripts/entry.js"></script>
+  <script src="/scripts/like.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/item.js"></script>
   <script src="/scripts/index.js"></script>
@@ -179,11 +180,46 @@
           <input type="submit" value="Delete Entry">
         </form>
 
+        <form id="create-like">
+          <h3>Create Like</h3>
+          <div>
+            <label for="id">Entry Id:</label>
+            <textarea id="id" name="id"></textarea>
+          </div>
+          <input type="submit" value="Create Like">
+        </form>
 
+        <form id="delete-like">
+          <h3>Delete Like</h3>
+          <div>
+            <label for="id">Entry ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Delete Like">
+        </form>
     
+        <form id="view-all-likes">
+          <h3>View All Likes</h3>
+          <input type="submit" value="View All Likes">
+        </form>
 
+        <form id="get-likes-by-entry">
+          <h3>View Likes for Entry</h3>
+          <div>
+            <label for="id">Entry ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="View Likes on Entry">
+        </form>
 
-
+        <form id="get-likes-by-user">
+          <h3>View Likes by User</h3>
+          <div>
+            <label for="username">Username:</label>
+            <input id="username" name="username">
+          </div>
+          <input type="submit" value="View Likes by Username">
+        </form>
 
       </div>
     </section>
