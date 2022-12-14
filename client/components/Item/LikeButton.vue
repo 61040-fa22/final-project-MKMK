@@ -71,8 +71,7 @@ export default {
                 }
                 params.callback();
             } catch (e) {
-                this.$set(this.alerts, e, 'error');
-                setTimeout(() => this.$delete(this.alerts, e), 3000);
+                console.log('whoops!')
             }
         },
     }
