@@ -5,7 +5,9 @@
      </div> 
      <div class= "post" style="display:flex-col"> 
          <div style="display:flex-row"> 
+          <router-link :to="{name: 'Profile', params: {id: entry.author}}">
              <div style="float:left; font-size:18px; color:grey"> {{entry.author}}</div>
+            </router-link>
              <div style="float:right; font-size:12px; color:grey"> {{entry.dateCreated}}</div>  
               <br>
          </div> 
@@ -14,7 +16,9 @@
            <!-- <div> {{ item.name}} </div> -->
            <div class="text" style="float:left">{{entry.content}} </div>
  
-           <div class="item-details" style="float:right"> {{item.name}}</div>
+           <router-link :to="{name: 'Item', params: {id: item._id}}">
+            <div class="item-details" style="float:right"> {{item.name}}</div>
+           </router-link>
            <br><br>
            <img class="itemPic" ref="imageData" src="https://via.placeholder.com/150x150" style="float:right"/>
          </div>
