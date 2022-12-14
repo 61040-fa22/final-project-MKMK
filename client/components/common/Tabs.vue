@@ -79,6 +79,6 @@
     }
     .tabs li.tab__selected {
       background-color: #fff;
-      color: #83FFB3;
+      color: #3D405B;
     }
   </style>
