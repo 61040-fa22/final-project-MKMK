@@ -1,12 +1,9 @@
 <template>
   <main class="feed page_content">
     <EntryComponent
-      v-for="entry in entries"
-      :content="entry.content"
-      :author="entry.author"
-      :date="entry.dateCreated"
-      :itemId="entry.itemId"
-    />
+          v-for="entry in entries"
+          :entry="entry"
+        />
   </main>
 </template>
 

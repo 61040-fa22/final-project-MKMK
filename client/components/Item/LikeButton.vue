@@ -17,10 +17,10 @@
 export default {
     name: 'LikeButton',
     props: {
-        // entry: {
-        // type: Object,
-        // required: true
-        // }
+        entry: {
+        type: Object,
+        required: true
+        }
     },
     data() {
         return {
@@ -33,14 +33,9 @@ export default {
          * Toggles on a like on this post.
          */
         this.liked = true;
-
         const params = {
             method: 'POST',
-            message: 'Successfully liked entry!',
-            callback: () => {
-            this.$set(this.alerts, params.message, 'success');
-            setTimeout(() => this.$delete(this.alerts, params.message), 3000);
-            }
+            message: 'Successfully liked entry!'
         };
         this.like(params);
         },
@@ -49,14 +44,9 @@ export default {
          * Toggles off the like on this post.
          */
         this.liked = false;
-
         const params = {
             method: 'DELETE',
-            message: 'Successfully unliked entry!',
-            callback: () => {
-            this.$set(this.alerts, params.message, 'success');
-            setTimeout(() => this.$delete(this.alerts, params.message), 3000);
-            }
+            message: 'Successfully unliked entry!'
         };
         this.like(params);
         },
@@ -65,7 +55,6 @@ export default {
              * Submits a like request to the like endpoint.
              * @param params - Options for the request
              * @param params.body - Body for the request, if it exists
-             * @param params.callback - Function to run if the the request succeeds
              */
             const options = {
                 method: params.method, headers: {'Content-Type': 'application/json'}
@@ -82,8 +71,6 @@ export default {
                 }
                 params.callback();
             } catch (e) {
-                this.$set(this.alerts, e, 'error');
-                setTimeout(() => this.$delete(this.alerts, e), 3000);
             }
         },
     }
