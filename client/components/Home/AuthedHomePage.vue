@@ -2,7 +2,7 @@
   <div class="" >
     <div class="right-content">
       <div>
-      <h2 s>browse items</h2>
+      <h2>Browse items</h2>
       </div>
       <div>
       <GalleryComponent >
@@ -48,11 +48,16 @@ export default {
   display: flex-col; 
   padding-top: 25px;
   padding-left: 45px;
+  
   /* flex-direction:col; */
   /* width:100%;  */
   /* border: 1px solid green; */
   /* float:right; */
 
   }
+
+.img{
+      cursor: pointer;
+}
 
 </style>

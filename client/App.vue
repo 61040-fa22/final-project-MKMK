@@ -1,14 +1,11 @@
 <template>
-  <div id="app" style="display:flex">
-    <div style="">
-      <GlobalAlerts />
-      <LeftNav/>
+  <div id="app">
+    <GlobalAlerts />
+    <LeftNav />
+    <div style="width: 100%">
+      <MainMenu />
+      <router-view />
     </div>
-    <div style="display:col; padding-left:0px; padding-top:50px">
-        <MainMenu />
-        <router-view />
-    </div>
-
   </div>
 </template>
 
@@ -71,21 +68,9 @@ body {
 
 #app {
   width: 95%; /* Take up most of the width of a screen... */
-  max-width: 64rem; /* ...but stop at a certain point if the screen is too wide */
+  max-width: 72rem; /* ...but stop at a certain point if the screen is too wide */
   margin: 0 auto; /* Horizontally center */
-}
-
-aside {
-  width: 100%;
-  max-width: 16rem;
-  position: sticky;
-  top: 0;
-  height: 100%;
-}
-
-main {
-  width: 100%;
-  padding: 2rem auto;
+  display: flex;
 }
 
 /* Wrapper to make page no wider than a specific width on large screens,
@@ -103,7 +88,7 @@ but still take up the whole width on small screens */
   align-items: center;
 }
 .page_content {
-  margin: 0 2rem;
+  margin: 2rem 0 2rem 2rem;
 }
 
 h1, h2, h3 {
@@ -134,20 +119,13 @@ p.success {
 button, .button {
   border: none;
   outline: none;
-  width:120px;
-  max-width: 150px;
-  height :auto;
   color: #3D405B;
   background: #3d405b75;
-  font-size:18px;
-
-  /* transition: 0.1s; */
+  font-size: 18px;
   cursor: pointer;
   border-radius: 5px;
-  /* flex: auto; */
   font-weight: bold;
   padding: 10px 10px;
-  /* width: 150px; */
 }
 
 .submit_button {

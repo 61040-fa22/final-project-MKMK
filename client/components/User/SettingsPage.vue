@@ -1,19 +1,9 @@
 <template>
-  <main class="page_container">
-    <section>
-      <header>
-        <h2>Account settings for @{{ $store.state.username }}</h2>
-      </header>
-      <ChangeUsernameForm />
-      <ChangePasswordForm />
-      <ChangeProfilePicForm />
-    </section>
-    <section>
-      <header>
-        <h2>Account management</h2>
-      </header>
-      <DeleteAccountForm />
-    </section>
+  <main class="page_content">
+    <ChangeUsernameForm />
+    <ChangePasswordForm />
+    <ChangeProfilePicForm />
+    <DeleteAccountForm />
   </main>
 </template>
 

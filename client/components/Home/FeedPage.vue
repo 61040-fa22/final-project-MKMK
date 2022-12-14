@@ -1,7 +1,5 @@
 <template>
-  <main class="feed">
-      <!-- <EntryComponent :content="entry.content" :author="entry.author"/> -->
-    <p style="font-size:30px"> Item Diary Entries  </p> 
+  <main class="feed page_content">
     <EntryComponent
           v-for="entry in entries"
           :entry="entry"
@@ -28,7 +26,6 @@ export default {
 .feed {
   display: flex;
   flex-direction: column;
-  gap: 1rem;;
-  margin: 10px 0px 0px 10px;
+  gap: 1rem;
 }
 </style>

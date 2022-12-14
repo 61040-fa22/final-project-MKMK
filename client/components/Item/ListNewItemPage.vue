@@ -1,5 +1,5 @@
 <template>
-  <main class="page_container">
+  <main class="page_content">
     <ListNewItemForm />
   </main>
 </template>

@@ -71,7 +71,6 @@ export default {
                 }
                 params.callback();
             } catch (e) {
-                console.log('whoops!')
             }
         },
     }

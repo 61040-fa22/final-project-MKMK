@@ -1,31 +1,52 @@
 <template>
   <article>
-    <div class="info">
-      <p>
-        <router-link :to="{name: 'Profile', params: {id: entry.author}}">
-          <div>
-            @{{ entry.author }} <br><br>
-            <img class="profilePic" ref="profPic" src="https://via.placeholder.com/150x150"/>
-          </div>
-        </router-link>
-      </p>
-      <p>{{ entry.dateCreated }}</p>
+    <div class="avatar_container">
+      <router-link :to="{name: 'Profile', params: {id: entry.author}}">
+        <img class="avatar" ref="profPic" src="https://via.placeholder.com/150x150"/>
+      </router-link>
     </div>
-    <div class="content">
-      <p>
-        {{ entry.content }}
-      </p>
+    <div class="info_and_content">
+      <div class="info">
+        <p>
+          <router-link :to="{name: 'Profile', params: {id: entry.author}}">
+            @{{ entry.author }}
+          </router-link>
+          <span class="date">{{ entry.dateCreated }}</span>
+        </p>
+
+
+        <DotsMenu v-if="authorIsMe">
+          <DeleteDiaryPostButton :entry="entry" />
+        </DotsMenu>
+      </div>
+      <div class="content">
+        <p>
+          {{ entry.content }}
+        </p>
+      </div>
     </div>
   </article>
 </template>
 
 <script>
+import DeleteDiaryPostButton from "@/components/Item/DeleteDiaryPostButton.vue";
+import DotsMenu from "@/components/util/DotsMenu.vue";
+
 export default {
   name: 'DiaryPost',
+  components: {
+    DeleteDiaryPostButton,
+    DotsMenu
+  },
   props: {
     entry: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    authorIsMe() {
+      return this.entry.author === this.$store.state.username;
     }
   },
   async mounted () {
@@ -43,24 +64,44 @@ export default {
 article {
   border-bottom: 1px solid #ccc;
   padding: 1.5rem 0;
+  display: flex;
+  gap: 1.5rem;
 }
 
 article:last-of-type {
   border-bottom: none;
 }
 
-.profilePic {
+.info_and_content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.avatar {
   width: 100px;
 }
+
 .info {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
-.content {
-  width: 300px;
+.info_and_content {
+  background: white;
+  border: rgb(165, 164, 164);
+  width: 70rem;
+  min-height: 100px;
+  border-radius:10px;
   position: relative;
-  left: 150px;
-  bottom: 75px;
+  padding: 15px;
+
 }
+.profilePic{
+      cursor: pointer;
+}
+
+/* .date {
+  margin-left: 0.5rem;
+} */
 </style>

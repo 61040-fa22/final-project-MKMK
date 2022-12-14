@@ -1,23 +1,21 @@
-
-
 <template>
-    <div v-if="$store.state.username" class="outer">
-      <div class="left">
-        <LogoComponent style="padding:10px"/>
-        <router-link :to="`/profile/${$store.state.username}`">
-            <div >
-            <img ref="imageData" src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px">
-            <h2> {{this.$store.state.username}} </h2>
-            </div>
-        </router-link>
-        <router-link to="/new">
-          <div class="left-item"> Add New Item </div >
-        </router-link>
-                <router-link :to="`/profile/${$store.state.username}`">
-            <div class="left-item">My Profile</div >
-        </router-link>
-        <div class="left-item" style="border:0px"@click="logoutCallback">Log Out</div>
-      </div>
+  <div v-if="$store.state.username" class="outer">
+    <div class="left">
+      <LogoComponent />
+      <router-link :to="{name: 'Profile', params: {id: $store.state.username}}">
+        <div>
+          <img ref="imageData" src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px;" class="imgs">
+          <h2> {{ this.$store.state.username }} </h2>
+        </div>
+      </router-link>
+      <router-link to="/new">
+        <div class="left-item">Add New Item</div>
+      </router-link>
+      <router-link :to="{name: 'Profile', params: {id: $store.state.username}}">
+        <div class="left-item">My Profile</div>
+      </router-link>
+      <div class="left-item" style="border: none" @click="logoutCallback">Log Out</div>
+    </div>
   </div>
 </template>
 
@@ -33,7 +31,7 @@ export default {
     LogoComponent, 
     IconVue, 
   },
-  async mounted (){
+  async mounted () {
     const r = await fetch(`/api/users/session`);
     if (r.ok) {
       const res = await r.json();
@@ -41,18 +39,10 @@ export default {
     }
     setTimeout(() => {
       this.$refs["imageData"].src = this.user.imageRef;
-    }, 0)
-
+    }, 0);
   },
   methods: {
-    // logoutCallback() {
-    //   this.$store.commit('alert', {
-    //     message: 'You are now logged out',
-    //     status: 'success'
-    //   });
-    //   this.$router.push({name: 'LeftNav'});
-    // }, 
-      async logoutCallback() {
+    async logoutCallback() {
       const r = await fetch(`/api/users/session`, {method: 'DELETE'});
       const res = await r.json().then( ()=>{
         this.$store.state.username = null;
@@ -61,30 +51,30 @@ export default {
         this.$store.state.items = [];
         this.$store.state.entries = [];
         this.$store.commit('alert', {
-        message: 'You are now logged out',
-        status: 'success'
-        })
+          message: 'You are now logged out',
+          status: 'success'
+        });
         this.$router.push({name: 'Home'});
-    });
+      });
     }
   }
 };
 </script>
 
 <style>
-
 .outer {
   border-right: 1px solid rgba(179, 179, 179, 0.541);
-  width: 240px;
+  width: min-content;
   height: 100vh;
-  float:left;
+  position: sticky;
+  top: 0;
 }
 
 .left {
   display: flex;
   flex-direction: column;
   padding-top: 15px;
-  padding-right: 15px;
+  padding-right: 32px;
   height: 250px;
   /* padding-left: 0px; */
   gap: 1rem;
@@ -111,5 +101,10 @@ export default {
 }
 .left-item:active{
     background:rgba(107, 106, 168, 0.247);
+}
+
+.imgs{
+    cursor: pointer;
+    /* transition:0.13s ease-in; */
 }
 </style>
