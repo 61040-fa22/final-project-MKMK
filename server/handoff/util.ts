@@ -9,7 +9,8 @@ type HandoffResponse = {
   item: string;
   owner: string;
   borrower: string;
-  returnDate: string;
+  startDate: string;
+  endDate: string;
   returned: boolean;
 };
 
@@ -29,11 +30,14 @@ const formatDate = (date: Date): string => moment(date).format('MMMM Do YYYY, h:
  * @returns {handoffResponse} - The handoff object formatted for the frontend
  */
 const constructHandoffResponse = async (handoff: HydratedDocument<Handoff>): Promise<HandoffResponse> => {
+  console.log('CONSTRUCT RESPONSE');
   const handoffCopy: PopulatedHandoff = {
     ...handoff.toObject({
       versionKey: false // Cosmetics; prevents returning of __v property
     })
   };
+
+  console.log(handoff, handoffCopy);
 
   const ownerName = handoffCopy.ownerId.username;
   const borrowerName = handoffCopy.borrowerId.username;
@@ -51,7 +55,8 @@ const constructHandoffResponse = async (handoff: HydratedDocument<Handoff>): Pro
     item: itemName,
     owner: ownerName,
     borrower: borrowerName,
-    returnDate: formatDate(handoff.returnDate)
+    startDate: formatDate(handoff.startDate),
+    endDate: formatDate(handoff.endDate)
   };
 };
 

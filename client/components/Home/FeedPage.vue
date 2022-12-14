@@ -4,6 +4,7 @@
     <p style="font-size:30px"> Item Diary Entries  </p> 
     <EntryComponent
           v-for="entry in entries"
+          :key="entry._id"
           :content="entry.content"
           :author="entry.author"
           :date="entry.dateCreated"

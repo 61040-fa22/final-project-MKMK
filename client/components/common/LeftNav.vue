@@ -16,7 +16,7 @@
                 <router-link :to="`/profile/${$store.state.username}`">
             <button>My Profile</button >
         </router-link>
-
+        <div class="left-item" style="border:0px" @click="logoutCallback">Log Out</div>
       </div>
   </div>
 </template>

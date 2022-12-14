@@ -60,6 +60,7 @@ const store = new Vuex.Store({
       /**
        * Request the server for requests for this user
        */
+      console.log('refreshing requests');
       const url = `/api/requests?user=${state.username}`;
       const res = await fetch(url).then(async r => r.json());
       state.requests = res.filter(request => request.accepted === null);
@@ -68,9 +69,11 @@ const store = new Vuex.Store({
       /**
        * Request the server for active borrows for this user
        */
+      console.log('refreshing handoffs');
       const url = `/api/handoffs?user=${state.username}`;
+      console.log('gonna hit fetch');
       const res = await fetch(url).then(async r => r.json());
-      state.handoffs = res.filter(borrow => !borrow.returned);
+      state.handoffs = res.filter(borrow => !borrow.returned && borrow.startDate < new Date());
     },
     async refreshItems(state) {
       /**

@@ -12,11 +12,12 @@ class HandoffCollection {
    */
   static async addOne(requestId: Types.ObjectId | string): Promise<HydratedDocument<Handoff>> {
     const request = await RequestCollection.findOne(requestId);
-    const {ownerId, borrowerId, endDate} = request;
+    const {ownerId, borrowerId, startDate, endDate} = request;
     const handoff = new HandoffModel({
       requestId,
       ownerId,
       borrowerId,
+      startDate,
       endDate
     });
     await handoff.save(); // Saves handoff to MongoDB
@@ -30,7 +31,7 @@ class HandoffCollection {
    * @return {Promise<HydratedDocument<Handoff>> | Promise<null> } - The handoff with the given handoffId, if any
    */
   static async findOne(handoffId: Types.ObjectId | string): Promise<HydratedDocument<Handoff>> {
-    return HandoffModel.findOne({_id: handoffId});
+    return HandoffModel.findOne({_id: handoffId}).populate(['requestId',  'ownerId', 'borrowerId']);
   }
 
   /**

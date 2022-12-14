@@ -43,9 +43,6 @@
             required: true
         }
     },
-    mounted () {
-      console.log(request);
-    },
     methods: {
       async deleteRequest() {
         try{
@@ -67,17 +64,24 @@
       },
       async accept(accepted) {
         try{
-            const r = await fetch(`api/requests/${this.request._id}`, {method: 'DELETE'});
+            const r = await fetch(`api/requests/${this.request._id}`, {method: 'PATCH', body: JSON.stringify({accept: accepted}), headers: {'Content-Type': 'application/json'}});
             if (!r.ok) {
                 const res = await r.json();
                 throw new Error(res.error);
             }
             this.$store.commit('alert', {
-                message: 'Successfully deleted the request.',
+                message: 'Successfully accepted the request.',
                 status: 'success'
             });
             this.$store.commit('refreshRequests');
-            console.log(this.$store.requests);
+            const r2 = await fetch(`api/handoffs/`, {method: 'POST', body: JSON.stringify({requestId: this.request._id}), headers: {'Content-Type': 'application/json'}});
+            if (!r2.ok) {
+              const res2 = await r2.json();
+              throw new Error(res2.error);
+            } else {
+              const res2 = await r2.json();
+              this.$store.commit('refreshHandoffs'); 
+            }
           } catch (e) {
             this.$set(this.alerts, e, 'error');
             setTimeout(() => this.$delete(this.alerts, e), 3000);

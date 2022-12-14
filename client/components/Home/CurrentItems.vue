@@ -5,11 +5,11 @@ Homepage widgets for items you're currently borrowing and lending
   <section id="current_items">
     <!--Currently borrowing (only appears if you're currently borrowing something)-->
     <section>
-      <h2>currently borrowing ({{ $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username).length }})</h2>
+      <h2>currently borrowing ({{ $store.state.handoffs.filter(handoff => handoff.borrower === $store.state.username).length }})</h2>
       <p>post an update about the item(s) you're borrowing!</p>
       <GalleryComponent num-columns="4">
         <HandoffComponent
-          v-for="handoff in $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username)"
+          v-for="handoff in $store.state.handoffs.filter(handoff => handoff.borrower === $store.state.username)"
           :key="handoff._id"
         />
       </GalleryComponent>
@@ -17,10 +17,10 @@ Homepage widgets for items you're currently borrowing and lending
 
     <!--Currently lending (only appears if you're currently lending something)-->
     <section>
-      <h2>currently lending ({{ $store.state.activeBorrows.filter(handoff => handoff.owner === $store.state.username).length }})</h2>
+      <h2>currently lending ({{ $store.state.handoffs.filter(handoff => handoff.owner === $store.state.username).length }})</h2>
       <GalleryComponent num-columns="4">
         <HandoffComponent
-          v-for="handoff in $store.state.activeBorrows.filter(handoff => handoff.borrower === $store.state.username)"
+          v-for="handoff in $store.state.handoffs.filter(handoff => handoff.borrower === $store.state.username)"
           :key="handoff._id"
         />
       </GalleryComponent>
