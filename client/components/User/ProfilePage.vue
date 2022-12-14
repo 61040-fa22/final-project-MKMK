@@ -9,7 +9,7 @@
         <h2>@{{ $route.params.id }}</h2>
         <p class="indent">Joined in {{ date() }}</p>
         <br><br>
-        <p> *INSERT RATING HERE* </p>
+        <!-- <p> *INSERT RATING HERE* </p> -->
       </section>
       <section v-if="isMe">
         <router-link
