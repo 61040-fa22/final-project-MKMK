@@ -14,6 +14,7 @@ import { itemRouter } from "../server/item/router";
 import { entryRouter } from "../server/entry/router";
 import { requestRouter } from "../server/request/router";
 import { handoffRouter } from "../server/handoff/router";
+import { likeRouter } from "../server/like/router";
 import MongoStore from "connect-mongo";
 import HandoffCollection from "server/handoff/collection";
 
@@ -94,6 +95,7 @@ app.use("/api/entries", entryRouter);
 app.use("/api/items", itemRouter);
 app.use("/api/requests", requestRouter);
 app.use('/api/handoff', handoffRouter);
+app.use('/api/likes', likeRouter);
 
 
 // Catch all the other routes and display error message
