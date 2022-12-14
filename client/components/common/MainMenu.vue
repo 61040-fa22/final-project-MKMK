@@ -84,11 +84,8 @@ nav {
   min-width:120px;
   z-index: 1;
   cursor: pointer;
-  /* transition:         0.08s ease-in;
-  -o-transition:      0.08s ease-in;
-  -ms-transition:     0.08s ease-in;
-  -moz-transition:    0.08s ease-in;
-  -webkit-transition: 0.08s ease-in; */
+  transition:0.13s ease-in;
+ 
 
  }
  a {
@@ -96,8 +93,11 @@ nav {
   color:  #3D405B;
 }
 
-.nav-item::selection{
-    background:olive;
+.nav-item:hover{
+    background:rgba(57, 55, 214, 0.247);
+}
+.nav-item:active{
+    background:rgba(57, 55, 214, 0.247);
 }
 
 </style>
