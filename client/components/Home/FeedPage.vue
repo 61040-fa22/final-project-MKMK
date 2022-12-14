@@ -1,6 +1,7 @@
 <template>
   <main class="feed">
       <!-- <EntryComponent :content="entry.content" :author="entry.author"/> -->
+    <p style="font-size:30px"> Item Diary Entries  </p> 
     <EntryComponent
           v-for="entry in entries"
           :content="entry.content"

@@ -130,9 +130,6 @@ export default {
     align-items: center;
     gap: 0.75em;
   }
-  .indent {
-    /* margin-left: 20px; */
-  }
   .wrapper {
       width: 100%;
       min-height: 100vh;
