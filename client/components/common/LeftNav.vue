@@ -11,11 +11,13 @@
             </div>
         </router-link>
         <router-link to="/new">
-          <button> Add New Item </button >
+          <div class="left-item"> Add New Item </div >
         </router-link>
                 <router-link :to="`/profile/${$store.state.username}`">
-            <button>My Profile</button >
+            <div class="left-item">My Profile</div >
         </router-link>
+        <div class="left-item" style="border:0px"@click="logoutCallback">Log Out</div>
+
 
       </div>
   </div>
@@ -45,12 +47,27 @@ export default {
 
   },
   methods: {
-    logoutCallback() {
-      this.$store.commit('alert', {
+    // logoutCallback() {
+    //   this.$store.commit('alert', {
+    //     message: 'You are now logged out',
+    //     status: 'success'
+    //   });
+    //   this.$router.push({name: 'LeftNav'});
+    // }, 
+      async logoutCallback() {
+      const r = await fetch(`/api/users/session`, {method: 'DELETE'});
+      const res = await r.json().then( ()=>{
+        this.$store.state.username = null;
+        this.$store.state.requests = [];
+        this.$store.state.handoffs = [];
+        this.$store.state.items = [];
+        this.$store.state.entries = [];
+        this.$store.commit('alert', {
         message: 'You are now logged out',
         status: 'success'
-      });
-      this.$router.push({name: 'LeftNav'});
+        })
+        this.$router.push({name: 'Home'});
+    });
     }
   }
 };
@@ -72,10 +89,29 @@ export default {
   padding-right: 15px;
   height: 250px;
   /* padding-left: 0px; */
-  gap: 2rem;
+  gap: 1rem;
   text-align: center;
   /* float: left; */
   justify-content: space-between;
   /* margin-left: 15px; */
+}
+.left-item{
+  color: rgba(119, 118, 118, 0.767);
+  font-size: 18px;
+  text-decoration: none; 
+  border: solid 1px rgba(119, 118, 118, 0.767);
+  border-radius: 15px;
+  padding: 10px;
+  min-width:120px;
+  z-index: 1;
+  cursor: pointer;
+  transition:0.13s ease-in;
+  color: 
+}
+.left-item:hover{
+    background:rgba(107, 106, 168, 0.247);
+}
+.left-item:active{
+    background:rgba(107, 106, 168, 0.247);
 }
 </style>

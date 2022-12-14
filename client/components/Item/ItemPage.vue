@@ -5,7 +5,12 @@
         <img ref="itemImage" src="https://via.placeholder.com/150x150">
       </section>
       <section>
-        <h2 class="title">{{ item.name }}</h2>
+        <div class="row">
+          <h2 class="title">{{ item.name }}</h2>  
+          <DotsMenu v-if="ownerIsMe">
+            <DeleteItemButton :item="item" />
+          </DotsMenu>
+        </div>
         <p class="owner">
           owned by <router-link :to="{ name: 'Profile', params: {id: item.owner}}">
             @{{ item.owner }}
@@ -40,6 +45,7 @@
 <script>
 import DeleteItemButton from "@/components/Item/DeleteItemButton.vue";
 import DiaryFeed from "@/components/Item/DiaryFeed.vue";
+import DotsMenu from "@/components/util/DotsMenu.vue";
 import RequestToBorrowForm from "@/components/Item/RequestToBorrowForm.vue";
 import WriteDiaryPostForm from "@/components/Item/WriteDiaryPostForm.vue";
 
@@ -48,6 +54,7 @@ export default {
   components: {
     DeleteItemButton,
     DiaryFeed,
+    DotsMenu,
     RequestToBorrowForm,
     WriteDiaryPostForm
   },
@@ -99,6 +106,12 @@ img {
   display: grid;
   grid-template-columns: 3fr 6fr 1fr;
   margin-top: 25px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .description {
   font-style: oblique;

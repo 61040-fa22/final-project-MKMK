@@ -14,6 +14,7 @@ export default {
         {id: 'username', label: 'Username', value: ''},
         {id: 'password', label: 'Password', type: 'password', value: ''}
       ],
+      hasImage: true,
       title: '',
       buttonLabel: 'Sign up',
       callback: () => {

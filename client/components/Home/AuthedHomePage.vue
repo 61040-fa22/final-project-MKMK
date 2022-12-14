@@ -33,6 +33,9 @@ export default {
   },
   mounted() {
     this.$store.commit('refreshItems');
+    this.$store.commit('refreshHandoffs');
+    this.$store.commit('refreshRequests');
+    this.$store.commit('refreshEntries');
   }
 };
 </script>
