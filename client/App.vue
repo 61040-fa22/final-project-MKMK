@@ -134,8 +134,8 @@ p.success {
 button, .button {
   border: none;
   outline: none;
-  width:120px;
-  max-width: 150px;
+  width: 120px;
+  /* max-width: 150px; */
   height :auto;
   color: #3D405B;
   background: #3d405b75;
