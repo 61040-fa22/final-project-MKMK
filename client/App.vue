@@ -139,6 +139,7 @@ button, .button {
   height :auto;
   color: #3D405B;
   background: #3d405b75;
+  font-size:18px;
 
   /* transition: 0.1s; */
   cursor: pointer;

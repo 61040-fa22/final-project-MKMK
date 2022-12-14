@@ -17,9 +17,9 @@
     </div>
 
     <div class="interaction">
-      <svg>
+      <!-- <svg>
         <rect width="100%" height="50" style="fill:none;stroke:blue"/>
-      </svg>  
+      </svg>   -->
       <!--
         REPLACE ABOVE SVG WITH:
         if user is the owner or a current borrower,
