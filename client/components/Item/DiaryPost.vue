@@ -4,17 +4,26 @@
       <p>
         <router-link :to="{name: 'Profile', params: {id: entry.author}}">
           <div>
-            @{{ entry.author }} <br><br>
             <img class="profilePic" ref="profPic" src="https://via.placeholder.com/150x150"/>
           </div>
         </router-link>
       </p>
-      <p>{{ entry.dateCreated }}</p>
-    </div>
+
+    </div> 
+   
+
     <div class="content">
-      <p>
-        {{ entry.content }}
-      </p>
+         <!-- @{{ entry.author }}<p style="color:grey; font-size:13px">{{ entry.dateCreated }}</p>
+
+        <p>{{ entry.content }} </p> -->
+             <div style="display:flex-row"> 
+            <div style="float:left; font-size:18px; color:grey"> @{{entry.author}}</div>
+            <div style="float:right; font-size:12px; color:grey"> {{entry.dateCreated}}</div>  
+             <br>
+        </div> 
+        <div class="text" style="float:left">{{entry.content}} </div>
+        <br><br>
+
     </div>
   </article>
 </template>
@@ -58,9 +67,17 @@ article:last-of-type {
   margin-bottom: 1rem;
 }
 .content {
-  width: 300px;
+  background: white;
+  border: rgb(165, 164, 164);
+  width: 71rem;
+  min-height: 100px;
+  border-radius:10px;
   position: relative;
-  left: 150px;
-  bottom: 75px;
+  padding: 15px;
+  left: 130px;
+  bottom: 120px;
+}
+.profilePic{
+      cursor: pointer;
 }
 </style>

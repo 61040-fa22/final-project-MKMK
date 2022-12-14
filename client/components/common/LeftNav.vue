@@ -6,7 +6,7 @@
         <LogoComponent style="padding:10px"/>
         <router-link :to="`/profile/${$store.state.username}`">
             <div >
-            <img ref="imageData" src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px">
+            <img ref="imageData" src="https://via.placeholder.com/150x150" style="width: 100px; max-width: 150px; border-radius:75px;" class="imgs">
             <h2> {{this.$store.state.username}} </h2>
             </div>
         </router-link>
@@ -45,13 +45,7 @@ export default {
 
   },
   methods: {
-    // logoutCallback() {
-    //   this.$store.commit('alert', {
-    //     message: 'You are now logged out',
-    //     status: 'success'
-    //   });
-    //   this.$router.push({name: 'LeftNav'});
-    // }, 
+ 
       async logoutCallback() {
       const r = await fetch(`/api/users/session`, {method: 'DELETE'});
       const res = await r.json().then( ()=>{
@@ -111,5 +105,10 @@ export default {
 }
 .left-item:active{
     background:rgba(107, 106, 168, 0.247);
+}
+
+.imgs{
+    cursor: pointer;
+    /* transition:0.13s ease-in; */
 }
 </style>
