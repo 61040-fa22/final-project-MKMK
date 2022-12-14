@@ -1,40 +1,50 @@
 <template>
   <article>
-    <div class="info">
-      <p>
-        <router-link :to="{name: 'Profile', params: {id: entry.author}}">
-          <div>
-            <img class="profilePic" ref="profPic" src="https://via.placeholder.com/150x150"/>
-          </div>
-        </router-link>
-      </p>
-
-    </div> 
-   
-
-    <div class="content">
-         <!-- @{{ entry.author }}<p style="color:grey; font-size:13px">{{ entry.dateCreated }}</p>
-
-        <p>{{ entry.content }} </p> -->
-             <div style="display:flex-row"> 
-            <div style="float:left; font-size:18px; color:grey"> @{{entry.author}}</div>
-            <div style="float:right; font-size:12px; color:grey"> {{entry.dateCreated}}</div>  
-             <br>
-        </div> 
-        <div class="text" style="float:left">{{entry.content}} </div>
-        <br><br>
-
+    <div class="avatar_container">
+      <router-link :to="{name: 'Profile', params: {id: entry.author}}">
+        <img class="avatar" ref="profPic" src="https://via.placeholder.com/150x150"/>
+      </router-link>
+    </div>
+    <div class="info_and_content">
+      <div class="info">
+        <p>
+          <router-link :to="{name: 'Profile', params: {id: entry.author}}">
+            @{{ entry.author }}
+          </router-link>
+          <span class="date">{{ entry.dateCreated }}</span>
+        </p>
+        <DotsMenu v-if="authorIsMe">
+          <DeleteDiaryPostButton :entry="entry" />
+        </DotsMenu>
+      </div>
+      <div class="content">
+        <p>
+          {{ entry.content }}
+        </p>
+      </div>
     </div>
   </article>
 </template>
 
 <script>
+import DeleteDiaryPostButton from "@/components/Item/DeleteDiaryPostButton.vue";
+import DotsMenu from "@/components/util/DotsMenu.vue";
+
 export default {
   name: 'DiaryPost',
+  components: {
+    DeleteDiaryPostButton,
+    DotsMenu
+  },
   props: {
     entry: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    authorIsMe() {
+      return this.entry.author === this.$store.state.username;
     }
   },
   async mounted () {
@@ -52,15 +62,24 @@ export default {
 article {
   border-bottom: 1px solid #ccc;
   padding: 1.5rem 0;
+  display: flex;
+  gap: 1.5rem;
 }
 
 article:last-of-type {
   border-bottom: none;
 }
 
-.profilePic {
+.info_and_content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.avatar {
   width: 100px;
 }
+
 .info {
   display: flex;
   justify-content: space-between;
@@ -79,5 +98,9 @@ article:last-of-type {
 }
 .profilePic{
       cursor: pointer;
+}
+
+.date {
+  margin-left: 0.5rem;
 }
 </style>

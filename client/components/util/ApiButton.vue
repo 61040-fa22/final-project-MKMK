@@ -70,4 +70,7 @@ export default {
 </script>
 
 <style scoped>
+button {
+  white-space: nowrap;
+}
 </style>

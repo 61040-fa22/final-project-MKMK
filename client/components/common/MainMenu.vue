@@ -10,12 +10,11 @@
         </router-link> -->
       
             <router-link to="/">
-              <div class="nav-item" @click="handleClick()"> All Items </div >
+              <div class="nav-item" @click="handleClick()"> Feed </div >
             </router-link>
-            <router-link to="/feed">
-              <div class="nav-item"> Feed</div >
+            <router-link to="/items">
+              <div class="nav-item"> All Items</div >
             </router-link>
-
 
       </nav>
       <!--Nav when not signed in-->
