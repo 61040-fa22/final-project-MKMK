@@ -15,13 +15,21 @@
         <div class="item-details" style="float:right"> {{item.name}}</div>
         <br><br>
         <img class="itemPic" ref="imageData" src="https://via.placeholder.com/150x150" style="float:right"/>
-    </div>
+        <LikeButton 
+          :entry="entry"
+        />
+      </div>
  </main>
 </template>
 
 <script>
+import LikeButton from '@/components/Item/LikeButton.vue';
+
 export default {
   name: 'EntryComponent',
+  components: {
+    LikeButton
+  },
   props: {
     itemId: {
       type: Object | String,
