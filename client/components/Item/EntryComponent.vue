@@ -20,8 +20,9 @@
          </div>
          <LikeButton 
            :entry="entry"
-           class="like"
+           style="cursor:pointer;"
          />
+         <!-- <p>{{likes}}</p> -->
          </div>
   </main>
  </template>
@@ -40,6 +41,11 @@
        required: true
      }, 
    },
+   data() {
+    return {
+      likes: 0
+    }
+   },
    computed: {
      item() {
        const item = this.$store.state.items.filter(item => item._id === this.entry.itemId)[0];
@@ -57,10 +63,16 @@
          console.log(res.user.imageRef);
          this.$entry.refs["profilePic"].src = res.user.imageRef;
        }, 0)
-     }
-     
+      }
+      const r2 = await fetch(`/api/likes/entry/${this.entry._id}`);
+     if (r2.ok) {
+       const res2 = await r2.json();
+       setTimeout(() => {
+         console.log(res2.user.imageRef);
+         this.likes = r2.length;
+       }, 0)
    }
- }
+ }}
    
  </script>
  

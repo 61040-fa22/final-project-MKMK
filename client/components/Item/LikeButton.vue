@@ -1,15 +1,8 @@
 <template>
-    <div 
-    v-if="!liked"
+    <button 
     @click="likePost"
     >
-        ❤️ Like
-    </div>
-    <button 
-    v-else
-    @click="unlikePost"
-    >
-        ❤️ Liked
+        {{content}}
     </button>
 </template>
 
@@ -25,30 +18,31 @@ export default {
     data() {
         return {
         liked: false,
+        content: '❤️ Like',
         };
     },
     methods: {
         likePost() {
-        /**
-         * Toggles on a like on this post.
-         */
-        this.liked = true;
-        const params = {
-            method: 'POST',
-            message: 'Successfully liked entry!'
-        };
-        this.like(params);
-        },
-        unlikePost() {
-        /**
-         * Toggles off the like on this post.
-         */
-        this.liked = false;
-        const params = {
-            method: 'DELETE',
-            message: 'Successfully unliked entry!'
-        };
-        this.like(params);
+            /**
+             * Toggles on a like on this post.
+             */
+            if (!this.liked) {
+                this.liked = true;
+                this.content = '❤️ Liked'
+            const params = {
+                method: 'POST',
+                message: 'Successfully liked entry!'
+            };
+            this.like(params);
+            } else {
+                this.liked = false;
+                this.content = '❤️ Like';
+            const params = {
+                method: 'DELETE',
+                message: 'Successfully unliked entry!'
+            };
+            this.like(params);
+            }
         },
         async like(params) {
             /**

@@ -48,7 +48,7 @@ router.get(
 /**
  * Get likes for a given entry.
  *
- * @name GET /api/likes/:entryId
+ * @name GET /api/likes/entry/:entryId
  *
  * @return {LikeResponse[]} - An array of likes created on a given entry, liked
  * @throws {400} - If user is not given
