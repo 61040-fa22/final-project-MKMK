@@ -5,7 +5,7 @@
     </div> 
     <div class= "post" style="display:flex-col"> 
         <div style="display:flex-row"> 
-            <div style="float:left; font-size:12px; color:grey"> {{author}}</div>
+            <div style="float:left; font-size:18px; color:grey"> {{author}}</div>
             <div style="float:right; font-size:12px; color:grey"> {{date}}</div>  
              <br>
         </div> 
@@ -47,20 +47,21 @@ export default {
         this.$refs["imageData"].src = item.imageRef;
       }, 0)
       return item;
-    },
-    async user() {
-      const r = await fetch(`/api/users/${author}`);
-      if (r.ok) {
-        const res = await r.json();
-        setTimeout(() => {
-          console.log(res.user.imageRef);
-          this.$refs["profilePic"].src = res.user.imageRef;
-        }, 0)
-      }
-      
     }
+  },
+  async mounted () {
+    const r = await fetch(`/api/users/${this.author}`);
+    if (r.ok) {
+      const res = await r.json();
+      setTimeout(() => {
+        console.log(res.user.imageRef);
+        this.$refs["profilePic"].src = res.user.imageRef;
+      }, 0)
+    }
+    
   }
 }
+  
 </script>
 
 <style scoped>
@@ -70,10 +71,19 @@ img {
   position:relative;
 }
 
+.profPic {
+  position: relative;
+}
+.itemPic {
+  position: relative;
+}
 .text {
   margin-left: 60px;
   word-wrap: normal;
-  width: 400px;
+  width: 300px;
+  position: relative;
+  top: 30px;
+
 }
 .post {
     width:auto; 
@@ -84,5 +94,6 @@ img {
     border-radius: 8px;
     border:1px solid rgb(204, 204, 204); 
     padding-bottom: 10px;
+    overflow: auto;
 }
 </style>
